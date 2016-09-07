@@ -36,7 +36,7 @@ var tsProject = tsc.createProject("tsconfig.json");
 gulp.task("build-app", function() {
     return gulp.src([
             "source/**/**.ts",
-            "typings/main.d.ts/",
+            "typings/index.d.ts/",
             "source/interfaces/interfaces.d.ts"
         ])
         .pipe(tsc(tsProject))
@@ -48,7 +48,7 @@ var tsTestProject = tsc.createProject("tsconfig.json");
 gulp.task("build-test", function() {
     return gulp.src([
             "test/**/*.ts",
-            "typings/main.d.ts/",
+            "typings/index.d.ts/",
             "source/interfaces/interfaces.d.ts"
         ])
         .pipe(tsc(tsTestProject))
@@ -81,21 +81,28 @@ gulp.task("test", ["istanbul:hook"], function() {
 //******************************************************************************
 var appPublishPathName="release";
 var appSourcePathName="Eicc-browseweekrpt";
+var libraryName1 = "shiftrptofsuper";
+var outputFileName1 = libraryName1 + ".min.js";
+var mainTsFilePath1 = "source/"+appSourcePathName+"/"+libraryName1+".js";
+var outputFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/";
+
+var outputRootFolder   = appPublishPathName+"/"+appSourcePathName+"/";
+var outputComponentFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/Component/";
+
 gulp.task("bundle", function() {
    
-    var libraryName = "myapp";
-    var mainTsFilePath = "source/"+appSourcePathName+"/main.js";
-    var outputFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/";
-    var outputFileName = libraryName + ".min.js";
-
+   
     var bundler = browserify({
         debug: true,
-        standalone : libraryName
+        standalone : libraryName1
     });
-    
-    return bundler.add(mainTsFilePath)
+    gulp.src("source/"+appSourcePathName+'/approot/*.html')
+        .pipe(gulp.dest(outputRootFolder));
+    gulp.src("source/"+appSourcePathName+'/component/*.html')
+        .pipe(gulp.dest(outputComponentFolder));
+    return bundler.add(mainTsFilePath1)
         .bundle()
-        .pipe(source(outputFileName))
+        .pipe(source(outputFileName1))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(uglify())
@@ -106,14 +113,17 @@ gulp.task("bundle", function() {
 //******************************************************************************
 //* DEV SERVER
 //******************************************************************************
+var currentStartpage="shiftrptofsuper.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
 gulp.task("watch", ["default"], function () {
     
     browserSync.init({
-        server: "./"+appPublishPathName+"/"+appSourcePathName
+        server: "./"+appPublishPathName+"/"+appSourcePathName,
+        startPath: "/"+currentStartpage
+        
     });
     
-    gulp.watch([ "source/**/**.ts", "test/**/*.ts"], ["default"]);
-    gulp.watch(appPublishPathName+"/"+appSourcePathName+"/dist/*.js").on('change', browserSync.reload); 
+    gulp.watch([ "source/**/**.ts","source/**/**.html", "test/**/*.ts"], ["default"]);
+    gulp.watch(appPublishPathName+"/"+appSourcePathName+"/dist/*.*").on('change', browserSync.reload); 
 });
 
 //******************************************************************************

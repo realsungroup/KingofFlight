@@ -47,3 +47,34 @@ $ typings install
 8) Enjoy coding with TypeScript!
 
 Please send a PR! If you know how to make this template better.
+ $.ajax({
+        url: url,
+        success: function (text) {
+            if (text !== "") {
+                var data = mini.decode(text);
+               // alert(text);
+                if (data.error == -1) {
+                    alert(data.message);
+
+                }
+               // var grid = mini.get("grid1");
+                //var tesgrid1 = mini.get("tesgrid1");
+                var adata = [];
+               
+                adata = data.data;
+               // tesgrid1.setColumns(columns);
+                //tesgrid1.setData(adata);
+               // grid.setData(adata);
+                $.each(adata, function (i, item) {
+                    var row=[];
+                    row.push(item);
+                   // greeter.appendGrid(datagrids, "dynamicgrid" + i.toString(), columns,row, mini);
+                    greeter.appendPanel(datagrids,"dynamicgrid" + i.toString(),row,mini)
+                });
+
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+        }
+    });
