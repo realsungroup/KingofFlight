@@ -19,7 +19,7 @@ that you have installed typings and gulp as global packages:
 $ npm -g install gulp
 $ npm -g install typings
 ```
-
+wallaby 
 ```
 $ cd ts-vscode-boilerplate
 $ npm install

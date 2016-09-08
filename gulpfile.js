@@ -121,7 +121,7 @@ gulp.task("watch", ["default"], function () {
         startPath: "/"+currentStartpage
         
     });
-    //test
+    //test2
     gulp.watch([ "source/**/**.ts","source/**/**.html", "test/**/*.ts"], ["default"]);
     gulp.watch(appPublishPathName+"/"+appSourcePathName+"/dist/*.*").on('change', browserSync.reload); 
 });
