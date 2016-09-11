@@ -3,14 +3,18 @@
     baseUrl:string;
     saveMethod:string="SaveData_Ajax";
     getMethod:string="ShowHostTableDatas_Ajax";
-   constructor(baseurl:string)
+    user:string ;
+    ucode:string;
+   constructor(baseurl:string,user:string,ucode:string)
    {
        this.baseUrl=baseurl;
+       this.user=user;
+       this.ucode=ucode;
    }
-   dbGetdata(user:string ,ucode:string,resid:number,subresid:number,cmswhere:string,fnSuccess:any,fnError:any,fnSyserror:any) {
+   dbGetdata(resid:number,subresid:number,cmswhere:string,fnSuccess:any,fnError:any,fnSyserror:any) {
    var url : string;
-   url=this.baseUrl+"&method="+this.getMethod+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
- 
+   url=this.baseUrl+"&method="+this.getMethod+"&user="+this.user+"&ucode="+this.ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
+    
     $.ajax({
             url: url,
             dataType:"jsonp",
@@ -38,7 +42,42 @@
                  
                  if (fnSyserror!=null)
                      { fnSyserror(jqXHR, textStatus, errorThrown);}
-            });
+            }});
   
  }
+  dbSavedata( resid:number,subresid:number,json:string,fnSuccess:any,fnError:any,fnSyserror:any)
+  {
+       var url : string;
+       url=this.baseUrl+"&method="+this.saveMethod+"&user="+this.user+"&ucode="+this.ucode;
+       //alert(url);
+         $.ajax({
+                url:  url,
+                async:false,
+                dataType:"jsonp",
+                jsonp: "jsoncallback",
+		        type: 'post',
+                data: {data:json,resid:526415710928},
+                cache: false,
+                success: function (text) {
+            
+                if (text.error=="0")
+                {
+                  
+                  
+                    if (fnSuccess!=null){fnSuccess(text);}}
+                else    
+                {
+                  
+                   if (fnError!=null){ fnError(text);}
+                }  
+                 
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  if (fnSyserror!=null){fnSyserror(jqXHR, textStatus, errorThrown);}
+                    
+                 
+                    
+                }
+            });
+  }
 }

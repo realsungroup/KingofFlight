@@ -68,7 +68,7 @@ class Shiftrptofsuper {
             iFrame.contentWindow.SetData(data,url,user,ucode);},null);
     }
     
-    appendSupervisor(parentelement: HTMLElement,data :any,subdata:any,mini:any)
+    appendSupervisor(parentelement: HTMLElement,data :any,subdata:any,mini:any,dbs:any)
     {
        var aSupervisor=new Supervisor();
        aSupervisor=data[0]
@@ -103,8 +103,8 @@ class Shiftrptofsuper {
         var user  = getQueryString('user');
         var url ;
         url=baseUrl+"&method="+saveMethod+"&user="+user+"&ucode="+ucode;
-
-        iFrame.contentWindow.SetData(data,url);
+            
+        iFrame.contentWindow.SetData(data,url,user,ucode,dbs);
         },null);
         
     }
@@ -116,28 +116,31 @@ window.onload = () => {
     var el = document.getElementById('content');
     var datagrids = document.getElementById('datagrids');
     var shiftPanel = new Shiftrptofsuper(el);
-    var dbs=new dbHelper(baseUrl);
+    
     var ucode = getQueryString('ucode');
     var user  = getQueryString('user');
+    var dbs=new dbHelper(baseUrl,user,ucode);
     var resid=526415710928;
     var subresid=525642459751;
     var cmswhere="C3_525697777216=1959"
     shiftPanel.start();
     var url ;
     mini.parse();
-    /** /dbs.dbGetdata(user,ucode,resid,subresid,cmswhere,dataGot,fnerror,fnhttperror);
+    dbs.dbGetdata(resid,subresid,cmswhere,dataGot,fnerror,fnhttperror);
     function dataGot(data,subdata)
     {
-        shiftPanel.appendSupervisor(datagrids,data,subdata,mini);
+        shiftPanel.appendSupervisor(datagrids,data,subdata,mini,dbs);
                 $.each(subdata, function (i, item) {
                     var row=[];
                     row.push(item);
                     shiftPanel.appendLineleader(datagrids,"dynamicgrid" + i.toString(),row,mini);
                 });
     }
-    function fnerror(data){}
-    function fnhttperror(jqXHR, textStatus, errorThrown){}*/
-     url=baseUrl+"&method="+getMethod+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
+    function fnerror(data){   alert(data.message);
+
+    }
+    function fnhttperror(jqXHR, textStatus, errorThrown){alert(jqXHR.responseText);}
+  /*   url=baseUrl+"&method="+getMethod+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
      $.ajax({
         url: url,
         dataType:"jsonp",
@@ -165,6 +168,6 @@ window.onload = () => {
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText);
         }
-    });
+    });*/
 
 };
