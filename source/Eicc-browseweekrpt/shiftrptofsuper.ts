@@ -2,6 +2,10 @@
 declare var mini: any,getQueryString:any;
 declare  var baseUrl:string;
 baseUrl="http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
+declare var getMethod;
+getMethod="ShowHostTableDatas_Ajax";
+declare var saveMethod;
+saveMethod="SaveData_Ajax";
 class baseObject{
     REC_ID:string;
 }
@@ -21,7 +25,6 @@ class Shiftrptofsuper {
     mini_control:HTMLElement;
     constructor(element: HTMLElement) {
         this.element = element;
-       // this.element.innerHTML += "The time is: ";
         this.span = document.createElement('span');
         this.element.appendChild(this.span);
         this.span.innerText = new Date().toLocaleTimeString();
@@ -29,11 +32,6 @@ class Shiftrptofsuper {
 
     start() {
          var jsonString :string  = '{"messge": "ok","error":"-1"}';
-         
-       
-
-        
-         
         this.timerToken = setInterval(() => this.span.innerHTML = new Date().toLocaleTimeString(), 500);
     }
 
@@ -59,19 +57,15 @@ class Shiftrptofsuper {
         parentelement.appendChild(this.mini_control);
         mini.parse();
         var aPanel = mini.get(panelid);
-
-        aPanel.set({"width":"auto","showCollapseButton":"true","expanded":false});
-        aPanel.set({"style":"height:350px;"});
-        
-         
+ 
+        aPanel.set({"width":"auto","iconCls":"icon-date","buttons":"collapse ","expanded":false,"onbuttonclick":"onbuttonclick"});
         aPanel.load("./dist/component/shiftrptofsuper-weekform.html", function () {
-          var iFrame = aPanel.getIFrameEl();
-           var ucode = getQueryString('ucode');
-        var user  = getQueryString('user');
-         var url = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?method=SaveData_Ajax&uiver=200&dynlogin=1&user="+user+"&ucode="+ucode+""; 
-          iFrame.contentWindow.SetData(data,url,user,ucode);
-           
-        },null);
+            var iFrame = aPanel.getIFrameEl();
+            var ucode = getQueryString('ucode');
+            var user  = getQueryString('user');
+            var url ;
+             url=baseUrl+"&method="+saveMethod+"&user="+user+"&ucode="+ucode;
+            iFrame.contentWindow.SetData(data,url,user,ucode);},null);
     }
     
     appendSupervisor(parentelement: HTMLElement,data :any,subdata:any,mini:any)
@@ -102,14 +96,15 @@ class Shiftrptofsuper {
       
       var aSupervisorPanel = mini.get("supervisor");
        aSupervisorPanel.set({"width":"auto","showCollapseButton":"true"});
-        aSupervisorPanel.set({"height":"400px"});
+        aSupervisorPanel.set({"height":"450px"});
         aSupervisorPanel.load("./dist/component/shiftsupervisor.html", function () {
         var iFrame = aSupervisorPanel.getIFrameEl();
-        
-          var ucode = getQueryString('ucode');
+        var ucode = getQueryString('ucode');
         var user  = getQueryString('user');
-            var url = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?method=SaveData_Ajax&uiver=200&dynlogin=1&user="+user+"&ucode="+ucode+""; 
-          iFrame.contentWindow.SetData(data,url);
+        var url ;
+        url=baseUrl+"&method="+saveMethod+"&user="+user+"&ucode="+ucode;
+
+        iFrame.contentWindow.SetData(data,url);
         },null);
         
     }
@@ -121,9 +116,8 @@ window.onload = () => {
     var el = document.getElementById('content');
     var datagrids = document.getElementById('datagrids');
     var shiftPanel = new Shiftrptofsuper(el);
-   
-    var method="ShowHostTableDatas_Ajax";
-     var ucode = getQueryString('ucode');
+    var dbs=new dbHelper(baseUrl);
+    var ucode = getQueryString('ucode');
     var user  = getQueryString('user');
     var resid=526415710928;
     var subresid=525642459751;
@@ -131,8 +125,19 @@ window.onload = () => {
     shiftPanel.start();
     var url ;
     mini.parse();
-    var columns = [{ "field": "REC_ID", "header": "recid1" }, { "field": "fName", "header": "fName" }, { "field": "fDescription", "header": "fDescription" }];
-     url=baseUrl+"&method="+method+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
+    /** /dbs.dbGetdata(user,ucode,resid,subresid,cmswhere,dataGot,fnerror,fnhttperror);
+    function dataGot(data,subdata)
+    {
+        shiftPanel.appendSupervisor(datagrids,data,subdata,mini);
+                $.each(subdata, function (i, item) {
+                    var row=[];
+                    row.push(item);
+                    shiftPanel.appendLineleader(datagrids,"dynamicgrid" + i.toString(),row,mini);
+                });
+    }
+    function fnerror(data){}
+    function fnhttperror(jqXHR, textStatus, errorThrown){}*/
+     url=baseUrl+"&method="+getMethod+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
      $.ajax({
         url: url,
         dataType:"jsonp",
@@ -140,7 +145,7 @@ window.onload = () => {
         success: function (text) {
             if (text !== "") {    
                 var data = mini.decode(text);
-                console.log(data.message);
+               // console.log(data.message);
                 if (data.error == -1) {
                     alert(data.message);
 
@@ -151,10 +156,10 @@ window.onload = () => {
                 if (data.subdata!=null){subdata=data.subdata.data;}
                 shiftPanel.appendSupervisor(datagrids,adata,subdata,mini);
                 $.each(subdata, function (i, item) {
-                    var row=[];
-                    row.push(item);
-                    shiftPanel.appendLineleader(datagrids,"dynamicgrid" + i.toString(),row,mini);
-                });
+                var row=[];
+               row.push(item);
+                   shiftPanel.appendLineleader(datagrids,"dynamicgrid" + i.toString(),row,mini);
+               });
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
