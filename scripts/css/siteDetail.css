@@ -1,0 +1,50 @@
+
+
+table{
+    border: 1px solid #99bbc1;
+    border-spacing: 0px;
+margin:0 auto;
+background-color: white;
+}
+
+table tr td{
+border-bottom: 1px solid rgb(245, 245, 245);
+
+}
+
+
+table .head1
+{
+    background-color:rgb(245, 245, 245);
+    text-align: right;
+height:30px;
+line-height: 30px;
+}
+
+table .head
+{
+    background-color:cadetblue;
+    text-align: center;
+height:30px;
+line-height: 30px;
+color:white;
+}
+
+table .title
+{
+    background-color:rgb(245, 245, 245);
+    text-align: right;
+width:170px;
+}
+
+table .content
+{
+
+width:200px;
+}
+
+
+ .mini-panel
+    {
+       padding-top:5px;
+    }

@@ -84,36 +84,62 @@ var appSourcePathName="Eicc-browseweekrpt";
 var libraryName1 = "shiftrptofsuper";
 var outputFileName1 = libraryName1 + ".min.js";
 var mainTsFilePath1 = "source/"+appSourcePathName+"/"+libraryName1+".js";
-var outputFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/";
 
+var libraryName2="shiftrptofmanage";
+var outputFileName2 = libraryName2 + ".min.js";
+var mainTsFilePath2 = "source/"+appSourcePathName+"/"+libraryName2+".js";
+
+var libraryName3="shiftrptofmajordomo";
+var outputFileName3 = libraryName3 + ".min.js";
+var mainTsFilePath3 = "source/"+appSourcePathName+"/"+libraryName3+".js";
+
+var outputFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/";
 var outputRootFolder   = appPublishPathName+"/"+appSourcePathName+"/";
 var outputComponentFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/Component/";
-
+var outputComponentFolderjs  = appPublishPathName+"/"+appSourcePathName+"/dist/shiftjs/";
 gulp.task("bundle", function() {
    
    
-    var bundler = browserify({
+   var bundler = browserify({
         debug: true,
-        standalone : libraryName1
+        standalone : libraryName3
     });
+    //var bundler2=browserify({
+       // debug: true,
+       // standalone : libraryName2
+    //});
     gulp.src("source/"+appSourcePathName+'/approot/*.html')
         .pipe(gulp.dest(outputRootFolder));
     gulp.src("source/"+appSourcePathName+'/component/*.html')
         .pipe(gulp.dest(outputComponentFolder));
-    return bundler.add(mainTsFilePath1)
+    gulp.src("source/"+appSourcePathName+'/shiftjs/*.js')
+        .pipe(gulp.dest(outputComponentFolderjs));
+    gulp.src("source/"+appSourcePathName+'/*.js')
+        .pipe(gulp.dest(outputFolder));
+         gulp.src("scripts/css/*.css")
+        .pipe(gulp.dest(outputRootFolder+"/scripts/css"));
+ 
+   /*return  bundler.add([mainTsFilePath2])
         .bundle()
-        .pipe(source(outputFileName1))
+        .pipe(source(outputFileName2))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(outputFolder));
+        .pipe(gulp.dest(outputFolder));*/
+
+ 
+      
+      
 });
 
 //******************************************************************************
 //* DEV SERVER
 //******************************************************************************
-var currentStartpage="shiftrptofsuper.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
+//var currentStartpage="shiftrptofsuper.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
+ 
+var currentStartpage="shiftrptofmanage.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
+
 gulp.task("watch", ["default"], function () {
     
     browserSync.init({
@@ -122,7 +148,7 @@ gulp.task("watch", ["default"], function () {
         
     });
     //test2
-    gulp.watch([ "source/**/**.ts","source/**/**.html", "test/**/*.ts"], ["default"]);
+    gulp.watch([ "scripts/css/*.css","source/**/**.ts","source/**/**.js","source/**/**.html", "test/**/*.ts"], ["default"]);
     gulp.watch(appPublishPathName+"/"+appSourcePathName+"/dist/*.*").on('change', browserSync.reload); 
 });
 
