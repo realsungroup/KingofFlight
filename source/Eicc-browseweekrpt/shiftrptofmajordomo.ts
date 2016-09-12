@@ -62,7 +62,7 @@ class ShiftrptofMajordomo {
         parentelement.appendChild(this.mini_control);
         mini.parse();
         var aPanel = mini.get(panelid);
-       aPanel.set({"width":"auto","showCollapseButton":"true","expanded":false});
+       aPanel.set({"width":"auto","buttons":"collapse ","expanded":false,"onbuttonclick":"onbuttonclick"});
         aPanel.set({"height":"auto"});
         
         aPanel.load("./dist/component/shiftrptofmajordomo-weekform.html", function () {

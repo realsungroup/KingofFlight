@@ -56,7 +56,7 @@ KingofAttendances.ShiftMajordomo=new function() {
              // mini.get("asp").set({"text":"已审批"});
                //mini.get("asp").enabled=false;
            }
-           
+             mini.parse();
              new mini.Form("form1").setData(o);
             return;
 }
