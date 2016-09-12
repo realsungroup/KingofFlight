@@ -1,4 +1,6 @@
 ﻿/**
+* License Code : PMTG3DFQ
+*
 * jQuery MiniUI 3.7.1
 *
 * Date : 2016-08-25
