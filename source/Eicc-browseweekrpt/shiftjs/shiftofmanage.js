@@ -1,9 +1,10 @@
 var KingofAttendances = KingofAttendances || {};
 KingofAttendances.ShiftManage=new function() {
     var shiftManage = this;
-    shiftManage.setData=function(data,user,ucode){
+      var dbs;
+    shiftManage.setData=function(data,adbs){
        var o = data[0];
-           
+           dbs=adbs;
            
             $("#spCount").html(data[0].C3_525716987383);
             $("#spHour").html(data[0].C3_526578576195);
@@ -12,7 +13,7 @@ KingofAttendances.ShiftManage=new function() {
             $("#spMonth").html(data[0].C3_525699725531);
             $("#spManage").html(data[0].C3_525699725094);
           
-           
+             function fnSuccess(data,subdata){ mini.parse();mini.get("cbReasons").set({"data":data});}      
            
             if (data[0].C3_526393969049=="Y")
             {
@@ -33,40 +34,14 @@ KingofAttendances.ShiftManage=new function() {
 
         
           $("#tbManage tbody").append(list);
-            var baseUrl="http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
-         var method="ShowHostTableDatas_Ajax";
-    
-       var resid=526765618499;
-      var subresid="";
-     var cmswhere=""
-     var url ;
-    mini.parse();
-    var columns = [{ "field": "REC_ID", "header": "recid1" }, { "field": "fName", "header": "fName" }, { "field": "fDescription", "header": "fDescription" }];
-     url=baseUrl+"&method="+method+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
-
-          $.ajax({
-        url: url,
-        dataType:"jsonp",
-        jsonp: "jsoncallback",
-        success: function (text) {
-            if (text !== "") {  
-              
-                var data = mini.decode(text);
-                console.log(data.message);
-                if (data.error == -1) {
-                    alert(data.message);
-
-                }
-                var adata = [];
-                adata = data.data;
-              
-              mini.get("cbReasons").set({"data":adata});   
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText);
-        }
-    });
+          
+        var resid=526765618499;
+        var subresid="";
+        var cmswhere=""
+      
+         dbs.dbGetdata(resid,0,cmswhere,fnSuccess,null,null);
+      
+   
             }
             else 
             {
@@ -76,7 +51,7 @@ KingofAttendances.ShiftManage=new function() {
               if (data[0].C3_526417619765=="Y")
            {
              mini.parse();
-             mini.get("asave").set({"text":"已申请"});
+            mini.get("asave").set({"text":"已申请"});
                mini.get("asave").enabled=false;
            }
             
@@ -84,45 +59,32 @@ KingofAttendances.ShiftManage=new function() {
             return;
     }
   shiftManage.saveData=function(){
-           var url=$("#hfurl").val();
+      
      
          var o =  new mini.Form("form1").getData(); 
              o.C3_526417619765="Y";  
              o._id=1;
              o._state="modified";
             var json = mini.encode([o]);
-            $.ajax({
-                url:  url,
-                async:false,
-                dataType:"jsonp",
-                jsonp: "jsoncallback",
-		        type: 'post',
-                data: {data:json,resid:525699610587},
-                cache: false,
-                success: function (text) {
-              if (text.error=="0")
-              {
-                  alert("申请成功");
-                  
+             dbs.dbSavedata(525699610587,0,json,dataSaved,fnerror,fnhttperror);
+              function dataSaved(text)
+            {
+                alert("申请成功");
                 mini.get("asave").set({"text":"已申请"});
-               mini.get("asave").enabled=false;
+                mini.get("asave").enabled=false;
             }
-                else    
-                {
-               alert("申请失败");
-                }  
-                 
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("error");
-                 
-                    
-                }
-            });
+         function fnerror(text){
+                alert("申请失败");
 
+         }
+         function fnhttperror(jqXHR, textStatus, errorThrown){
+             alert("error");
+
+         }
+            
   }
-  shiftManage.setData2=function(data){
-    
+  shiftManage.setData2=function(data,bdbs){
+    dbs=bdbs;
      
             $("#spHour").html(data[0].C3_526577949788);
 			 $("#spCount").html(data[0].C3_525716459309);
@@ -160,10 +122,10 @@ KingofAttendances.ShiftManage=new function() {
               if (data[0].C3_526416147534=="Y")
            {
             mini.parse();
-              mini.get("asp").set({"text":"已审批"});
-               mini.get("asp").enabled=false;
+            mini.get("asp").set({"text":"已审批"});
+             mini.get("asp").enabled=false;
            }
-              mini.parse();
+            
              new mini.Form("form1").setData(o);
             return;
 }
@@ -176,36 +138,22 @@ KingofAttendances.ShiftManage=new function() {
              o._state="modified";
              o.C3_526416147534="Y";
             var json = mini.encode([o]);
-           
-            $.ajax({
-                url:  url,
-                async:false,
-                dataType:"jsonp",
-                jsonp: "jsoncallback",
-		        type: 'post',
-                data: { data: json,resid:525697747154},
-                cache: false,
-                success: function (text) {
-                   
-                   if (text.error=="0")
-              {
-                  alert("审批成功");
+                 dbs.dbSavedata(525697747154,0,json,dataSaved,fnerror,fnhttperror);
+              function dataSaved(text)
+            {
+                 alert("审批成功");
                    mini.get("asp").set({"text":"已审批"});
                mini.get("asp").enabled=false;
             }
-                else    
-                {
-               alert("审批失败");
-                }  
-                 
-              
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                  
-                    alert(jqXHR.responseText);
-                    
-                }
-            });
+         function fnerror(text){
+                    alert("审批失败");
+
+         }
+         function fnhttperror(jqXHR, textStatus, errorThrown){
+             alert("error");
+
+         }
+          
         }
 
 }

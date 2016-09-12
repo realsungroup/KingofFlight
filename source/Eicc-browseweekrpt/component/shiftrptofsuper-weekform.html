@@ -67,15 +67,16 @@
     
 </form>
 <link href="../../scripts/css/siteDetail.css" rel="stylesheet" type="text/css">
+<script src="../common.js" type="text/javascript"></script>
 <script src="../../scripts/boot.js" type="text/javascript"></script>
 <script src="../shiftJs/shiftofsuper.js" type="text/javascript"></script>
 <script type="text/javascript">
         mini.parse();
-        function SetData(data,url)
+        function SetData(data,dbs)
         {
-			  $("#hfurl").val(url);
+			
           
-           KingofAttendances.ShiftSupervisor.setData2(data,url);
+           KingofAttendances.ShiftSupervisor.setData2(data,dbs);
         
       
         

@@ -26,6 +26,7 @@
                     if (data.error == -1) {
                      if (fnError!=null)
                      {fnError(data);}
+                       
                     }
                     var adata = [];
                     var subdata=[];
@@ -55,7 +56,7 @@
                 dataType:"jsonp",
                 jsonp: "jsoncallback",
 		        type: 'post',
-                data: {data:json,resid:526415710928},
+                data: {data:json,resid:resid},
                 cache: false,
                 success: function (text) {
             

@@ -2,10 +2,10 @@ var KingofAttendances = KingofAttendances || {};
 KingofAttendances.ShiftSupervisor=new function() {
     var shiftSupervisor = this;
      var dbs;
-    shiftSupervisor.setData=function(data,user,ucode,adbs){
+     
+    shiftSupervisor.setData=function(data,adbs){
        var o = data[0];
        dbs=adbs;
-          //debugger;
             $("#spCount").html(data[0].C3_525716459309);//排班人数
             $("#spHour").html(data[0].C3_526577949788);//排班小时
             $("#spDate").html(data[0].C3_525698252634+"~"+data[0].C3_526580236305);//排班日期
@@ -30,47 +30,20 @@ KingofAttendances.ShiftSupervisor=new function() {
                         "</td></td><td  >"+
                         "<input  name='C3_526416460460' class='mini-textarea'  />"+
                         "</td><td  >"+
-                        "<a class='mini-button' id='asave' onclick='KingofAttendances.ShiftSupervisor.saveData' >超标申请</a></td></tr>";
-
+                       "<a class='mini-button' id='asave' onclick='KingofAttendances.ShiftSupervisor.saveData' >超标申请</a></td></tr>";
+                     
         
           $("#tbsupervisor tbody").append(list);
         
-      //  var baseUrl="http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
-       //  var method="ShowHostTableDatas_Ajax";
-    
+   
         var resid=526765618499;
         var subresid="";
         var cmswhere=""
-        //var url ;
+      
    
        dbs.dbGetdata(resid,0,cmswhere,fnSuccess,null,null);
       
-    /**
-     url=baseUrl+"&method="+method+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
-
-          $.ajax({
-        url: url,
-        dataType:"jsonp",
-        jsonp: "jsoncallback",
-        success: function (text) {
-            if (text !== "") {  
-              
-                var data = mini.decode(text);
-               
-                if (data.error == -1) {
-                    alert(data.message);
-
-                }
-                var adata = [];
-                adata = data.data;
-              mini.get("cbReasons").set({"data":adata});   
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText);
-        }
-    }); */
-
+           
 
             }
             else 
@@ -84,20 +57,17 @@ KingofAttendances.ShiftSupervisor=new function() {
             mini.get("asave").set({"text":"已审批"});
             mini.get("asave").enabled=false;
            }
-           
           
             new mini.Form("form1").setData(o);
-            return;
     }
   shiftSupervisor.saveData=function(){
-       var url=$("#hfurl").val();
-         
          var o =  new mini.Form("form1").getData(); 
              o.C3_526393734192="Y";  
              o._id=1;
              o._state="modified";
             var json = mini.encode([o]);
-           //debugger;
+         
+            
           dbs.dbSavedata(526415710928,0,json,dataSaved,fnerror,fnhttperror);
           function dataSaved(text)
             {
@@ -113,40 +83,11 @@ KingofAttendances.ShiftSupervisor=new function() {
              alert("error");
 
          }
-    /**
-            $.ajax({
-                url:  url,
-                async:false,
-                dataType:"jsonp",
-                jsonp: "jsoncallback",
-		        type: 'post',
-                data: {data:json,resid:526415710928},
-                cache: false,
-                success: function (text) {
-            
-                     if (text.error=="0")
-              {
-                  alert("申请成功");
-                mini.get("asave").set({"text":"已申请"});
-               mini.get("asave").enabled=false;
-             
-            }
-                else    
-                {
-               alert("申请失败");
-                }  
-                 
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("error");
-                 
-                    
-                }
-            }); */
+ 
 
   }
-  shiftSupervisor.setData2=function(data){
-    
+  shiftSupervisor.setData2=function(data,bdbs){
+    dbs=bdbs;
       $("#proLine").html(data[0].C3_525642615889);
             $("#spHour").html(data[0].C3_526578100819);
 			 $("#spCount").html(data[0].C3_525715678864);
@@ -193,36 +134,24 @@ KingofAttendances.ShiftSupervisor=new function() {
              o._id=1;
              o._state="modified";
              o.C3_526410202841="Y";
-            var json = mini.encode([o]);
-            $.ajax({
-                url:  url,
-                async:false,
-                dataType:"jsonp",
-                jsonp: "jsoncallback",
-		        type: 'post',
-                data: { data: json,resid:525642459751},
-                cache: false,
-                success: function (text) {
-                   
-                     if (text.error=="0")
-              {
-                  alert("审批成功");
+          var json = mini.encode([o]);
+         dbs.dbSavedata(525642459751,0,json,dataSaved,fnerror,fnhttperror);
+          function dataSaved(text)
+            {
+                 alert("审批成功");
                 mini.get("asp").set({"text":"已审批"});
                mini.get("asp").enabled=false;
             }
-                else    
-                {
-               alert("审批失败");
-                }  
-                 
-                 
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                  
-                    alert(jqXHR.responseText);
-                    
-                }
-            });
+         function fnerror(text){
+                alert("审批失败");
+
+         }
+         function fnhttperror(jqXHR, textStatus, errorThrown){
+             alert("error");
+
+         }
+           
+         
         }
 
 }

@@ -40,7 +40,7 @@ var Shiftrptofsuper = (function () {
     Shiftrptofsuper.prototype.stop = function () {
         clearTimeout(this.timerToken);
     };
-    Shiftrptofsuper.prototype.appendLineleader = function (parentelement, panelid, data, mini) {
+    Shiftrptofsuper.prototype.appendLineleader = function (parentelement, panelid, data, mini, dbs) {
         var aLineleader = new Lineleader();
         aLineleader = data[0];
         this.mini_control = document.createElement('div');
@@ -62,7 +62,7 @@ var Shiftrptofsuper = (function () {
             var user = getQueryString('user');
             var url;
             url = baseUrl + "&method=" + saveMethod + "&user=" + user + "&ucode=" + ucode;
-            iFrame.contentWindow.SetData(data, url, user, ucode);
+            iFrame.contentWindow.SetData(data, dbs);
         }, null);
     };
     Shiftrptofsuper.prototype.appendSupervisor = function (parentelement, data, subdata, mini, dbs) {
@@ -92,7 +92,7 @@ var Shiftrptofsuper = (function () {
             var user = getQueryString('user');
             var url;
             url = baseUrl + "&method=" + saveMethod + "&user=" + user + "&ucode=" + ucode;
-            iFrame.contentWindow.SetData(data, url, user, ucode, dbs);
+            iFrame.contentWindow.SetData(data, dbs);
         }, null);
     };
     return Shiftrptofsuper;
@@ -116,7 +116,7 @@ window.onload = function () {
         $.each(subdata, function (i, item) {
             var row = [];
             row.push(item);
-            shiftPanel.appendLineleader(datagrids, "dynamicgrid" + i.toString(), row, mini);
+            shiftPanel.appendLineleader(datagrids, "dynamicgrid" + i.toString(), row, mini, dbs);
         });
     }
     function fnerror(data) {

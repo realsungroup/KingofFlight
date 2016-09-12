@@ -1,5 +1,10 @@
 declare var mini: any,getQueryString:any;
- 
+ declare  var baseUrl:string;
+baseUrl="http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
+declare var getMethod;
+getMethod="ShowHostTableDatas_Ajax";
+declare var saveMethod;
+saveMethod="SaveData_Ajax";
 class baseObjectM{
     REC_ID:string;
 }
@@ -39,7 +44,7 @@ class Shiftrptofmanage {
         clearTimeout(this.timerToken);
     }
     
-    appendLineSupervisor(parentelement: HTMLElement,panelid :string ,data :any,mini:any){
+    appendLineSupervisor(parentelement: HTMLElement,panelid :string ,data :any,mini:any,dbs:any){
         var aLineSupervisor=new LineSupervisor();
         aLineSupervisor=data[0]
         this.mini_control=document.createElement('div');
@@ -64,11 +69,12 @@ class Shiftrptofmanage {
          
           var ucode = getQueryString('ucode');
         var user  = getQueryString('user');
-            var url = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?method=SaveData_Ajax&uiver=200&dynlogin=1&user="+user+"&ucode="+ucode+""; 
-          iFrame.contentWindow.SetData(data,url);
+            //var url = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?method=SaveData_Ajax&uiver=200&dynlogin=1&user="+user+"&ucode="+ucode+""; 
+        //  iFrame.contentWindow.SetData(data,url);
+         iFrame.contentWindow.SetData(data,dbs);
         },null);
     }
-    appendManage(parentelement: HTMLElement,data :any,subdata:any,mini:any)
+    appendManage(parentelement: HTMLElement,data :any,subdata:any,mini:any,dbs:any)
     {
        var aManage=new Manage();
        aManage=data[0]
@@ -100,57 +106,44 @@ class Shiftrptofmanage {
         var iFrame = aManagePanel.getIFrameEl();
          var ucode = getQueryString('ucode');
         var user  = getQueryString('user');
-      var url = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?method=SaveData_Ajax&uiver=200&dynlogin=1&user="+user+"&ucode="+ucode+""; 
-             iFrame.contentWindow.SetData(data,url,user,ucode);
-        
+     // var url = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?method=SaveData_Ajax&uiver=200&dynlogin=1&user="+user+"&ucode="+ucode+""; 
+           //  iFrame.contentWindow.SetData(data,url,user,ucode);
+         iFrame.contentWindow.SetData(data,dbs);
         },null);
         
     }
 }
 
 window.onload = () => {
-    var el = document.getElementById('content');
+   
+   
+   
+     var el = document.getElementById('content');
     var datagrids = document.getElementById('datagrids');
     var shiftPanel = new Shiftrptofmanage(el);
-    var baseUrl="http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
-    var method="ShowHostTableDatas_Ajax";
-     var ucode = getQueryString('ucode');
+    
+    var ucode = getQueryString('ucode');
     var user  = getQueryString('user');
-    var resid=526417296293;//主表id
-    var subresid=525697747154;//字表id
-    var cmswhere="C3_525699724860=392";//主表数据的编号
+    var dbs=new dbHelper(baseUrl,user,ucode);
+    var resid=526417296293;
+    var subresid=525697747154;
+    var cmswhere="C3_525699724860=392"
     shiftPanel.start();
     var url ;
     mini.parse();
-    var columns = [{ "field": "REC_ID", "header": "recid1" }, { "field": "fName", "header": "fName" }, { "field": "fDescription", "header": "fDescription" }];
-     url=baseUrl+"&method="+method+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
-     $.ajax({
-        url: url,
-        dataType:"jsonp",
-        jsonp: "jsoncallback",
-        success: function (text) {
-            if (text !== "") {    
-                var data = mini.decode(text);
-                console.log(data.message);
-                if (data.error == -1) {
-                    alert(data.message);
-
-                }
-                var adata = [];
-                var subdata=[];
-                adata = data.data;
-                if (data.subdata!=null){subdata=data.subdata.data;}
-                shiftPanel.appendManage(datagrids,adata,subdata,mini);
+    dbs.dbGetdata(resid,subresid,cmswhere,dataGot,fnerror,fnhttperror);
+    function dataGot(data,subdata)
+    {
+        shiftPanel.appendManage(datagrids,data,subdata,mini,dbs);
                 $.each(subdata, function (i, item) {
                     var row=[];
                     row.push(item);
-                    shiftPanel.appendLineSupervisor(datagrids,"dynamicgrid" + i.toString(),row,mini);
+                    shiftPanel.appendLineSupervisor(datagrids,"dynamicgrid" + i.toString(),row,mini,dbs);
                 });
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText);
-        }
-    });
+    }
+    function fnerror(data){   alert(data.message);
+
+    }
+    function fnhttperror(jqXHR, textStatus, errorThrown){alert(jqXHR.responseText);}
 
 };

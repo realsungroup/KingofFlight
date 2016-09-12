@@ -1,9 +1,10 @@
 var KingofAttendances = KingofAttendances || {};
 KingofAttendances.ShiftMajordomo=new function() {
     var shiftMajordomo = this;
-    shiftMajordomo.setData=function(data){
+    var dbs;
+    shiftMajordomo.setData=function(data,adbs){
        var o = data[0];
-          
+          dbs=adbs;
            
             $("#spMajordomo").html(data[0].C3_526389708747);
             $("#spCount").html(data[0].C3_526389709403);
@@ -14,8 +15,8 @@ KingofAttendances.ShiftMajordomo=new function() {
             new mini.Form("form1").setData(o);
           
     }
-  shiftMajordomo.setData2=function(data,url){
-     
+  shiftMajordomo.setData2=function(data,bdbs){
+     dbs=bdbs;
             $("#spHour").html(data[0].C3_526578576195);
 			 $("#spCount").html(data[0].C3_525716987383);
             $("#spDate").html(data[0].C3_525699725313+"~"+data[0].C3_526580294945);
@@ -51,12 +52,11 @@ KingofAttendances.ShiftMajordomo=new function() {
             }
               if (data[0].C3_526417619032=="Y")
            {
-            
              mini.parse();
-              mini.get("asp").set({"text":"已审批"});
-               mini.get("asp").enabled=false;
+             // mini.get("asp").set({"text":"已审批"});
+               //mini.get("asp").enabled=false;
            }
-            mini.parse();
+           
              new mini.Form("form1").setData(o);
             return;
 }
@@ -69,34 +69,22 @@ KingofAttendances.ShiftMajordomo=new function() {
              o._state="modified";
              o.C3_526417619032="Y";
             var json = mini.encode([o]);
-            $.ajax({
-                url:  url,
-                async:false,
-                dataType:"jsonp",
-                jsonp: "jsoncallback",
-		        type: 'post',
-                data: { data: json,resid:525699610587},
-                cache: false,
-                success: function (text) {
-                   
-                     if (text.error=="0")
-              {
-                  alert("审批成功");
-                   mini.get("asp").set({"text":"已审批"});
+         dbs.dbSavedata(525699610587,0,json,dataSaved,fnerror,fnhttperror);
+            function dataSaved(text)
+            {
+                 alert("审批成功");
+                mini.get("asp").set({"text":"已审批"});
                mini.get("asp").enabled=false;
             }
-                else    
-                {
-               alert("审批失败");
-                }  
-                 
-               
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                  
-                    alert(jqXHR.responseText);
-                    
-                }
-            });
+         function fnerror(text){
+                    alert("审批失败");
+
+         }
+         function fnhttperror(jqXHR, textStatus, errorThrown){
+             alert("error");
+
+         }
+          
+        
         }
 }

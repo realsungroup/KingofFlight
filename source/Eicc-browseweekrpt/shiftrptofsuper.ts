@@ -39,7 +39,7 @@ class Shiftrptofsuper {
         clearTimeout(this.timerToken);
     }
     
-    appendLineleader(parentelement: HTMLElement,panelid :string ,data :any,mini:any){
+    appendLineleader(parentelement: HTMLElement,panelid :string ,data :any,mini:any,dbs:any){
         var aLineleader=new Lineleader();
         aLineleader=data[0]
         this.mini_control=document.createElement('div');
@@ -65,7 +65,10 @@ class Shiftrptofsuper {
             var user  = getQueryString('user');
             var url ;
              url=baseUrl+"&method="+saveMethod+"&user="+user+"&ucode="+ucode;
-            iFrame.contentWindow.SetData(data,url,user,ucode);},null);
+          //  iFrame.contentWindow.SetData(data,url,user,ucode);
+           iFrame.contentWindow.SetData(data,dbs);
+        },null);
+           
     }
     
     appendSupervisor(parentelement: HTMLElement,data :any,subdata:any,mini:any,dbs:any)
@@ -104,7 +107,7 @@ class Shiftrptofsuper {
         var url ;
         url=baseUrl+"&method="+saveMethod+"&user="+user+"&ucode="+ucode;
             
-        iFrame.contentWindow.SetData(data,url,user,ucode,dbs);
+        iFrame.contentWindow.SetData(data,dbs);
         },null);
         
     }
@@ -133,41 +136,13 @@ window.onload = () => {
                 $.each(subdata, function (i, item) {
                     var row=[];
                     row.push(item);
-                    shiftPanel.appendLineleader(datagrids,"dynamicgrid" + i.toString(),row,mini);
+                    shiftPanel.appendLineleader(datagrids,"dynamicgrid" + i.toString(),row,mini,dbs);
                 });
     }
     function fnerror(data){   alert(data.message);
 
     }
     function fnhttperror(jqXHR, textStatus, errorThrown){alert(jqXHR.responseText);}
-  /*   url=baseUrl+"&method="+getMethod+"&user="+user+"&ucode="+ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
-     $.ajax({
-        url: url,
-        dataType:"jsonp",
-        jsonp: "jsoncallback",
-        success: function (text) {
-            if (text !== "") {    
-                var data = mini.decode(text);
-               // console.log(data.message);
-                if (data.error == -1) {
-                    alert(data.message);
-
-                }
-                var adata = [];
-                var subdata=[];
-                adata = data.data;
-                if (data.subdata!=null){subdata=data.subdata.data;}
-                shiftPanel.appendSupervisor(datagrids,adata,subdata,mini);
-                $.each(subdata, function (i, item) {
-                var row=[];
-               row.push(item);
-                   shiftPanel.appendLineleader(datagrids,"dynamicgrid" + i.toString(),row,mini);
-               });
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText);
-        }
-    });*/
+ 
 
 };

@@ -64,15 +64,16 @@
 	<input  id="hfurl" class="mini-Hidden"    allowInput="false"/>
 </form>
 <link href="../../scripts/css/siteDetail.css" rel="stylesheet" type="text/css">
+<script src="../common.js" type="text/javascript"></script>
 <script src="../../scripts/boot.js" type="text/javascript"></script>
 <script src="../shiftJs/shiftofmanage.js" type="text/javascript"></script>
 <script type="text/javascript">
         mini.parse();
-   function SetData(data,url,user,ucode)
+   function SetData(data,dbs)
         {
 		 
-             $("#hfurl").val(url);
-     KingofAttendances.ShiftManage.setData(data,user,ucode);
+     
+     KingofAttendances.ShiftManage.setData(data,dbs);
         }
        
     

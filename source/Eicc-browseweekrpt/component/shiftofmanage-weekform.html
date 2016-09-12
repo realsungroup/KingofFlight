@@ -64,15 +64,13 @@
   
  
 
-<!--<div style="padding:10px;">               
-    <a class="mini-button" onclick="onOk" >审批通过</a>       
-    <a class="mini-button" onclick="onCancel" >拒绝通过</a>       
-</div>  --> 
+
 	<input  name="C3_526410202841" class="mini-Hidden"   allowInput="false"/>
 	<input  name="REC_ID" class="mini-Hidden"  allowInput="false"/>
 	<input  id="hfurl" class="mini-Hidden"  allowInput="false"/>        
 </form>
 <link href="../../scripts/css/siteDetail.css" rel="stylesheet" type="text/css">
+<script src="../common.js" type="text/javascript"></script>
 <script src="../../scripts/boot.js" type="text/javascript"></script>
 <script src="../shiftJs/shiftofmanage.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -81,10 +79,10 @@
      
 
     
-       function SetData(data,url)
+       function SetData(data,dbs)
         {
-            $("#hfurl").val(url);
-           KingofAttendances.ShiftManage.setData2(data);
+        
+           KingofAttendances.ShiftManage.setData2(data,dbs);
         
       
         

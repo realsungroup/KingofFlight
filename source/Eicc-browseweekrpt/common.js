@@ -47,7 +47,7 @@ var dbHelper = (function () {
             dataType: "jsonp",
             jsonp: "jsoncallback",
             type: 'post',
-            data: { data: json, resid: 526415710928 },
+            data: { data: json, resid: resid },
             cache: false,
             success: function (text) {
                 if (text.error == "0") {
