@@ -35,5 +35,5 @@ dist
 .node_repl_history
 
 # Compiler generated
-source/**/*.js
+
 test/**/*.js
