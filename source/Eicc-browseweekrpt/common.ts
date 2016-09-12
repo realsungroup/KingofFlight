@@ -26,7 +26,6 @@
                     if (data.error == -1) {
                      if (fnError!=null)
                      {fnError(data);}
-                       
                     }
                     var adata = [];
                     var subdata=[];
