@@ -1,0 +1,51 @@
+ 
+
+<div style="padding:10px;">               
+    <a class="mini-button" onclick="onOk" >审批通过</a>       
+    <a class="mini-button" onclick="onCancel" >拒绝通过</a>       
+</div>        
+</form>
+<script src="../../scripts/boot.js" type="text/javascript"></script>
+<script type="text/javascript">
+        mini.parse();
+
+        var url = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?method=SaveData_Ajax&uiver=200&dynlogin=1&user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
+
+        var form = new mini.Form("form1");
+        function SetData(data) {
+            
+          
+             var o = data[0];
+            form.setData(o);
+            
+            return;
+        
+    }
+    function SaveData() {
+            var o = form.getData();            
+             o._id=1;
+             o._state="modified";
+            var json = mini.encode([o]);
+            $.ajax({
+                url:  url,
+                async:false,
+                dataType:"jsonp",
+                jsonp: "jsoncallback",
+		        type: 'post',
+                data: { data: json,resid:491762412839 },
+                cache: false,
+                success: function (text) {
+                   // CloseWindow("save");
+                   alert('saved');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                    
+                }
+            });
+        }
+         function onOk(e) {
+            SaveData();
+        }
+ </script>
+      
