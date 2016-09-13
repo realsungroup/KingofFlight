@@ -50,8 +50,7 @@ var Shiftrptofsuper = (function (_super) {
         var className = "";
         var dates = "";
         var title;
-        aSupervisor = data[0];
-        dates = (aSupervisor.C3_525698252634);
+        dates = (data[0].C3_525698252634);
         title = dates + "日产线排班整体情况";
         if (data[0].C3_526393560160 == "Y") {
             className = "mini-panel mini-panel-danger";
@@ -65,7 +64,7 @@ var Shiftrptofsuper = (function (_super) {
     };
     return Shiftrptofsuper;
 }(miniPanel));
-window.onload = function () {
+function main() {
     baseUrl = appConfig.app.baseUrl;
     getMethod = appConfig.app.getMethod;
     saveMethod = appConfig.app.SaveData_Ajax;
@@ -101,4 +100,4 @@ window.onload = function () {
         alert(data.message);
     }
     function fnhttperror(jqXHR, textStatus, errorThrown) { alert(jqXHR.responseText); }
-};
+}

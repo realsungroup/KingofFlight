@@ -77,7 +77,7 @@ gulp.task("test", ["istanbul:hook"], function() {
 });
 
 //******************************************************************************
-//* BUNDLE
+//* realease
 //******************************************************************************
 var appPublishPathName="release";
 var appSourcePathName="Eicc-browseweekrpt";
@@ -104,10 +104,7 @@ gulp.task("bundle", function() {
         debug: true,
         standalone : libraryName3
     });
-    //var bundler2=browserify({
-       // debug: true,
-       // standalone : libraryName2
-    //});
+  
     gulp.src("source/"+appSourcePathName+'/approot/*.html')
         .pipe(gulp.dest(outputRootFolder));
     gulp.src("source/"+appSourcePathName+'/component/*.html')
@@ -121,18 +118,7 @@ gulp.task("bundle", function() {
       gulp.src("source/"+appSourcePathName+'/*.json')
         .pipe(gulp.dest(outputFolder));
  
-   /*return  bundler.add([mainTsFilePath2])
-        .bundle()
-        .pipe(source(outputFileName2))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(outputFolder));*/
-
  
-      
-      
 });
 
 //******************************************************************************

@@ -59,8 +59,8 @@ class Shiftrptofsuper extends miniPanel {
        var className="";
        var dates:string="";
        var title;
-       aSupervisor=data[0];
-       dates =(aSupervisor.C3_525698252634);
+       
+       dates =(data[0].C3_525698252634);
        title =dates+"日产线排班整体情况";
          if(data[0].C3_526393560160=="Y"){
             className="mini-panel mini-panel-danger";
@@ -81,7 +81,7 @@ class Shiftrptofsuper extends miniPanel {
     }
 }
  
-window.onload = () => {
+function main() {
     //alert(appConfig.app.baseUrl);
     baseUrl=appConfig.app.baseUrl;
     getMethod=appConfig.app.getMethod;
@@ -123,4 +123,4 @@ window.onload = () => {
     function fnhttperror(jqXHR, textStatus, errorThrown){alert(jqXHR.responseText);}
  
 
-};
+}
