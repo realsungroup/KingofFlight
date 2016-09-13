@@ -116,8 +116,10 @@ gulp.task("bundle", function() {
         .pipe(gulp.dest(outputComponentFolderjs));
     gulp.src("source/"+appSourcePathName+'/*.js')
         .pipe(gulp.dest(outputFolder));
-         gulp.src("scripts/css/*.css")
+    gulp.src("scripts/css/*.css")
         .pipe(gulp.dest(outputRootFolder+"/scripts/css"));
+      gulp.src("source/"+appSourcePathName+'/*.json')
+        .pipe(gulp.dest(outputFolder));
  
    /*return  bundler.add([mainTsFilePath2])
         .bundle()
@@ -148,7 +150,7 @@ gulp.task("watch", ["default"], function () {
         
     });
     //test2
-    gulp.watch([ "scripts/css/*.css","source/**/**.ts","source/**/**.js","source/**/**.html", "test/**/*.ts"], ["default"]);
+    gulp.watch([ "source/**/**.json","scripts/css/*.css","source/**/**.ts","source/**/**.js","source/**/**.html", "test/**/*.ts"], ["default"]);
     gulp.watch(appPublishPathName+"/"+appSourcePathName+"/dist/*.*").on('change', browserSync.reload); 
 });
 

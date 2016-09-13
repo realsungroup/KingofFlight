@@ -31,7 +31,12 @@ function  onbuttonclick(e)
 			    //alert(e.name);
                 if (e.name="collapse")
                 {
-                    e.sender.set({"height":"400px"});
+                     setTimeout(function() {
+                            if (e.sender.expanded == true) { 
+                                         e.sender.set({ "height": "400px" }); 
+                              }
+                    }, 500);
+
                 }
 		    }
 

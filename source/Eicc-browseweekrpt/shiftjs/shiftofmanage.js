@@ -9,7 +9,7 @@ KingofAttendances.ShiftManage=new function() {
             $("#spCount").html(data[0].C3_525716987383);
             $("#spHour").html(data[0].C3_526578576195);
             $("#spDate").html(data[0].C3_525699725313+"~"+data[0].C3_526580294945);
-            $("#spMajordomo").html(data[0].C3_525699845153);
+            //$("#spMajordomo").html(data[0].C3_525699845153);
             $("#spMonth").html(data[0].C3_525699725531);
             $("#spManage").html(data[0].C3_525699725094);
           
@@ -22,11 +22,11 @@ KingofAttendances.ShiftManage=new function() {
     
     var list="<tr>"+
   "<td class='title'>"+
-     "<span '>超标原因类型：</span></td>"+
+     "<span>超标原因类型：</span></td>"+
  "<td><input class='mini-combobox' style='width:150px;' name='C3_526417619516' id='cbReasons' textField='C3_526765634258' valueField='C3_526765634258' showNullItem='true' allowInput='true'/></td>"+
   "<td><span lang='EN-US' style='color:#0070C0' </span>"+
  "</td></tr><tr>"+
- " <td class='title'><span>超标原因描述：</span></span></p>"+
+ " <td class='title'><span>超标原因描述：</span>"+
   "</td></td><td >"+
   "<input  name='C3_526417619250' class='mini-textarea'  />"+
   "</td><td  >"+
@@ -101,7 +101,7 @@ KingofAttendances.ShiftManage=new function() {
       $("#isIllegal").html("超标");
                var list="<tr>"+
   "<td class='title' >"+
-     " <span ><span>超标原因类型：</span></td>"+
+     " <span>超标原因类型：</span></td>"+
  "<td><input  name='C3_526393593762' class='mini-textarea' allowInput='false' /></span></td>"+
   "<td><span ><span lang='EN-US' style='color:#0070C0' </span>"+
  "</td></tr><tr>"+

@@ -3,9 +3,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-baseUrl = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
-getMethod = "ShowHostTableDatas_Ajax";
-saveMethod = "SaveData_Ajax";
 var baseObject = (function () {
     function baseObject() {
     }
@@ -25,99 +22,80 @@ var Supervisor = (function (_super) {
     }
     return Supervisor;
 }(baseObject));
-var Shiftrptofsuper = (function () {
+var Shiftrptofsuper = (function (_super) {
+    __extends(Shiftrptofsuper, _super);
     function Shiftrptofsuper(element) {
-        this.element = element;
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = new Date().toLocaleTimeString();
+        _super.call(this, element);
     }
-    Shiftrptofsuper.prototype.start = function () {
-        var _this = this;
-        var jsonString = '{"messge": "ok","error":"-1"}';
-        this.timerToken = setInterval(function () { return _this.span.innerHTML = new Date().toLocaleTimeString(); }, 500);
-    };
-    Shiftrptofsuper.prototype.stop = function () {
-        clearTimeout(this.timerToken);
-    };
     Shiftrptofsuper.prototype.appendLineleader = function (parentelement, panelid, data, mini, dbs) {
         var aLineleader = new Lineleader();
+        var className = "";
+        var dates = "";
+        var title;
         aLineleader = data[0];
-        this.mini_control = document.createElement('div');
-        this.mini_control.id = panelid;
         if (data[0].C3_526410163545 == "Y") {
-            this.mini_control.className = "mini-panel mini-panel-danger";
+            className = "mini-panel mini-panel-danger";
         }
         else {
-            this.mini_control.className = "mini-panel mini-panel-success";
+            className = "mini-panel mini-panel-success";
         }
-        this.mini_control.title = data[0].C3_525642615889 + data[0].C3_525715020942 + "排班" + data[0].C3_525715678864 + "人，" + "排班" + data[0].C3_526578100819 + "小时";
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-        var aPanel = mini.get(panelid);
-        aPanel.set({ "width": "auto", "iconCls": "icon-date", "buttons": "collapse ", "expanded": false, "onbuttonclick": "onbuttonclick" });
-        aPanel.load("./dist/component/shiftrptofsuper-weekform.html", function () {
-            var iFrame = aPanel.getIFrameEl();
-            var ucode = getQueryString('ucode');
-            var user = getQueryString('user');
-            var url;
-            url = baseUrl + "&method=" + saveMethod + "&user=" + user + "&ucode=" + ucode;
-            iFrame.contentWindow.SetData(data, dbs);
-        }, null);
+        title = data[0].C3_525642615889 + data[0].C3_525715020942 + "排班" + data[0].C3_525715678864 + "人，" + "排班" + data[0].C3_526578100819 + "小时";
+        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofsuper.subHtml, function (iFrame) {
+            iFrame.contentWindow.KingofAttendances.ShiftSupervisor.setData2(data, dbs, appConfig);
+        }, false, "icon-user");
     };
     Shiftrptofsuper.prototype.appendSupervisor = function (parentelement, data, subdata, mini, dbs) {
         var aSupervisor = new Supervisor();
+        var panelid = "supervisor";
+        var className = "";
+        var dates = "";
+        var title;
         aSupervisor = data[0];
-        this.mini_control = document.createElement('div');
-        this.mini_control.id = "supervisor";
+        dates = (aSupervisor.C3_525698252634);
+        title = dates + "日产线排班整体情况";
         if (data[0].C3_526393560160 == "Y") {
-            this.mini_control.className = "mini-panel mini-panel-danger";
+            className = "mini-panel mini-panel-danger";
         }
         else {
-            this.mini_control.className = "mini-panel mini-panel-success";
+            className = "mini-panel mini-panel-success";
         }
-        var yearmonth = aSupervisor.C3_525698252852;
-        var dates = (aSupervisor.C3_525698252634);
-        var startDate = new Date(dates.substr(0, 4) + '-' + dates.substr(4, 2) + '-' + dates.substr(6, 2));
-        var title = dates + "日产线排班整体情况";
-        this.mini_control.title = title;
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-        var aSupervisorPanel = mini.get("supervisor");
-        aSupervisorPanel.set({ "width": "auto", "showCollapseButton": "true" });
-        aSupervisorPanel.set({ "height": "450px" });
-        aSupervisorPanel.load("./dist/component/shiftsupervisor.html", function () {
-            var iFrame = aSupervisorPanel.getIFrameEl();
-            var ucode = getQueryString('ucode');
-            var user = getQueryString('user');
-            var url;
-            url = baseUrl + "&method=" + saveMethod + "&user=" + user + "&ucode=" + ucode;
-            iFrame.contentWindow.SetData(data, dbs);
-        }, null);
+        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofsuper.mainHtml, function (iFrame) {
+            iFrame.contentWindow.KingofAttendances.ShiftSupervisor.setData(data, dbs, appConfig);
+        }, true, "");
     };
     return Shiftrptofsuper;
-}());
+}(miniPanel));
 window.onload = function () {
-    var el = document.getElementById('content');
-    var datagrids = document.getElementById('datagrids');
-    var shiftPanel = new Shiftrptofsuper(el);
+    baseUrl = appConfig.app.baseUrl;
+    getMethod = appConfig.app.getMethod;
+    saveMethod = appConfig.app.SaveData_Ajax;
     var ucode = getQueryString('ucode');
     var user = getQueryString('user');
     var dbs = new dbHelper(baseUrl, user, ucode);
-    var resid = 526415710928;
-    var subresid = 525642459751;
-    var cmswhere = "C3_525697777216=1959";
+    var resid = appConfig.shifrpttofsuper.resid;
+    var subresid = appConfig.shifrpttofsuper.subresid;
+    var cmswhere = "";
+    if (appConfig.app.debug) {
+        cmswhere = "C3_525697777216=1959";
+    }
+    var el = document.getElementById('content');
+    var datagrids = document.getElementById('datagrids');
+    var shiftPanel = new Shiftrptofsuper(el);
     shiftPanel.start();
     var url;
     mini.parse();
     dbs.dbGetdata(resid, subresid, cmswhere, dataGot, fnerror, fnhttperror);
     function dataGot(data, subdata) {
-        shiftPanel.appendSupervisor(datagrids, data, subdata, mini, dbs);
-        $.each(subdata, function (i, item) {
-            var row = [];
-            row.push(item);
-            shiftPanel.appendLineleader(datagrids, "dynamicgrid" + i.toString(), row, mini, dbs);
-        });
+        if (data.length > 0) {
+            shiftPanel.appendSupervisor(datagrids, data, subdata, mini, dbs);
+            if (subdata.length > 0) {
+                $.each(subdata, function (i, item) {
+                    var row = [];
+                    row.push(item);
+                    shiftPanel.appendLineleader(datagrids, "dynamicgrid" + i.toString(), row, mini, dbs);
+                });
+            }
+        }
     }
     function fnerror(data) {
         alert(data.message);

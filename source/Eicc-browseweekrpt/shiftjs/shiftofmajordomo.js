@@ -53,8 +53,8 @@ KingofAttendances.ShiftMajordomo=new function() {
               if (data[0].C3_526417619032=="Y")
            {
              mini.parse();
-             // mini.get("asp").set({"text":"已审批"});
-               //mini.get("asp").enabled=false;
+              mini.get("asp").set({"text":"已审批"});
+              mini.get("asp").enabled=false;
            }
              mini.parse();
              new mini.Form("form1").setData(o);

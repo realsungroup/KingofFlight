@@ -4,7 +4,11 @@
         "**/.git": false,
         "**/.DS_Store": true,
        "source/Eicc-browseweekrpt/*.js":true,
-        "test/**/*.js": false
-      
+        "test/**/*.js": false,
+        "release":true,
+        "source/entities":true,
+        "source/interfaces":true,
+        "source/*.*":true
+        
     }
 }

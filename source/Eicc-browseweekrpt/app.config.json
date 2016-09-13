@@ -1,0 +1,27 @@
+{
+    "app": {
+        "baseUrl": "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1",
+        "getMethod": "ShowHostTableDatas_Ajax",
+        "saveMethod":"SaveData_Ajax",
+        "dic1Resid":526765618499,
+        "debug":true
+    },
+    "shifrpttofsuper":{
+        "mainHtml":"./dist/component/shiftsupervisor.html",
+        "subHtml":"./dist/component/shiftrptofsuper-weekform.html",
+        "resid":526415710928,
+        "subresid":525642459751
+    },
+    "shifrpttofmanager":{
+        "mainHtml":"./dist/component/shiftmanage.html",
+        "subHtml":"./dist/component/shiftofmanage-weekform.html",
+        "resid":526415710928,
+        "subresid":525642459751
+    },
+    "shifrpttofdirector":{
+        "mainHtml":"./dist/component/shiftmajordomo.html",
+        "subHtml":"./dist/component/shiftrptofmajordomo-weekform.html",
+        "resid":526415710928,
+        "subresid":525642459751
+    }
+}
