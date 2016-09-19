@@ -3,9 +3,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-baseUrl = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
-getMethod = "ShowHostTableDatas_Ajax";
-saveMethod = "SaveData_Ajax";
 var baseObjectC = (function () {
     function baseObjectC() {
     }
@@ -25,80 +22,70 @@ var Majordomo = (function (_super) {
     }
     return Majordomo;
 }(baseObjectC));
-var ShiftrptofMajordomo = (function () {
+var ShiftrptofMajordomo = (function (_super) {
+    __extends(ShiftrptofMajordomo, _super);
     function ShiftrptofMajordomo(element) {
-        this.element = element;
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = new Date().toLocaleTimeString();
+        _super.call(this, element);
     }
-    ShiftrptofMajordomo.prototype.start = function () {
-        var _this = this;
-        var jsonString = '{"messge": "ok","error":"-1"}';
-        this.timerToken = setInterval(function () { return _this.span.innerHTML = new Date().toLocaleTimeString(); }, 500);
-    };
-    ShiftrptofMajordomo.prototype.stop = function () {
-        clearTimeout(this.timerToken);
-    };
     ShiftrptofMajordomo.prototype.appendLineManage = function (parentelement, panelid, data, mini, dbs) {
         var aLineManage = new LineManage();
+        var className = "";
+        var dates = "";
+        var title;
         aLineManage = data[0];
-        this.mini_control = document.createElement('div');
-        this.mini_control.id = panelid;
         if (data[0].C3_526393969049 == "Y") {
-            this.mini_control.className = "mini-panel mini-panel-danger";
+            className = "mini-panel mini-panel-danger";
         }
         else {
-            this.mini_control.className = "mini-panel mini-panel-success";
+            className = "mini-panel mini-panel-success";
         }
-        this.mini_control.title = data[0].C3_525699725094 + "排班" + data[0].C3_525716987383 + "人 " + " 排班" + data[0].C3_526578576195 + "小时";
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-        var aPanel = mini.get(panelid);
-        aPanel.set({ "width": "auto", "buttons": "collapse ", "expanded": false, "onbuttonclick": "onbuttonclick" });
-        aPanel.set({ "height": "auto" });
-        aPanel.load("./dist/component/shiftrptofmajordomo-weekform.html", function () {
-            var iFrame = aPanel.getIFrameEl();
-            var ucode = getQueryString('ucode');
-            var user = getQueryString('user');
-            iFrame.contentWindow.SetData(data, dbs);
-        }, null);
+        title = data[0].C3_525699725094 + "排班" + data[0].C3_525716987383 + "人 " + " 排班" + data[0].C3_526578576195 + "小时";
+        data[0].C3_525717403432 = (data[0].C3_525717403432 * 100);
+        data[0].C3_525717403651 = (data[0].C3_525717403651 * 100);
+        data[0].C3_525717403838 = (data[0].C3_525717403838 * 100);
+        data[0].C3_525717404025 = (data[0].C3_525717404025 * 100);
+        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofdirector.subHtml, function (iFrame) {
+            iFrame.contentWindow.KingofAttendances.ShiftMajordomo.setData2(data, dbs, appConfig);
+        }, false, "icon-user");
     };
     ShiftrptofMajordomo.prototype.appendMajordomo = function (parentelement, data, subdata, mini, dbs) {
         var aMajordomo = new Majordomo();
+        var panelid = "director";
+        var className = "";
+        var title;
         aMajordomo = data[0];
-        this.mini_control = document.createElement('div');
-        this.mini_control.id = "majordomo";
-        this.mini_control.className = "mini-panel mini-panel-success";
-        var yearmonth = aMajordomo.C3_526389709184;
-        var dates = (aMajordomo.C3_526389708966);
+        className = "mini-panel mini-panel-success";
+        var yearmonth = data[0].C3_526389709184;
+        var dates = (data[0].C3_526389708966);
         var startDate = new Date(dates.substr(0, 4) + '-' + dates.substr(4, 2) + '-' + dates.substr(6, 2));
-        var title = dates + "日产线排班整体情况";
-        this.mini_control.title = title;
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-        var aMajordomoPanel = mini.get("majordomo");
-        aMajordomoPanel.set({ "width": "auto", "showCollapseButton": "true" });
-        aMajordomoPanel.set({ "height": "400px" });
-        aMajordomoPanel.load("./dist/component/shiftmajordomo.html", function () {
-            var iFrame = aMajordomoPanel.getIFrameEl();
-            var ucode = getQueryString('ucode');
-            var user = getQueryString('user');
-            iFrame.contentWindow.SetData(data, dbs);
-        }, null);
+        title = dates + "日产线排班整体情况";
+        data[0].C3_526389712164 = (data[0].C3_526389712164 * 100);
+        data[0].C3_526389711477 = (data[0].C3_526389711477 * 100);
+        data[0].C3_526389711696 = (data[0].C3_526389711696 * 100);
+        data[0].C3_526389711930 = (data[0].C3_526389711930 * 100);
+        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofdirector.mainHtml, function (iFrame) {
+            iFrame.contentWindow.KingofAttendances.ShiftMajordomo.setData(data, dbs, appConfig);
+        }, true, "");
     };
     return ShiftrptofMajordomo;
-}());
-window.onload = function () {
+}(miniPanel));
+function main() {
+    baseUrl = appConfig.app.baseUrl;
+    getMethod = appConfig.app.getMethod;
+    saveMethod = appConfig.app.saveMethod;
     var el = document.getElementById('content');
     var datagrids = document.getElementById('datagrids');
     var shiftPanel = new ShiftrptofMajordomo(el);
     var ucode = getQueryString('ucode');
     var user = getQueryString('user');
     var dbs = new dbHelper(baseUrl, user, ucode);
-    var resid = 526418740112;
-    var subresid = 525699610587;
-    var cmswhere = "C3_526389708467=27647";
+    var resid = appConfig.shifrpttofdirector.resid;
+    var subresid = appConfig.shifrpttofdirector.subresid;
+    ;
+    var cmswhere = "";
+    if (appConfig.app.debug) {
+        cmswhere = "C3_526389708467=27647";
+    }
     shiftPanel.start();
     var url;
     mini.parse();
@@ -115,4 +102,5 @@ window.onload = function () {
         alert(data.message);
     }
     function fnhttperror(jqXHR, textStatus, errorThrown) { alert(jqXHR.responseText); }
-};
+}
+;

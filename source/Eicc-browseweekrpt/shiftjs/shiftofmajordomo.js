@@ -2,18 +2,29 @@ var KingofAttendances = KingofAttendances || {};
 KingofAttendances.ShiftMajordomo = new function () {
     var shiftMajordomo = this;
     var dbs;
-    shiftMajordomo.setData = function (data, adbs) {
+    var appConfig;
+    shiftMajordomo.setData = function (data, adbs, aappConfig) {
         var o = data[0];
         dbs = adbs;
+        appConfig = aappConfig;
         $("#spMajordomo").html(data[0].C3_526389708747);
         $("#spCount").html(data[0].C3_526389709403);
         $("#spHour").html(data[0].C3_526578899253);
         $("#spDate").html(data[0].C3_526389708966 + "~" + data[0].C3_526580475483);
         $("#spMonth").html(data[0].C3_526389709184);
         new mini.Form("form1").setData(o);
+        var hrtext = mini.getbyName("C3_526389710526");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_526389710744");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_526389711025");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_526389711259");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
     };
-    shiftMajordomo.setData2 = function (data, bdbs) {
+    shiftMajordomo.setData2 = function (data, bdbs, aappConfig) {
         dbs = bdbs;
+        appConfig = aappConfig;
         $("#spHour").html(data[0].C3_526578576195);
         $("#spCount").html(data[0].C3_525716987383);
         $("#spDate").html(data[0].C3_525699725313 + "~" + data[0].C3_526580294945);
@@ -44,6 +55,14 @@ KingofAttendances.ShiftMajordomo = new function () {
         }
         mini.parse();
         new mini.Form("form1").setData(o);
+        var hrtext = mini.getbyName("C3_525716986259");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716986041");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716985823");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716985573");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
         return;
     };
     shiftMajordomo.saveData2 = function () {

@@ -40,6 +40,10 @@ var Shiftrptofsuper = (function (_super) {
             className = "mini-panel mini-panel-success";
         }
         title = data[0].C3_525642615889 + data[0].C3_525715020942 + "排班" + data[0].C3_525715678864 + "人，" + "排班" + data[0].C3_526578100819 + "小时";
+        data[0].C3_525718264194 = (data[0].C3_525718264194 * 100);
+        data[0].C3_525718264474 = (data[0].C3_525718264474 * 100);
+        data[0].C3_525718264693 = (data[0].C3_525718264693 * 100);
+        data[0].C3_525718264911 = (data[0].C3_525718264911 * 100);
         _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofsuper.subHtml, function (iFrame) {
             iFrame.contentWindow.KingofAttendances.ShiftSupervisor.setData2(data, dbs, appConfig);
         }, false, "icon-user");
@@ -58,6 +62,10 @@ var Shiftrptofsuper = (function (_super) {
         else {
             className = "mini-panel mini-panel-success";
         }
+        data[0].C3_525718184010 = (data[0].C3_525718184010 * 100);
+        data[0].C3_525718184259 = (data[0].C3_525718184259 * 100);
+        data[0].C3_525718184478 = (data[0].C3_525718184478 * 100);
+        data[0].C3_525718184727 = (data[0].C3_525718184727 * 100);
         _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofsuper.mainHtml, function (iFrame) {
             iFrame.contentWindow.KingofAttendances.ShiftSupervisor.setData(data, dbs, appConfig);
         }, true, "");
@@ -67,7 +75,7 @@ var Shiftrptofsuper = (function (_super) {
 function main() {
     baseUrl = appConfig.app.baseUrl;
     getMethod = appConfig.app.getMethod;
-    saveMethod = appConfig.app.SaveData_Ajax;
+    saveMethod = appConfig.app.saveMethod;
     var ucode = getQueryString('ucode');
     var user = getQueryString('user');
     var dbs = new dbHelper(baseUrl, user, ucode);

@@ -1,9 +1,74 @@
+var appfunctions=appfunctions||{};
 var appConfig;
-$.getJSON("./dist/app.config.json",function(data,textStatus,hr){appConfig=data;});
+$.getJSON("./dist/app.config.json",function(data,textStatus,hr){appConfig=data;appConfig.appfunction=appfunctions});
+//load file
+
+appfunctions.uploadFile=new function (){
+    var uploadFile=this;
+    /** swfFileUpload 在服务器根目录下放crossdomain.xml可以跨域上传文件*/
+    this.swfFileUpload=function (aappConfig,fileupload) {
+        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+aappConfig.app.httppath);
+        fileupload.startUpload();
+
+    }
+    this.ajaxFileUpload=function (aappConfig,inputFile) {
+       mini.parse();
+      
+       // $.getScript('dist/ajaxfileupload.js',scriptLoaded)
+        scriptLoaded();
+       function scriptLoaded(){
+           alert('scriptLoaded');
+           //document.domain = "localhost";
+           $.ajaxFileUpload({
+            url: aappConfig.app.uploadFileUrl,                 //用于文件上传的服务器端请求地址
+            fileElementId: inputFile,               //文件上传域的ID
+            data: { savepath: "e:\\web\\rispweb\\upfiles" },            //附加的额外参数
+            dataType: 'json',               //返回值类型 一般设置为json
+            
+            success: function (data, status)    //服务器成功响应处理函数
+            {
+                if (data)
+                {alert("上传成功: " + data);}
+                else
+                {alert("上传成功,无返回信息 " );}
+                
+
+            },
+            error: function (data, status, e)   //服务器响应失败处理函数
+            {
+                alert(e);
+            },
+            complete: function () {
+                var jq = $("#file1 > input:file");
+                jq.before(inputFile);
+                jq.remove();
+            }
+        });
+    }}
+        
+
+}
+appfunctions.textStyle=new function (){
+    var textStyle=this;
+    textStyle.setInputStyle=function (hrtext){
+     if (hrtext.getValue()=='priority')
+            {
+              hrtext.set({"inputStyle":"background-color:red"});
+            };
+    if (hrtext.getValue()=='major')
+            {
+              hrtext.set({"inputStyle":"background-color:sandybrown"});
+            };
+     if (hrtext.getValue()=='normal'||hrtext.getValue()=='minor')
+            {
+              hrtext.set({"inputStyle":"background-color:yellow"});
+            };
+        }
+}
  class dbHelper {
     baseUrl:string;
-    saveMethod:string="SaveData_Ajax";
-    getMethod:string="ShowHostTableDatas_Ajax";
+    saveMethod:string=appConfig.app.saveMethod;
+    getMethod:string=appConfig.app.getMethod;
     user:string ;
     ucode:string;
    constructor(baseurl:string,user:string,ucode:string)
@@ -131,7 +196,6 @@ function getQueryString(name) {
 } 
 function  onbuttonclick(e){
                 
-			    //alert(e.name);
         if (e.name="collapse")
                 {
                      setTimeout(function() {
@@ -141,8 +205,8 @@ function  onbuttonclick(e){
                     }, 500);
 
                 }
-            }
+}
 
 
- 
+
    

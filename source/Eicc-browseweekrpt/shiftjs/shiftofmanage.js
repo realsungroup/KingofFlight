@@ -2,9 +2,11 @@ var KingofAttendances = KingofAttendances || {};
 KingofAttendances.ShiftManage = new function () {
     var shiftManage = this;
     var dbs;
-    shiftManage.setData = function (data, adbs) {
+    var appConfig;
+    shiftManage.setData = function (data, adbs, aappConfig) {
         var o = data[0];
         dbs = adbs;
+        appConfig = aappConfig;
         $("#spCount").html(data[0].C3_525716987383);
         $("#spHour").html(data[0].C3_526578576195);
         $("#spDate").html(data[0].C3_525699725313 + "~" + data[0].C3_526580294945);
@@ -39,6 +41,14 @@ KingofAttendances.ShiftManage = new function () {
             mini.get("asave").enabled = false;
         }
         new mini.Form("form1").setData(o);
+        var hrtext = mini.getbyName("C3_525716986259");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716986041");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716985823");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716985573");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
         return;
     };
     shiftManage.saveData = function () {
@@ -60,8 +70,9 @@ KingofAttendances.ShiftManage = new function () {
             alert("error");
         }
     };
-    shiftManage.setData2 = function (data, bdbs) {
+    shiftManage.setData2 = function (data, bdbs, aappConfig) {
         dbs = bdbs;
+        appConfig = aappConfig;
         $("#spHour").html(data[0].C3_526577949788);
         $("#spCount").html(data[0].C3_525716459309);
         $("#spDate").html(data[0].C3_525698252634 + "~" + data[0].C3_526580236305);
@@ -93,6 +104,14 @@ KingofAttendances.ShiftManage = new function () {
         }
         mini.parse();
         new mini.Form("form1").setData(o);
+        var hrtext = mini.getbyName("C3_525716460432");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716460666");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716460900");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716461134");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
         return;
     };
     shiftManage.saveData2 = function () {

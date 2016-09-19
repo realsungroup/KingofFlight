@@ -3,6 +3,16 @@ KingofAttendances.ShiftSupervisor = new function () {
     var shiftSupervisor = this;
     var dbs;
     var appConfig;
+    shiftSupervisor.ajaxFileUpload = function () {
+        alert("upload");
+        var inputFile = $("#file1 > input:file")[0];
+        appConfig.appfunction.uploadFile.ajaxFileUpload(appConfig, inputFile);
+    };
+    shiftSupervisor.swfFileUpload = function () {
+        mini.parse();
+        var fileupload = mini.get("fileupload1");
+        appConfig.appfunction.uploadFile.swfFileUpload(appConfig, fileupload);
+    };
     shiftSupervisor.setData = function (data, adbs, aappConfig) {
         var o = data[0];
         dbs = adbs;
@@ -23,8 +33,14 @@ KingofAttendances.ShiftSupervisor = new function () {
                 "<td class='title'>超标原因描述" + "</td><td  colspan=2>" +
                 "<input style='width:100%'  name='C3_526416460460' class='mini-textarea'  />" +
                 "</td><td  >" +
-                "<a class='mini-button' id='asave' onclick='KingofAttendances.ShiftSupervisor.saveData' >超标申请</a></td></tr>";
+                "<a class='mini-button' id='asave' onclick='KingofAttendances.ShiftSupervisor.saveData'  >超标申请</a></td></tr>" +
+                "<tr><td class='title'>附件</td>" +
+                " <td colspan=3><input id='fileupload1' name='' onuploaderror='onUploadError' onfileselect='onFileSelect' onuploadsuccess='onUploadSuccess'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata' limitType='*.*' style='width:90%;' /></td></tr>" +
+                "<tr><td class='title'></td><td colspan=2><img align='middle' style='margin-left:100px;width:200px;height=200px;' id='imgUploaded' /></td><td></td></tr>";
             $("#tbsupervisor tbody").append(list);
+            mini.parse();
+            var fileupload = mini.get("fileupload1");
+            fileupload.setUploadUrl(aappConfig.app.uploadFileUrl + "?savepath=e:\\web\\rispweb\\upfiles&httppath=" + aappConfig.app.httppath);
             var resid = appConfig.app.dic1Resid;
             var subresid = "";
             var cmswhere = "";
@@ -41,6 +57,20 @@ KingofAttendances.ShiftSupervisor = new function () {
         }
         mini.parse();
         new mini.Form("form1").setData(o);
+        var imgfield = mini.get('imgurl');
+        var imgurl = imgfield.getValue();
+        if (imgurl) {
+            var img = $("#imgUploaded");
+            img[0].src = imgurl;
+        }
+        var hrtext = mini.getbyName("C3_525716460432");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716460666");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716460900");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525716461134");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
     };
     shiftSupervisor.saveData = function () {
         var o = new mini.Form("form1").getData();
@@ -55,7 +85,7 @@ KingofAttendances.ShiftSupervisor = new function () {
             mini.get("asave").enabled = false;
         }
         function fnerror(text) {
-            alert("申请失败");
+            alert("申请失败,message=" + text.message);
         }
         function fnhttperror(jqXHR, textStatus, errorThrown) {
             alert("error");
@@ -88,6 +118,14 @@ KingofAttendances.ShiftSupervisor = new function () {
         }
         mini.parse();
         new mini.Form("form1").setData(o);
+        var hrtext = mini.getbyName("C3_525715970441");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525715970644");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525715970847");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
+        hrtext = mini.getbyName("C3_525715971049");
+        appConfig.appfunction.textStyle.setInputStyle(hrtext);
         return;
     };
     shiftSupervisor.saveData2 = function () {

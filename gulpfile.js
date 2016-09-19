@@ -96,6 +96,7 @@ var mainTsFilePath3 = "source/"+appSourcePathName+"/"+libraryName3+".js";
 var outputFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/";
 var outputRootFolder   = appPublishPathName+"/"+appSourcePathName+"/";
 var outputComponentFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/Component/";
+var outputComponentswfuploadFolder   = appPublishPathName+"/"+appSourcePathName+"/dist/Component/swfupload/";
 var outputComponentFolderjs  = appPublishPathName+"/"+appSourcePathName+"/dist/shiftjs/";
 gulp.task("bundle", function() {
    
@@ -109,6 +110,10 @@ gulp.task("bundle", function() {
         .pipe(gulp.dest(outputRootFolder));
     gulp.src("source/"+appSourcePathName+'/component/*.html')
         .pipe(gulp.dest(outputComponentFolder));
+     gulp.src("source/"+appSourcePathName+'/component/swfupload/*.swf')
+        .pipe(gulp.dest(outputComponentswfuploadFolder));
+    gulp.src("source/"+appSourcePathName+'/component/swfupload/*.js')
+        .pipe(gulp.dest(outputComponentswfuploadFolder));
     gulp.src("source/"+appSourcePathName+'/shiftjs/*.js')
         .pipe(gulp.dest(outputComponentFolderjs));
     gulp.src("source/"+appSourcePathName+'/*.js')

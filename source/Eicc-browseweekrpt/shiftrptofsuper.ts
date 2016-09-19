@@ -1,6 +1,6 @@
 
 declare var mini: any;
-declare  var baseUrl:string;
+declare  var baseUrl;
 declare var getMethod;
 declare var saveMethod;
 class baseObject{
@@ -41,7 +41,10 @@ class Shiftrptofsuper extends miniPanel {
       
         
         title=data[0].C3_525642615889+data[0].C3_525715020942+"排班"+data[0].C3_525715678864+"人，"+"排班"+data[0].C3_526578100819+"小时";
-      
+       data[0].C3_525718264194=(data[0].C3_525718264194*100);
+       data[0].C3_525718264474=(data[0].C3_525718264474*100);
+       data[0].C3_525718264693=(data[0].C3_525718264693*100);
+       data[0].C3_525718264911=(data[0].C3_525718264911*100);
         super.appendPanel(parentelement,panelid,mini,className,title,appConfig.shifrpttofsuper.subHtml,
            function(iFrame){
                 iFrame.contentWindow. KingofAttendances.ShiftSupervisor.setData2(data,dbs,appConfig);
@@ -69,7 +72,11 @@ class Shiftrptofsuper extends miniPanel {
       else{
             className="mini-panel mini-panel-success";
       }
-      
+       // alert(data[0].C3_525718184010);C3_525718184727
+        data[0].C3_525718184010=(data[0].C3_525718184010*100);
+        data[0].C3_525718184259=(data[0].C3_525718184259*100);
+        data[0].C3_525718184478=(data[0].C3_525718184478*100);
+        data[0].C3_525718184727=(data[0].C3_525718184727*100);
       
          super.appendPanel(parentelement,panelid,mini,className,title,appConfig.shifrpttofsuper.mainHtml,
            function(iFrame){
@@ -85,7 +92,7 @@ function main() {
     //alert(appConfig.app.baseUrl);
     baseUrl=appConfig.app.baseUrl;
     getMethod=appConfig.app.getMethod;
-    saveMethod=appConfig.app.SaveData_Ajax;
+    saveMethod=appConfig.app.saveMethod;
     var ucode = getQueryString('ucode');
     var user  = getQueryString('user');
     var dbs=new dbHelper(baseUrl,user,ucode);
@@ -121,6 +128,4 @@ function main() {
 
     }
     function fnhttperror(jqXHR, textStatus, errorThrown){alert(jqXHR.responseText);}
- 
-
 }

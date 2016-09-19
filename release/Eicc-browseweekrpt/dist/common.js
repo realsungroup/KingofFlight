@@ -1,9 +1,63 @@
+var appfunctions = appfunctions || {};
 var appConfig;
-$.getJSON("./dist/app.config.json", function (data, textStatus, hr) { appConfig = data; });
+$.getJSON("./dist/app.config.json", function (data, textStatus, hr) { appConfig = data; appConfig.appfunction = appfunctions; });
+appfunctions.uploadFile = new function () {
+    var uploadFile = this;
+    this.swfFileUpload = function (aappConfig, fileupload) {
+        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl + "?savepath=e:\\web\\rispweb\\upfiles&httppath=" + aappConfig.app.httppath);
+        fileupload.startUpload();
+    };
+    this.ajaxFileUpload = function (aappConfig, inputFile) {
+        mini.parse();
+        scriptLoaded();
+        function scriptLoaded() {
+            alert('scriptLoaded');
+            $.ajaxFileUpload({
+                url: aappConfig.app.uploadFileUrl,
+                fileElementId: inputFile,
+                data: { savepath: "e:\\web\\rispweb\\upfiles" },
+                dataType: 'json',
+                success: function (data, status) {
+                    if (data) {
+                        alert("上传成功: " + data);
+                    }
+                    else {
+                        alert("上传成功,无返回信息 ");
+                    }
+                },
+                error: function (data, status, e) {
+                    alert(e);
+                },
+                complete: function () {
+                    var jq = $("#file1 > input:file");
+                    jq.before(inputFile);
+                    jq.remove();
+                }
+            });
+        }
+    };
+};
+appfunctions.textStyle = new function () {
+    var textStyle = this;
+    textStyle.setInputStyle = function (hrtext) {
+        if (hrtext.getValue() == 'priority') {
+            hrtext.set({ "inputStyle": "background-color:red" });
+        }
+        ;
+        if (hrtext.getValue() == 'major') {
+            hrtext.set({ "inputStyle": "background-color:sandybrown" });
+        }
+        ;
+        if (hrtext.getValue() == 'normal' || hrtext.getValue() == 'minor') {
+            hrtext.set({ "inputStyle": "background-color:yellow" });
+        }
+        ;
+    };
+};
 var dbHelper = (function () {
     function dbHelper(baseurl, user, ucode) {
-        this.saveMethod = "SaveData_Ajax";
-        this.getMethod = "ShowHostTableDatas_Ajax";
+        this.saveMethod = appConfig.app.saveMethod;
+        this.getMethod = appConfig.app.getMethod;
         this.baseUrl = baseurl;
         this.user = user;
         this.ucode = ucode;

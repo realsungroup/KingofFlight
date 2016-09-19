@@ -3,9 +3,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-baseUrl = "http://www.realsun.me:8003/rispweb/risphost/data/AjaxService.aspx?uiver=200&dynlogin=1";
-getMethod = "ShowHostTableDatas_Ajax";
-saveMethod = "SaveData_Ajax";
 var baseObjectM = (function () {
     function baseObjectM() {
     }
@@ -25,85 +22,72 @@ var Manage = (function (_super) {
     }
     return Manage;
 }(baseObjectM));
-var Shiftrptofmanage = (function () {
+var Shiftrptofmanage = (function (_super) {
+    __extends(Shiftrptofmanage, _super);
     function Shiftrptofmanage(element) {
-        this.element = element;
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = new Date().toLocaleTimeString();
+        _super.call(this, element);
     }
-    Shiftrptofmanage.prototype.start = function () {
-        var _this = this;
-        var jsonString = '{"messge": "ok","error":"-1"}';
-        this.timerToken = setInterval(function () { return _this.span.innerHTML = new Date().toLocaleTimeString(); }, 500);
-    };
-    Shiftrptofmanage.prototype.stop = function () {
-        clearTimeout(this.timerToken);
-    };
     Shiftrptofmanage.prototype.appendLineSupervisor = function (parentelement, panelid, data, mini, dbs) {
         var aLineSupervisor = new LineSupervisor();
+        var className = "";
+        var title = "";
         aLineSupervisor = data[0];
-        this.mini_control = document.createElement('div');
-        this.mini_control.id = panelid;
         if (data[0].C3_526393560160 == "Y") {
-            this.mini_control.className = "mini-panel mini-panel-danger";
+            className = "mini-panel mini-panel-danger";
         }
         else {
-            this.mini_control.className = "mini-panel mini-panel-success";
+            className = "mini-panel mini-panel-success";
         }
-        this.mini_control.title = data[0].C3_525697777450 + "排班" + data[0].C3_525716459309 + "人，" + "排班" + data[0].C3_526577949788 + "小时";
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-        var aPanel = mini.get(panelid);
-        aPanel.set({ "width": "auto", "buttons": "collapse ", "expanded": false, "onbuttonclick": "onbuttonclick" });
-        aPanel.set({ "height": "auto" });
-        aPanel.load("./dist/component/shiftofmanage-weekform.html", function () {
-            var iFrame = aPanel.getIFrameEl();
-            var ucode = getQueryString('ucode');
-            var user = getQueryString('user');
-            iFrame.contentWindow.SetData(data, dbs);
-        }, null);
+        title = data[0].C3_525697777450 + "排班" + data[0].C3_525716459309 + "人，" + "排班" + data[0].C3_526577949788 + "小时";
+        data[0].C3_525718184010 = (data[0].C3_525718184010 * 100);
+        data[0].C3_525718184259 = (data[0].C3_525718184259 * 100);
+        data[0].C3_525718184478 = (data[0].C3_525718184478 * 100);
+        data[0].C3_525718184727 = (data[0].C3_525718184727 * 100);
+        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofmanager.subHtml, function (iFrame) {
+            iFrame.contentWindow.KingofAttendances.ShiftManage.setData2(data, dbs, appConfig);
+        }, false, "icon-user");
     };
     Shiftrptofmanage.prototype.appendManage = function (parentelement, data, subdata, mini, dbs) {
         var aManage = new Manage();
+        var panelid = "manager";
+        var className = "";
         aManage = data[0];
-        this.mini_control = document.createElement('div');
-        this.mini_control.id = "manage";
         if (data[0].C3_526393969049 == "Y") {
-            this.mini_control.className = "mini-panel mini-panel-danger";
+            className = "mini-panel mini-panel-danger";
         }
         else {
-            this.mini_control.className = "mini-panel mini-panel-success";
+            className = "mini-panel mini-panel-success";
         }
-        var yearmonth = aManage.C3_525699725531;
-        var dates = (aManage.C3_525699725313);
+        var yearmonth = data[0].C3_525699725531;
+        var dates = (data[0].C3_525699725313);
         var startDate = new Date(dates.substr(0, 4) + '-' + dates.substr(4, 2) + '-' + dates.substr(6, 2));
         var title = dates + "日产线排班整体情况";
-        this.mini_control.title = title;
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-        var aManagePanel = mini.get("manage");
-        aManagePanel.set({ "width": "auto", "showCollapseButton": "true" });
-        aManagePanel.set({ "height": "400px" });
-        aManagePanel.load("./dist/component/shiftmanage.html", function () {
-            var iFrame = aManagePanel.getIFrameEl();
-            var ucode = getQueryString('ucode');
-            var user = getQueryString('user');
-            iFrame.contentWindow.SetData(data, dbs);
-        }, null);
+        data[0].C3_525717403432 = (data[0].C3_525717403432 * 100).toString();
+        data[0].C3_525717403651 = (data[0].C3_525717403651 * 100).toString();
+        data[0].C3_525717403838 = (data[0].C3_525717403838 * 100).toString();
+        data[0].C3_525717404025 = (data[0].C3_525717404025 * 100).toString();
+        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofmanager.mainHtml, function (iFrame) {
+            iFrame.contentWindow.KingofAttendances.ShiftManage.setData(data, dbs, appConfig);
+        }, true, "");
     };
     return Shiftrptofmanage;
-}());
-window.onload = function () {
-    var el = document.getElementById('content');
-    var datagrids = document.getElementById('datagrids');
-    var shiftPanel = new Shiftrptofmanage(el);
+}(miniPanel));
+function main() {
+    baseUrl = appConfig.app.baseUrl;
+    getMethod = appConfig.app.getMethod;
+    saveMethod = appConfig.app.saveMethod;
     var ucode = getQueryString('ucode');
     var user = getQueryString('user');
     var dbs = new dbHelper(baseUrl, user, ucode);
-    var resid = 526417296293;
-    var subresid = 525697747154;
-    var cmswhere = "C3_525699724860=392";
+    var el = document.getElementById('content');
+    var datagrids = document.getElementById('datagrids');
+    var shiftPanel = new Shiftrptofmanage(el);
+    var resid = appConfig.shifrpttofmanager.resid;
+    var subresid = appConfig.shifrpttofmanager.subresid;
+    var cmswhere;
+    if (appConfig.app.debug) {
+        cmswhere = "C3_525699724860=392";
+    }
     shiftPanel.start();
     var url;
     mini.parse();
@@ -120,4 +104,5 @@ window.onload = function () {
         alert(data.message);
     }
     function fnhttperror(jqXHR, textStatus, errorThrown) { alert(jqXHR.responseText); }
-};
+}
+;
