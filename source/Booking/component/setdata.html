@@ -1,0 +1,137 @@
+<html>
+    <body>
+        <form id="form3">
+            <table>
+                <tr>
+                    <td>护照号: </td>
+                    <td><input class="mini-textbox" required="true" name="C3_526655213359"></td>
+                </tr>
+                <tr>
+                    <td>护照有效期</td>
+                    <td><input class="mini-datepicker" required="true" name="C3_526655225559"></td>
+                </tr>
+                <tr>
+                    <td>出发日期: </td>
+                    <td><input class="mini-datepicker" required="true" name="C3_526655237449"></td>
+                </tr>
+                <tr>
+                    <td>返回日前:</td>
+                    <td><input class="mini-datepicker" required="true" name="C3_526655248019"></td>
+                </tr>
+                <tr>
+                    <td>出发地: </td>
+                    <td><input class="mini-textbox" required="true" name="C3_526655262089"></td>
+                </tr>
+                <tr>
+                    <td>目的地:</td>
+                    <td><input class="mini-textbox" required="true" name="C3_526655271756"></td>
+                </tr>
+                <tr height="60px">
+                    <td>护照扫描件: </td>
+                    <td>
+                        <input required="true" id='fileupload1' name='' onuploaderror='onUploadError' onfileselect='onFileSelect' onuploadsuccess='onUploadSuccess'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata' "+   
+                      " limitType='*.jpg;*.jpeg;*.png' style='width:50%;'/>
+                      <input id="imgurl" name='C3_527873192635' class="mini-Hidden"  allowInput="false"/>
+                      <img align='middle' id='imgUploaded' style="width:70px"/>
+                    </td>
+                </tr>
+                <tr height="60px">
+                    <td>签证扫描件:</td>
+                    <td>
+                        <input required="true" id='fileupload2' name='' onuploaderror='onUploadError2' onfileselect='onFileSelect2' onuploadsuccess='onUploadSuccess2'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata2' "+   
+                      " limitType='*.jpg;*.jpeg;*.png' style='width:50%;' />
+                        <input  id="imgurl2" name='C3_526655353950' class="mini-Hidden"  allowInput="false"/>
+                        <img align='middle' id='imgUploaded2' style="width:70px"/>
+                      </td>
+                </tr>
+                <tr>
+                    <td>是否往返: </td>
+                    <td>
+                        <select class="mini-combobox" name="C3_526655466969">
+		                    <option value="Y">Y</option>
+                            <option value="N">N</option>
+	                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="REC_ID" class="mini-Hidden" allowInput="false"/>
+                        <!--<input name="REC_RESID" class="mini-Hidden" allowInput="false"/>-->
+                        
+                    </td>
+                    <td>
+                        <a class="mini-button" iconCls="icon-save" onclick="saveClick">保存</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <script>
+            
+            function Setdbs(dbs,appConfig,REC_ID){
+                
+                var resid=appConfig.internationalfilght.guojiResid;
+                //debugger;
+                var cmswhere="REC_ID="+REC_ID+"";
+                
+      
+                dbs.dbGetdata(resid,0,cmswhere,fnSuccess,null,null);
+                 function fnSuccess(data,subdata){
+                    mini.parse();
+                    var form = new mini.Form("#form3"); 
+                    form.setData(data[0]);
+                    
+                } 
+                mini.parse();
+                var fileupload = mini.get("fileupload1");
+                fileupload.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
+
+                var imgfield=mini.get('imgurl');
+                var imgurl= imgfield.getValue();
+                if (imgurl)
+                {
+                    var img=$("#imgUploaded");
+                    img[0].src=imgurl;
+                }
+                var fileupload2 = mini.get("fileupload2");
+                fileupload2.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
+
+                var imgfield2=mini.get('imgurl2'); 
+                var imgurl2= imgfield2.getValue();
+                if (imgurl2)
+                {
+                   var img=$("#imgUploaded2");
+                    img[0].src=imgurl2;
+                }
+                saveClick=function(){
+                    mini.parse();
+                    var form = new mini.Form("form3");
+                    var o =  new mini.Form("form3").getData();
+                    form.validate(); 
+                    if (form.isValid() == false) return;
+                    o._id=1;
+                    o._state="added";
+                    var json = mini.encode([o]);
+                    //debugger;
+                    console.log(json);
+                    dbs.dbSavedata(appConfig.internationalfilght.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
+                    function dataSaved(text){
+                        alert("申请成功");
+                        //console.log(text);
+                    }
+                    function fnerror(text){
+                        alert("申请失败");
+                        //console.log(text);
+                    }
+                    function fnhttperror(jqXHR, textStatus, errorThrown){
+                        alert("error");
+                    }
+                    window.CloseOwnerWindow();
+                }   
+            }
+        </script>
+        <script src="../../scripts/boot.js" type="text/javascript"></script>
+        <link href="../../scripts/css/siteDetail.css" rel="stylesheet" type="text/css">
+        <script src="../shiftJs/international.js" type="text/javascript"></script>
+        <script src="../component/swfupload/swfupload.js" type="text/javascript"></script>
+    </body>
+</html>

@@ -80,12 +80,13 @@ gulp.task("test", ["istanbul:hook"], function() {
 //* realease
 //******************************************************************************
 var appPublishPathName="release";
-var appSourcePathName="Eicc-browseweekrpt";
-var libraryName1 = "shiftrptofsuper";
+var appSourcePathName="Booking";
+
+var libraryName1 = "internationalfilght";
 var outputFileName1 = libraryName1 + ".min.js";
 var mainTsFilePath1 = "source/"+appSourcePathName+"/"+libraryName1+".js";
 
-var libraryName2="shiftrptofmanage";
+var libraryName2="domesticfilght";
 var outputFileName2 = libraryName2 + ".min.js";
 var mainTsFilePath2 = "source/"+appSourcePathName+"/"+libraryName2+".js";
 
@@ -129,9 +130,9 @@ gulp.task("bundle", function() {
 //******************************************************************************
 //* DEV SERVER
 //******************************************************************************
-//var currentStartpage="shiftrptofsuper.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
- 
-var currentStartpage="shiftrptofmanage.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
+
+//var currentStartpage="domesticfilght.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw=="; 
+var currentStartpage="internationalfilght.html?user=demo1&ucode=bTqoF2CcMCj7uIOBllZtDw==";
 
 gulp.task("watch", ["default"], function () {
     

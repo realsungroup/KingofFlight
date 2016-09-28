@@ -1,6 +1,6 @@
 var appfunctions=appfunctions||{};
 var appConfig;
-$.getJSON("./dist/app.config.json",function(data,textStatus,hr){appConfig=data;appConfig.appfunction=appfunctions});
+
 //load file
 
 appfunctions.uploadFile=new function (){
@@ -31,8 +31,6 @@ appfunctions.uploadFile=new function (){
                 {alert("上传成功: " + data);}
                 else
                 {alert("上传成功,无返回信息 " );}
-                
-
             },
             error: function (data, status, e)   //服务器响应失败处理函数
             {
@@ -48,23 +46,7 @@ appfunctions.uploadFile=new function (){
         
 
 }
-appfunctions.textStyle=new function (){
-    var textStyle=this;
-    textStyle.setInputStyle=function (hrtext){
-     if (hrtext.getValue()=='priority')
-            {
-              hrtext.set({"inputStyle":"background-color:red"});
-            };
-    if (hrtext.getValue()=='major')
-            {
-              hrtext.set({"inputStyle":"background-color:sandybrown"});
-            };
-     if (hrtext.getValue()=='normal'||hrtext.getValue()=='minor')
-            {
-              hrtext.set({"inputStyle":"background-color:yellow"});
-            };
-        }
-}
+
  class dbHelper {
     baseUrl:string;
     saveMethod:string=appConfig.app.saveMethod;
@@ -77,10 +59,11 @@ appfunctions.textStyle=new function (){
        this.user=user;
        this.ucode=ucode;
    }
-   dbGetdata(resid:number,subresid:number,cmswhere:string,fnSuccess:any,fnError:any,fnSyserror:any) {
+   dbGetdata(resid:number,subresid:string,cmswhere:string,fnSuccess:any,fnError:any,fnSyserror:any) {
       var url : string;
+      
       url=this.baseUrl+"&method="+this.getMethod+"&user="+this.user+"&ucode="+this.ucode+"&resid="+resid+"&subresid="+subresid+"&cmswhere="+cmswhere;
-    
+    //console.log(url);
       $.ajax({
             url: url,
             dataType:"jsonp",
@@ -88,7 +71,7 @@ appfunctions.textStyle=new function (){
             success: function (text) {
                 if (text !== "") {    
                     var data = mini.decode(text);
-                     
+                     //debugger;
                     if (data.error == -1) {
                      if (fnError!=null)
                      {fnError(data);}
@@ -111,12 +94,11 @@ appfunctions.textStyle=new function (){
             }});
   
   }
-  dbSavedata( resid:number,subresid:number,json:string,fnSuccess:any,fnError:any,fnSyserror:any)
-  {
+  dbSavedata( resid:number,subresid:number,json:string,fnSuccess:any,fnError:any,fnSyserror:any){
        var url : string;
        url=this.baseUrl+"&method="+this.saveMethod+"&user="+this.user+"&ucode="+this.ucode;
        //alert(url);
-         $.ajax({
+        $.ajax({
                 url:  url,
                 async:false,
                 dataType:"jsonp",
@@ -125,26 +107,23 @@ appfunctions.textStyle=new function (){
                 data: {data:json,resid:resid},
                 cache: false,
                 success: function (text) {
-            
-                if (text.error=="0")
-                {
-                  
-                  
-                    if (fnSuccess!=null){fnSuccess(text);}}
-                else    
-                {
-                  
-                   if (fnError!=null){ fnError(text);}
-                }  
-                 
+                   
+                    if (text.error=="0"){
+                        if (fnSuccess!=null){
+                            fnSuccess(text);
+                        }
+                    }
+                    else{
+                       if (fnError!=null){ fnError(text);}
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                  if (fnSyserror!=null){fnSyserror(jqXHR, textStatus, errorThrown);}
                     
-                 
-                    
+                    if (fnSyserror!=null){
+                        
+                        fnSyserror(jqXHR, textStatus, errorThrown);}
                 }
-              });
+        });
    }
 }
 class miniPanel {
@@ -169,8 +148,7 @@ class miniPanel {
         clearTimeout(this.timerToken);
     }
     
-    appendPanel(parentelement: HTMLElement,panelid :string ,mini:any,classname:string,title:string,url:string,fnload:any,expanded:Boolean,iconCls:string){
-        
+    appendPanel(parentelement: HTMLElement,panelid :string ,mini:any,classname:string,title:string,url:string,fnload:any,expanded:Boolean,iconCls:string){ 
         this.mini_control=document.createElement('div');
         this.mini_control.id = panelid;
         this.mini_control.className=classname;
@@ -178,15 +156,13 @@ class miniPanel {
         parentelement.appendChild(this.mini_control);
         mini.parse();
         var aPanel = mini.get(panelid);
-        aPanel.set({"width":"auto","height":"400px","iconCls":iconCls,"buttons":"collapse ","expanded":expanded,"onbuttonclick":"onbuttonclick"});
+        aPanel.set({"width":"auto","height":"800","iconCls":iconCls,"expanded":expanded,"onbuttonclick":"onbuttonclick"});
         aPanel.load(url, function () {
             var iFrame = aPanel.getIFrameEl();
              fnload(iFrame);
         },null);
            
     }
-    
- 
 }
  
 function getQueryString(name) { 
@@ -194,19 +170,12 @@ function getQueryString(name) {
         var r = window.location.search.substr(1).match(reg); 
         if (r != null) return unescape(r[2]); return null; 
 } 
-function  onbuttonclick(e){
-                
-        if (e.name="collapse")
-                {
-                     setTimeout(function() {
-                            if (e.sender.expanded == true) { 
-                                         e.sender.set({ "height": "400px" }); 
-                              }
-                    }, 500);
-
+function  onbuttonclick(e){               
+        if (e.name="collapse"){
+            setTimeout(function() {
+                if (e.sender.expanded == true) { 
+                    e.sender.set({ "height": "400px" }); 
                 }
+            }, 500);
+        }
 }
-
-
-
-   

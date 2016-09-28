@@ -139,9 +139,7 @@ jQuery.extend({
                     }
 
                 }, 100)
-
                 xml = null
-
             }
         }
         // Timeout checker
@@ -171,7 +169,6 @@ jQuery.extend({
 
         jQuery('#' + frameId).load(uploadCallback);
         return { abort: function () { } };
-
     },
 
     uploadHttpData: function (r, type) {
