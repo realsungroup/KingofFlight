@@ -277,33 +277,6 @@ KingofAttendances.international=new function() {
         	// 	},1)
         	// }
         };
-        // var list2=`<div class="mature-progress-box v0" id="mamture">
-        // 			    <dl onclick="KingofAttendances.international.navClick(0,'未提交')">
-        // 					<dt><a>未提交</a></dt>
-        // 				</dl>
-        // 				<dl onclick="KingofAttendances.international.navClick(200,'已提交')">
-        // 					<dt><a>已提交</a></dt>
-        // 				</dl>
-        // 				<dl onclick="KingofAttendances.international.navClick(400,'待确认出票')">
-        // 					<dt><a>待申请人确认</a></dt>
-        // 				</dl>
-        // 				<dl onclick="KingofAttendances.international.navClick(600,'待行政确认出票')">
-        // 					<dt><a>待行政确认</a></dt>
-        // 				</dl>
-        // 				<dl onclick="KingofAttendances.international.navClick(800,'订单完成')">
-        // 					<dt><a>订单完成</p></dt>
-        // 				</dl>
-        // 				<div class="progress-box">
-        // 					<i class="progress-box-1"></i>
-        // 					<i class="progress-box-2"></i>
-        // 					<i class="progress-box-3"></i>
-        // 					<i class="progress-box-4"></i>
-        // 				</div>
-        // 			</div>
-        // 			<div class="mature-progress-box bgtwos">
-        //                 <dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl>
-        // 			</div>`;
-        // $(".mature-progress").html(list2);
         var si=`<tr height="40px" align="center">
                   <td width="15%" class="title1">员工号</td>
                   <td width="15%">`+o[0].C3_526655169418+`</td>
