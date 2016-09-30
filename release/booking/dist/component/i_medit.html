@@ -1,0 +1,94 @@
+<html>
+    <body>
+        <form id="form2">
+            <table width="500px">
+                <tr>
+                    <td width="150px">往程航班号</td>
+                    <td><input class="mini-textbox" required="true" name="C3_526655793514"></td>
+                </tr>
+                <tr>
+                    <td>往程航班时间</td>
+                    <td><input class="mini-datepicker" required="true" name="C3_526655809049" style="width:200px;" onvaluechanged="onValueChanged" nullValue="null"
+        format="yyyy-MM-dd H:mm:ss" timeFormat="H:mm:ss" showTime="true" showOkButton="true" showClearButton="false"/></td>
+                </tr>
+                <tr>
+                    <td width="150px">返程航班号</td>
+                    <td><input class="mini-textbox" required="true" name="C3_528311923010"></td>
+                </tr>
+                <tr>
+                    <td>返程航班时间</td>
+                    <td><input class="mini-datepicker" required="true" name="C3_528311922738" style="width:200px;" onvaluechanged="onValueChanged" nullValue="null"
+        format="yyyy-MM-dd H:mm:ss" timeFormat="H:mm:ss" showTime="true" showOkButton="true" showClearButton="false"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="REC_ID" class="mini-Hidden" allowInput="false"/>
+                    </td>
+                    <td>
+                        <a class="mini-button" iconCls="icon-save" onclick="saveClick">保存</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <script>
+            function Setdbs(dbs,appConfig,REC_ID){
+                var resid=appConfig.internationalmanage.guojiResid;
+                var cmswhere="REC_ID="+REC_ID+"";
+                dbs.dbGetdata(resid,0,cmswhere,fnSuccess,null,null);
+                function fnSuccess(data,subdata){
+                    mini.parse();
+                    var form = new mini.Form("#form2");
+                    form.setData(data[0]);                        
+                    mini.parse();
+                    var fileupload=mini.get("fileupload1");//上传图片
+                    fileupload.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
+                    var imgfield=mini.get('imgurl');
+                    var imgurl=imgfield.getValue();
+                    if (imgurl)
+                    { 
+                        var img=$("#imgUploaded");
+                        img[0].src=imgurl;
+                    }   
+                    var fileupload2 = mini.get("fileupload2");
+                    fileupload2.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
+                    var imgfield2=mini.get('imgurl2'); 
+                    var imgurl2= imgfield2.getValue();
+                    if (imgurl2)
+                    {
+                    var img=$("#imgUploaded2");
+                        img[0].src=imgurl2;
+                    }
+                }
+                saveClick=function(){
+                    mini.parse();
+                    var form = new mini.Form("form2");
+                    var o =  new mini.Form("form2").getData();
+                    form.validate(); 
+                    if (form.isValid() == false) return;
+                    o._id=1;
+                    o._state="modified";
+                    var json = mini.encode([o]);
+                    dbs.dbSavedata(appConfig.internationalmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);              
+                    function dataSaved(text)
+                    {
+                        alert("申请成功");
+                    }
+                    function fnerror(text)
+                    {
+                        alert("申请失败");
+                    }
+                    function fnhttperror(jqXHR, textStatus, errorThrown)
+                    {
+                        alert("error");
+                    }
+                    window.CloseOwnerWindow();
+                }
+            }
+        </script>
+        <script src="../../scripts/boot.js" type="text/javascript"></script>
+        <link href="../../scripts/css/siteDetail.css" rel="stylesheet" type="text/css">
+        <script src="../shiftJs/i_manage.js" type="text/javascript"></script>
+        <script src="../component/swfupload/swfupload.js" type="text/javascript"></script>
+    </body>
+    
+</html>

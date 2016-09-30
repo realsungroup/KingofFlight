@@ -8,13 +8,18 @@
         "dic1Resid":526765618499,
         "debug":true
     },
+    "internationalfilght":{
+        "guojiResid":526664335204,
+        "mainHtml":"./dist/component/international.html"
+    },
+     "internationalmanage":
+    {        
+        "guojiResid":526664335204,
+        "mainHtml":"./dist/component/i_manage.html"
+    },
      "domesticfilght":
     {        
         "guoneiResid":526664384125,
         "mainHtml":"./dist/component/domestic.html"
-    },
-    "internationalfilght":{
-        "guojiResid":526664335204,
-        "mainHtml":"./dist/component/international.html"
     }
 }

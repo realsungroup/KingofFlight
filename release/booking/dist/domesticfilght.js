@@ -32,14 +32,14 @@ var domesticfilght = (function (_super) {
     };
     return domesticfilght;
 }(miniPanel));
-function main() {
+function main2() {
     $.getJSON("./dist/app.config.json", function (data, textStatus, hr) {
         appConfig = data;
         appConfig.appfunction = appfunctions;
-        submain();
+        submain2();
     });
 }
-function submain() {
+function submain2() {
     baseUrl = appConfig.app.baseUrl;
     getMethod = appConfig.app.getMethod;
     saveMethod = appConfig.app.saveMethod;

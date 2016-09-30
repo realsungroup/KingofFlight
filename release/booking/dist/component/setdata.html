@@ -115,7 +115,6 @@
                     o._id=1;
                     o._state="added";
                     var json = mini.encode([o]);
-                    console.log(json);
                     dbs.dbSavedata(appConfig.internationalfilght.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                     function dataSaved(text){
                         alert("申请成功");

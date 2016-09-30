@@ -5,13 +5,13 @@ declare var getMethod;
 
 declare var saveMethod;
 
-class baseObjectM2{
+class baseObjectM3{
     REC_ID:string;
 }
-class Manage2 extends baseObjectM2{
+class Manage3 extends baseObjectM3{
 
 }
-class domesticfilght extends miniPanel {
+class internationalmanage extends miniPanel {
       
     constructor(element: HTMLElement) {
         super(element);
@@ -19,28 +19,28 @@ class domesticfilght extends miniPanel {
 
     appendManage(parentelement: HTMLElement,data :any,subdata:any,mini:any,dbs:any)
     {
-       var aManage=new Manage2();
+       var aManage=new Manage3();
        var panelid="manager";
        var className="mini-panel mini-panel-primary";
      
        aManage=data[0];
  
-       var title="国内机票预定信息";
+       var title="国际机票预定情况";
 
-        super.appendPanel(parentelement,panelid,mini,className,title,appConfig.domesticfilght.mainHtml,
+        super.appendPanel(parentelement,panelid,mini,className,title,appConfig.internationalmanage.mainHtml,
            function(iFrame){
-                iFrame.contentWindow.KingofAttendances.domestic.setData(data,dbs,appConfig);
+                iFrame.contentWindow.KingofAttendances.i_manage.setData(data,dbs,appConfig);
             },true,"");
     }
 }
 
-function main2(){
+function main3(){
     $.getJSON("./dist/app.config.json",function(data,textStatus,hr){
          appConfig=data;
          appConfig.appfunction=appfunctions;
-         submain2();});
+         submain3();});
 }
-function submain2() {
+function submain3() {
    
    
     baseUrl=appConfig.app.baseUrl;
@@ -51,13 +51,12 @@ function submain2() {
     var dbs=new dbHelper(baseUrl,user,ucode);
     var el = document.getElementById('content');
     var datagrids = document.getElementById('datagrids');
-    var shiftPanel = new domesticfilght(el);
+    var shiftPanel = new internationalmanage(el);
   
     
-    var resid=appConfig.domesticfilght.guoneiResid;
+    var resid=appConfig.internationalmanage.guojiResid;
     var cmswhere="";
     if (appConfig.app.debug)
-    // {cmswhere="C3_525699724860=392";}
     shiftPanel.start();
     var url ;
     mini.parse();
