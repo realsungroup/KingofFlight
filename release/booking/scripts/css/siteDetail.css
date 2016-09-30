@@ -1,16 +1,12 @@
-
-
 table{
     border: 1px solid #99bbc1;
     border-spacing: 0px;
     margin:0 auto;
     background-color: white;
 }
-
 table tr td{
     border-bottom: 1px solid rgb(245, 245, 245);
 }
-
 table .head1
 {
     background-color:rgb(245, 245, 245);
@@ -18,10 +14,9 @@ table .head1
     height:30px;
     line-height: 30px;
 }
-
 table .head
 {
-    background-color:cadetblue;
+    background-color:#337AB7;
     text-align: center;
     height:30px;
     line-height: 30px;
@@ -33,7 +28,6 @@ table .headtimezone
     height:30px;
     line-height: 30px;
 }
-
 table .title
 {
     background-color:rgb(245, 245, 245);
@@ -44,14 +38,11 @@ table .title1
 {
     background-color:rgb(245, 245, 245);
     text-align: center;
-    height: 40px;
 }
 table .content
 { 
     width:200px;
 }
-
-
  .mini-panel
 {
     padding-top:5px;
@@ -77,91 +68,36 @@ a.head2{
 .tc{
     text-align: center;
 }
-/****************************以下为导航样式**********************************/
-.mature-progress .mature-progress-box {/*外边框*/
-  width: 800px;
-  height: 100px;
-  overflow: hidden;
-  position: absolute;
-  left: 120px;
-  top: 0px;
+.wtj{
+  background-color:#F0675A;
 }
-.mature-progress .mature-progress-box.bgtwos {
-  z-index: 1;
+.ytj{
+  background-color:#C9FCFC;
 }
-.mature-progress .mature-progress-box.bgtwos dl dt {/*背景球*/
-  border: #f2f2f2 solid 5px;
-  position: relative;
-  left: -5px;
-  top: -7px;
+.dqr{
+  background-color:#98B9ED;
 }
-.mature-progress .mature-progress-box.v0 dl:nth-of-type(1) dt {
-  background: #337AB7;
+.dsh{
+  background-color:#D9EDF7;
 }
-.mature-progress .mature-progress-box.v1 dl:nth-of-type(2) dt {
-  background: #337AB7;
+.none{
+  background-color:#76FF5A;
 }
-.mature-progress .mature-progress-box.v2 dl:nth-of-type(3) dt {
-  background: #337AB7;
-}
-.mature-progress .mature-progress-box.v3 dl:nth-of-type(4) dt {
-  background: #337AB7;
-}
-.mature-progress .mature-progress-box.v4 dl:nth-of-type(5) dt {
-  background: #337AB7;
-}
-.mature-progress .mature-progress-box dl {/*球容器*/
-  position: relative;
-  left: 20px;
-  top: 36px;
-  width: 70px;
-  float: left;
-  margin-right: 75px;
-}
-.mature-progress .mature-progress-box dl dt {
-  width: 70px;
-  height: 70px;
-  background: #999;
-  color: #fff;
-  text-align: center;
-  line-height: 20px;
-  font-size: 14px;
-  border-radius: 50%;
-  margin: -38px auto;
-  overflow: hidden;
-  cursor:pointer;
-  position: relative;
-  top:-2px;
-  z-index: 3;
-}
-.mature-progress .mature-progress-box dl dt a {
-  position: relative;
-  top:22px;
-}
-.mature-progress .mature-progress-box .progress-box {/*进度格容器*/
-  position: relative;
-  width: 620px;
-  height: 15px;
-  border-radius: 10px;
-  border: #f2f2f2 solid 5px;
-  background: #fff;
-  z-index: 2;
-  top:32px;
-  left: 30px;
-}
-.mature-progress .mature-progress-box .progress-box i {/*进度格*/
-  position: absolute;
-  height: 15px;
-  background: #337AB7;
-  left: 40px;
-}
-.mature-progress .mature-progress-box .progress-box i.progress-box-2 {
-  left: 185px;
-}
-.mature-progress .mature-progress-box .progress-box i.progress-box-3 {
-  left: 330px;
-}
-.mature-progress .mature-progress-box .progress-box i.progress-box-4 {
-  left: 475px;
-}
-/**********************************************************************************************/
+.ImgBox{
+		position:relative;
+		width:100px;
+		height:100px;
+	}
+	.oImg{
+		position:absolute;
+		top:20px;
+		left:20px;
+        width:70px;
+        z-index:1;
+	}
+	/*.oImg:hover{
+	    width:400px;
+	    left:-150px;
+	    top:-100px;
+	    z-index:100;
+	}*/

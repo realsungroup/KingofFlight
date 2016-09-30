@@ -4,15 +4,29 @@ KingofAttendances.international=new function() {
         var me=this;
         var list;
         var o = data;
+        this.big=function(id,i){
+            $(id).css({'width':900+'px','left':-350+'px','top':-200+'px',zIndex:1000});
+            console.log($(id).css('z-index'));
+	    }
+        this.small=function(id,i){
+		    $(id).css({'width':70+'px','left':20+'px','top':20+'px',zIndex:1});
+            console.log($(id).css('z-index'));
+	    }        
         this.jState=function(o,i){//判断单据状态改变按钮
-            if(o[i].C3_527946742678=="已提交"){
+            if(o[i].C3_527946742678=="未提交"){
+                $("#tds_"+i).addClass('wtj');
+            }else if(o[i].C3_527946742678=="已提交"){
                 $("#a_"+i).text("已提交").attr('onclick','');
+                $("#tds_"+i).addClass('ytj');
             }else if(o[i].C3_527946742678=="待确认出票"){
                 $("#a_"+i).text("确认").attr('onclick','KingofAttendances.international.conClick('+o[i].REC_ID+')');
+                $("#tds_"+i).addClass('dqr');
             }else if(o[i].C3_527946742678=="待行政确认出票"){
                 $("#a_"+i).text("已确认").attr('onclick','');
-            } if(o[i].C3_527946742678=="订单完成"){
+                $("#tds_"+i).addClass('dsh');
+            }else if(o[i].C3_527946742678=="订单完成"){
                 $("#td_"+i).remove();
+                $("#tds_"+i).addClass('none');
             }
         };
         this.bill=function(o,i){//动态加载单据信息
@@ -20,7 +34,7 @@ KingofAttendances.international=new function() {
                       <td class="head" width="10%" colspan="2">出差单据号</td>
                       <td colspan="4">`+o[i].C3_526655624603+`</td>
                       <td class="head1" align="center" width="10%">单据状态</td>
-                      <td align="center" width="15%">`+o[i].C3_527946742678+`</td>
+                      <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
                       <td rowspan="5" width="5%" align="center" id="td_`+i+`">
                           <a class="mini-button" id="a_`+i+`" style="width:80px;height:30px;" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
                           <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
@@ -32,10 +46,12 @@ KingofAttendances.international=new function() {
                       <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
                       <td width="10%" class="title" rowspan="2">出发地</td>
                       <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="3" width="15%"><img src="`+o[i].C3_527873192635+`" width="60px" style="max-width:80px;max-height:80px;"/></td>
-                      <td rowspan="3" width="15%"><img src="`+o[i].C3_526655353950+`" width="60px" style="max-width:80px;max-height:80px;"/></td>
-                      <!--<td rowspan="3" width="30px"><img src="`+o[i].C3_527873192635+`" width="60px"/></td>-->
-                      <!--<td rowspan="3" width="30px"><img src="`+o[i].C3_526655353950+`" width="60px"/></td>-->
+                      <td rowspan="3" width="15%" class="ImgBox">
+                          <img src="`+o[i].C3_527873192635+`" class="oImg" onmouseover="KingofAttendances.international.big(i1_`+i+`,`+i+`)" onmouseout="KingofAttendances.international.small(i1_`+i+`,`+i+`)" id="i1_`+i+`"/>
+                      </td>
+                      <td rowspan="3" width="15%" class="ImgBox">
+                          <img src="`+o[i].C3_526655353950+`" class="oImg" onmouseover="KingofAttendances.international.big(i2_`+i+`,`+i+`)" onmouseout="KingofAttendances.international.small(i2_`+i+`,`+i+`)" id="i2_`+i+`"/>
+                      </td>
                       <td align="center">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
                   </tr>
@@ -63,7 +79,7 @@ KingofAttendances.international=new function() {
           var win = mini.open({
                 url: '../dist/component/setdata.html',
                 showModal: false,
-                width: 600,
+                width: 550,
                 height: 550,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl(); 
@@ -174,7 +190,7 @@ KingofAttendances.international=new function() {
     			return;
     		}
         };
-        this.navClick=function(_number,state){//导航
+        this.navClick=function(state){//导航
             $("#tbManage tbody").empty()
             for(var i=0;i<o.length;i++){
                 if(o[i].C3_527946742678==state){
@@ -183,111 +199,111 @@ KingofAttendances.international=new function() {
                     me.jState(o,i);
                 }
             };
-        	$(".mature-progress").html(list2);
-        	var mamture = $('#mamture');
-        	var l = 0;
-        	var timer = null;
-        	var pro = 0;
-        	if ( _number < 200 ) {
-        		lad(_number, 200, '.progress-box-1',function(){});
-        	};
-        	if ( _number >= 200 && _number < 400  ) {
-        		lad(_number, 200, '.progress-box-1', function(){
-        			mamture.addClass('v1');
-        			lad(_number-200, 200, '.progress-box-2',function(){
-        				$('.progress-box-2').addClass('active');
-        			});
-        		});
-        	};
-        	if ( _number >= 400 && _number < 600  ) {
-        		lad(200, 200, '.progress-box-1', function(){
-        			mamture.addClass('v1')
-        			lad(400, 400, '.progress-box-2',function(){
-        				mamture.addClass('v2');
-        				lad(0, 200, '.progress-box-3',function(){
-        					$('.progress-box-3').addClass('active');
-        				})
-        			});
-        		});
-        	};
-        	if ( _number >= 600 && _number < 800  ) {
-        		lad(200, 200, '.progress-box-1', function(){
-        			mamture.addClass('v1')
-        			lad(400, 400, '.progress-box-2',function(){
-        				mamture.addClass('v2')
-        				lad(600, 600, '.progress-box-3', function(){
-        					mamture.addClass('v3')
-        					lad(0, 200, '.progress-box-4',function(){
-        						$('.progress-box-4').addClass('active');
-        					})
-        				})
-        			});
-        		});
-        	};
-        	if ( _number >= 800) {
-        		lad(200, 200, '.progress-box-1', function(){
-        			mamture.addClass('v1')
-        			lad(400, 400, '.progress-box-2',function(){
-        				mamture.addClass('v2')
-        				lad(600, 600, '.progress-box-3', function(){
-        					mamture.addClass('v3')
-        					lad(800, 800, '.progress-box-4',function(){
-        						mamture.addClass('v4')
-        					})
-        				})
-        			});
-        		});
-        	};
-        	function lad(number, max, cls, callback){
-        		l = 0;
-        		timer = setInterval(function(){
-        			if ( number <= 200 ) {
-        				l+=2;
-        			}else if( number > 200 && number <= 400 ){
-        				l+=4;
-        			}else if( number > 400 && number <= 600 ){
-        				l+=8;
-        			}else if( number > 600 && number <= 800 ){
-        				l+=16;
-        			};
-        			pro = (l/max)*100;				//100为  div的长度
-        			if ( l >= number ) {
-        				clearInterval(timer);
-        				if ( callback ) callback();   //回调
-        			};
-        			$(cls).css({
-        				width : pro+'px'
-        			})
-        		},1)
-        	}
+        	// $(".mature-progress").html(list2);
+        	// var mamture = $('#mamture');
+        	// var l = 0;
+        	// var timer = null;
+        	// var pro = 0;
+        	// if ( _number < 200 ) {
+        	// 	lad(_number, 200, '.progress-box-1',function(){});
+        	// };
+        	// if ( _number >= 200 && _number < 400  ) {
+        	// 	lad(_number, 200, '.progress-box-1', function(){
+        	// 		mamture.addClass('v1');
+        	// 		lad(_number-200, 200, '.progress-box-2',function(){
+        	// 			$('.progress-box-2').addClass('active');
+        	// 		});
+        	// 	});
+        	// };
+        	// if ( _number >= 400 && _number < 600  ) {
+        	// 	lad(200, 200, '.progress-box-1', function(){
+        	// 		mamture.addClass('v1')
+        	// 		lad(400, 400, '.progress-box-2',function(){
+        	// 			mamture.addClass('v2');
+        	// 			lad(0, 200, '.progress-box-3',function(){
+        	// 				$('.progress-box-3').addClass('active');
+        	// 			})
+        	// 		});
+        	// 	});
+        	// };
+        	// if ( _number >= 600 && _number < 800  ) {
+        	// 	lad(200, 200, '.progress-box-1', function(){
+        	// 		mamture.addClass('v1')
+        	// 		lad(400, 400, '.progress-box-2',function(){
+        	// 			mamture.addClass('v2')
+        	// 			lad(600, 600, '.progress-box-3', function(){
+        	// 				mamture.addClass('v3')
+        	// 				lad(0, 200, '.progress-box-4',function(){
+        	// 					$('.progress-box-4').addClass('active');
+        	// 				})
+        	// 			})
+        	// 		});
+        	// 	});
+        	// };
+        	// if ( _number >= 800) {
+        	// 	lad(200, 200, '.progress-box-1', function(){
+        	// 		mamture.addClass('v1')
+        	// 		lad(400, 400, '.progress-box-2',function(){
+        	// 			mamture.addClass('v2')
+        	// 			lad(600, 600, '.progress-box-3', function(){
+        	// 				mamture.addClass('v3')
+        	// 				lad(800, 800, '.progress-box-4',function(){
+        	// 					mamture.addClass('v4')
+        	// 				})
+        	// 			})
+        	// 		});
+        	// 	});
+        	// };
+        	// function lad(number, max, cls, callback){
+        	// 	l = 0;
+        	// 	timer = setInterval(function(){
+        	// 		if ( number <= 200 ) {
+        	// 			l+=2;
+        	// 		}else if( number > 200 && number <= 400 ){
+        	// 			l+=4;
+        	// 		}else if( number > 400 && number <= 600 ){
+        	// 			l+=8;
+        	// 		}else if( number > 600 && number <= 800 ){
+        	// 			l+=16;
+        	// 		};
+        	// 		pro = (l/max)*100;				//100为  div的长度
+        	// 		if ( l >= number ) {
+        	// 			clearInterval(timer);
+        	// 			if ( callback ) callback();   //回调
+        	// 		};
+        	// 		$(cls).css({
+        	// 			width : pro+'px'
+        	// 		})
+        	// 	},1)
+        	// }
         };
-        var list2=`<div class="mature-progress-box v0" id="mamture">
-        			    <dl onclick="KingofAttendances.international.navClick(0,'未提交')">
-        					<dt><a>未提交</a></dt>
-        				</dl>
-        				<dl onclick="KingofAttendances.international.navClick(200,'已提交')">
-        					<dt><a>已提交</a></dt>
-        				</dl>
-        				<dl onclick="KingofAttendances.international.navClick(400,'待确认出票')">
-        					<dt><a>待申请人确认</a></dt>
-        				</dl>
-        				<dl onclick="KingofAttendances.international.navClick(600,'待行政确认出票')">
-        					<dt><a>待行政确认</a></dt>
-        				</dl>
-        				<dl onclick="KingofAttendances.international.navClick(800,'订单完成')">
-        					<dt><a>订单完成</p></dt>
-        				</dl>
-        				<div class="progress-box">
-        					<i class="progress-box-1"></i>
-        					<i class="progress-box-2"></i>
-        					<i class="progress-box-3"></i>
-        					<i class="progress-box-4"></i>
-        				</div>
-        			</div>
-        			<div class="mature-progress-box bgtwos">
-                        <dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl>
-        			</div>`;
-        $(".mature-progress").html(list2);
+        // var list2=`<div class="mature-progress-box v0" id="mamture">
+        // 			    <dl onclick="KingofAttendances.international.navClick(0,'未提交')">
+        // 					<dt><a>未提交</a></dt>
+        // 				</dl>
+        // 				<dl onclick="KingofAttendances.international.navClick(200,'已提交')">
+        // 					<dt><a>已提交</a></dt>
+        // 				</dl>
+        // 				<dl onclick="KingofAttendances.international.navClick(400,'待确认出票')">
+        // 					<dt><a>待申请人确认</a></dt>
+        // 				</dl>
+        // 				<dl onclick="KingofAttendances.international.navClick(600,'待行政确认出票')">
+        // 					<dt><a>待行政确认</a></dt>
+        // 				</dl>
+        // 				<dl onclick="KingofAttendances.international.navClick(800,'订单完成')">
+        // 					<dt><a>订单完成</p></dt>
+        // 				</dl>
+        // 				<div class="progress-box">
+        // 					<i class="progress-box-1"></i>
+        // 					<i class="progress-box-2"></i>
+        // 					<i class="progress-box-3"></i>
+        // 					<i class="progress-box-4"></i>
+        // 				</div>
+        // 			</div>
+        // 			<div class="mature-progress-box bgtwos">
+        //                 <dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl>
+        // 			</div>`;
+        // $(".mature-progress").html(list2);
         var si=`<tr height="40px" align="center">
                   <td width="15%" class="title1">员工号</td>
                   <td width="15%">`+o[0].C3_526655169418+`</td>

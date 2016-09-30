@@ -1,38 +1,40 @@
 <html>
     <body>
         <form id="form3">
-            <table>
+            <table width="500px">
                 <tr>
-                    <td>护照号: </td>
-                    <td><input class="mini-textbox" required="true" name="C3_526655213359"></td>
+                    <td width="150px">护照号: </td>
+                    <td colspan="2"><input class="mini-textbox" required="true" name="C3_526655213359"></td>
                 </tr>
                 <tr>
                     <td>护照有效期</td>
-                    <td><input class="mini-datepicker" required="true" name="C3_526655225559"></td>
+                    <td colspan="2"><input class="mini-datepicker" required="true" name="C3_526655225559"></td>
                 </tr>
                 <tr>
                     <td>出发日期: </td>
-                    <td><input class="mini-datepicker" required="true" name="C3_526655237449"></td>
+                    <td colspan="2"><input class="mini-datepicker" required="true" name="C3_526655237449"></td>
                 </tr>
                 <tr>
                     <td>返回日前:</td>
-                    <td><input class="mini-datepicker" required="true" name="C3_526655248019"></td>
+                    <td colspan="2"><input class="mini-datepicker" required="true" name="C3_526655248019"></td>
                 </tr>
                 <tr>
                     <td>出发地: </td>
-                    <td><input class="mini-textbox" required="true" name="C3_526655262089"></td>
+                    <td colspan="2"><input class="mini-textbox" required="true" name="C3_526655262089"></td>
                 </tr>
                 <tr>
                     <td>目的地:</td>
-                    <td><input class="mini-textbox" required="true" name="C3_526655271756"></td>
+                    <td colspan="2"><input class="mini-textbox" required="true" name="C3_526655271756"></td>
                 </tr>
                 <tr height="60px">
                     <td>护照扫描件: </td>
-                    <td>
-                        <input required="true" id='fileupload1' name='' onuploaderror='onUploadError' onfileselect='onFileSelect' onuploadsuccess='onUploadSuccess'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata' "+   
+                    <td width="150px">
+                        <input required="true" cursor="pointer" id='fileupload1' name='' onuploaderror='onUploadError' onfileselect='onFileSelect' onuploadsuccess='onUploadSuccess'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata' "+   
                       " limitType='*.jpg;*.jpeg;*.png' style='width:50%;'/>
                       <input id="imgurl" name='C3_527873192635' class="mini-Hidden"  allowInput="false"/>
-                      <img align='middle' id='imgUploaded' style="width:70px"/>
+                    </td>
+                    <td>  
+                      <img align='middle' id='imgUploaded' width="70px"/>
                     </td>
                 </tr>
                 <tr height="60px">
@@ -41,12 +43,14 @@
                         <input required="true" id='fileupload2' name='' onuploaderror='onUploadError2' onfileselect='onFileSelect2' onuploadsuccess='onUploadSuccess2'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata2' "+   
                       " limitType='*.jpg;*.jpeg;*.png' style='width:50%;' />
                         <input  id="imgurl2" name='C3_526655353950' class="mini-Hidden"  allowInput="false"/>
+                    </td>
+                    <td>
                         <img align='middle' id='imgUploaded2' style="width:70px"/>
-                      </td>
+                    </td>
                 </tr>
                 <tr>
                     <td>是否往返: </td>
-                    <td>
+                    <td colspan="2">
                         <select class="mini-combobox" name="C3_526655466969">
 		                    <option value="Y">Y</option>
                             <option value="N">N</option>
@@ -55,11 +59,11 @@
                 </tr>
                 <tr>
                     <td>
-                        <input name="REC_ID" class="mini-Hidden" allowInput="false"/>
+                        <!--<input name="REC_ID" class="mini-Hidden" allowInput="false"/>-->
                         <!--<input name="REC_RESID" class="mini-Hidden" allowInput="false"/>-->
                         
                     </td>
-                    <td>
+                    <td colspan="2">
                         <a class="mini-button" iconCls="icon-save" onclick="saveClick">保存</a>
                     </td>
                 </tr>
@@ -111,16 +115,13 @@
                     o._id=1;
                     o._state="added";
                     var json = mini.encode([o]);
-                    //debugger;
                     console.log(json);
                     dbs.dbSavedata(appConfig.internationalfilght.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                     function dataSaved(text){
                         alert("申请成功");
-                        //console.log(text);
                     }
                     function fnerror(text){
                         alert("申请失败");
-                        //console.log(text);
                     }
                     function fnhttperror(jqXHR, textStatus, errorThrown){
                         alert("error");
