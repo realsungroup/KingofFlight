@@ -1,92 +1,63 @@
 var KingofAttendances = KingofAttendances || {};
-KingofAttendances.i_manage=new function() {
+KingofAttendances.d_manage=new function() {
     this.setData=function(data,adbs,aappConfig){
         var me=this;
         var list;
-        var o = data;
-        this.big=function(id,i){
-            $(id).removeClass("oImg").addClass('oImg1');
-            $(id).parent().removeClass("oh");
-	    }
-        this.small=function(id,i){
-            $(id).removeClass("oImg1").addClass('oImg');
-            $(id).parent().addClass("oh");
-	    }        
+        var o = data;     
         this.jState=function(o,i){//判断单据状态改变按钮
-            if(o[i].C3_527946742678=="未提交"){
+            if(o[i].C3_528049541154=="未提交"){
                 $("#tds_"+i).addClass('wtj');
-            }else if(o[i].C3_527946742678=="已提交"){
+            }else if(o[i].C3_528049541154=="已提交"){
                 $("#tds_"+i).addClass('ytj');
-            }else if(o[i].C3_527946742678=="待确认出票"){
+            }else if(o[i].C3_528049541154=="待确认出票"){
                 $("#a_"+i).text("确认").attr('onclick','');
                 $("#tds_"+i).addClass('dqr');
-            }else if(o[i].C3_527946742678=="待行政确认出票"){
-                $("#a_"+i).text("确认出票").attr('onclick','KingofAttendances.i_manage.conClick('+o[i].REC_ID+')');
+            }else if(o[i].C3_528049541154=="待行政确认出票"){
+                $("#a_"+i).text("确认出票").attr('onclick','KingofAttendances.d_manage.conClick('+o[i].REC_ID+')');
                 $("#tds_"+i).addClass('dsh');
-            }else if(o[i].C3_527946742678=="订单完成"){
+            }else if(o[i].C3_528049541154=="订单完成"){
                 $("#td_"+i).remove();
                 $("#tds_"+i).addClass('none');
             }
         };
         this.bill=function(o,i){//动态加载单据信息
             list=`<tr height="30px">
-                      <td class="head" width="10%" colspan="2">出差单据号</td>
-                      <td colspan="4">`+o[i].C3_526655624603+`</td>
+                      <td class="head" colspan="2">出差单据号</td>
+                      <td colspan="2">`+o[i].C3_526656513019+`</td>
                       <td class="head1" align="center" width="10%">单据状态</td>
-                      <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
-                      <td rowspan="6" width="5%" align="center" id="td_`+i+`">
-                          <a class="mini-button m_btn" id="a_`+i+`" onclick="KingofAttendances.i_manage.i_meditClick(`+o[i].REC_ID+`)">航班信息</a>
-                          <a class="mini-button m_btn" iconCls="icon-upgrade" onclick="KingofAttendances.i_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
-                          <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.i_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                      <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_528049541154+`</td>
+                      <td rowspan="4" width="5%" align="center" id="td_`+i+`">
+                          <a class="mini-button m_btn" id="a_`+i+`" onclick="KingofAttendances.d_manage.d_meditClick(`+o[i].REC_ID+`)">航班信息</a>
+                          <a class="mini-button m_btn" iconCls="icon-upgrade" onclick="KingofAttendances.d_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
+                          <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.d_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                       </td>
                   </tr>
                   <tr height="40px" align="center">
                       <td class="title1">姓名</td>
-                      <td>`+o[i].C3_526655177113+`</td>
-                      <td class="title1">护照号</td>
-                      <td>`+o[i].C3_526655213359+`</td>
-                      <td class="title1">护照有效期</td>
-                      <td>`+o[i].C3_527948550902+`</td>
+                      <td>`+o[i].C3_526656510920+`</td>
                       <td class="title1">身份证号</td>
-                      <td>`+o[i].C3_526655197108+`</td>
+                      <td colspan="3">`+o[i].C3_526656510713+`</td>
                   </tr>
                   <tr class="tc">
-                      <td width="10%" class="title" rowspan="2">出发日期</td>
-                      <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
-                      <td width="10%" class="title" rowspan="2">出发地</td>
-                      <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="3" class="ImgBox oh">
-                          <img src="`+o[i].C3_527873192635+`" class="oImg" onmouseover="KingofAttendances.i_manage.big(i1_`+i+`,`+i+`)" onmouseout="KingofAttendances.i_manage.small(i1_`+i+`,`+i+`)" id="i1_`+i+`"/>
-                      </td>
-                      <td rowspan="3" class="ImgBox oh">
-                          <img src="`+o[i].C3_526655353950+`" class="oImg" onmouseover="KingofAttendances.i_manage.big(i2_`+i+`,`+i+`)" onmouseout="KingofAttendances.i_manage.small(i2_`+i+`,`+i+`)" id="i2_`+i+`"/>
-                      </td>
-                      <td align="center">往程航班号</td>
-                      <td>`+o[i].C3_526655793514+`</td>
+                      <td class="title1">出发地</td>
+                      <td>`+o[i].C3_526656511963+`</td>
+                      <td class="title1">出发日期</td>
+                      <td>`+o[i].C3_528048113321+`</td>
+                      <td align="center">航班号</td>
+                      <td>`+o[i].C3_526656513426+`</td>
                   </tr>
                   <tr class="tc">
+                      <td class="title1">目的地</td>
+                      <td>`+o[i].C3_526656512229+`</td>
+                      <td class="title1">行程类别</td>
+                      <td>`+o[i].C3_526656512808+`</td>
                       <td>航班时间</td>
-                      <td>`+o[i].C3_528400651698+`</td>
-                      </tr>
-                      <tr class="tc">
-                      <td class="title" rowspan="2">返回日期</td>
-                      <td rowspan="2">`+o[i].C3_527948869929+`</td>
-                      <td class="title" rowspan="2">返回地</td>
-                      <td rowspan="2">`+o[i].C3_526655271756+`</td>
-                      <td align="center"">返程航班号</td>
-                      <td>`+o[i].C3_528311923010+`</td>
-                  </tr>
-                  <tr class="tc">
-                      <td>护照扫描件</td>
-                      <td>签证扫描件</td>
-                      <td>航班时间</td>
-                      <td>`+o[i].C3_528400600428+`</td>
+                      <td>`+o[i].C3_529016446872+`</td>
                   </tr>`;
         }
-        this.i_meditClick=function(REC_ID){//编辑航班单据
+        this.d_meditClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
-                
-                url: '../dist/component/i_medit.html',
+                url: '../dist/component/d_medit.html',
                 showModal: false,
                 width: 600,
                 height: 470,
@@ -110,9 +81,9 @@ KingofAttendances.i_manage=new function() {
                 o._state="modified";
                 o.REC_ID=REC_ID;
                 console.log(REC_ID);
-                o.C3_526655932836="Y";
+                o.C3_526656514479="Y";
                 var json = mini.encode([o]);
-                adbs.dbSavedata(aappConfig.internationalmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
+                adbs.dbSavedata(aappConfig.domesticmanage.guoneiResid,0,json,dataSaved,fnerror,fnhttperror);
                 function dataSaved(text){
                     alert("申请成功");
                 }
@@ -140,7 +111,7 @@ KingofAttendances.i_manage=new function() {
                 o.REC_ID=REC_ID;
                 o.C3_527965048090="Y";
                 var json = mini.encode([o]);
-                adbs.dbSavedata(aappConfig.internationalmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
+                adbs.dbSavedata(aappConfig.domesticmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                 function dataSaved(text){
                     alert("申请成功");
                 }
@@ -168,7 +139,7 @@ KingofAttendances.i_manage=new function() {
                 console.log(REC_ID);
                 o.C3_526655608924="";
                 var json = mini.encode([o]);
-                adbs.dbSavedata(aappConfig.internationalmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
+                adbs.dbSavedata(aappConfig.domesticmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                 function dataSaved(text){
                     alert("申请成功");
                 }
@@ -186,7 +157,7 @@ KingofAttendances.i_manage=new function() {
         this.navClick=function(state){//导航
             $("#tbManage tbody").empty()
             for(var i=0;i<o.length;i++){
-                if(o[i].C3_527946742678==state){
+                if(o[i].C3_528049541154==state){
                     me.bill(o,i);
                     $("#tbManage tbody").append(list);
                     me.jState(o,i);
@@ -194,7 +165,7 @@ KingofAttendances.i_manage=new function() {
             };
         };
         for(var i=0;i<o.length;i++){
-            if(o[i].C3_527946742678=="已提交"){
+            if(o[i].C3_528049541154=="已提交"){
                 this.bill(o,i);
                 $("#tbManage tbody").append(list);
                 this.jState(o,i);

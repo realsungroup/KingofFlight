@@ -36,9 +36,9 @@ KingofAttendances.international=new function() {
                       <td class="head1" align="center" width="10%">单据状态</td>
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
                       <td rowspan="5" width="5%" align="center" id="td_`+i+`">
-                          <a class="mini-button" id="a_`+i+`" style="width:80px;height:30px;" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
-                          <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
-                          <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                          <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
+                          <a class="mini-button m_btn" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
+                          <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                       </td>
                   </tr>
                   <tr class="tc">
@@ -47,10 +47,10 @@ KingofAttendances.international=new function() {
                       <td width="10%" class="title" rowspan="2">出发地</td>
                       <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
                       <td rowspan="3" width="15%" class="ImgBox oh">
-                          <img src="`+o[i].C3_527873192635+`" class="oImg" onmouseover="KingofAttendances.international.big(i1_`+i+`,`+i+`)" onmouseout="KingofAttendances.international.small(i1_`+i+`,`+i+`)" id="i1_`+i+`"/>
+                          <img src="`+o[i].C3_527873192635+`" class="oImg"/>
                       </td>
                       <td rowspan="3" width="15%" class="ImgBox oh">
-                          <img src="`+o[i].C3_526655353950+`" class="oImg" onmouseover="KingofAttendances.international.big(i2_`+i+`,`+i+`)" onmouseout="KingofAttendances.international.small(i2_`+i+`,`+i+`)" id="i2_`+i+`"/>
+                          <img src="`+o[i].C3_526655353950+`" class="oImg"/>
                       </td>
                       <td  class="title1">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
@@ -68,8 +68,14 @@ KingofAttendances.international=new function() {
                       <td>`+o[i].C3_528311923010+`</td>
                   </tr>
                   <tr class="tc">
-                      <td>护照扫描件</td>
-                      <td>签证扫描件</td>
+                      <td>
+                          护照扫描件
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_527873192635+`')"/>
+                      </td>
+                      <td>
+                          签证扫描件
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_526655353950+`')"/>
+                      </td>
                       <td class="title1">航班时间</td>
                       <td>`+o[i].C3_528400600428+`</td>
                   </tr>`;
@@ -86,6 +92,21 @@ KingofAttendances.international=new function() {
                 },
                 ondestroy: function (action) {
                    parent.location.reload();
+                }
+            });
+        };
+        this.enlClick=function(imgUrl){//放大图片
+          var win = mini.open({
+                url: '../dist/component/imgenl.html',
+                showModal: false,
+                width: 600,
+                height: 600,
+                onload: function () {       //弹出页面加载完成
+                    var iframe = this.getIFrameEl(); 
+                    iframe.contentWindow.Setdbs(imgUrl);
+                },
+                ondestroy: function (action) {
+                     parent.location.reload();     
                 }
             });
         };
@@ -194,6 +215,7 @@ KingofAttendances.international=new function() {
                     me.bill(o,i);
                     $("#tbManage tbody").append(list);
                     me.jState(o,i);
+                    mini.parse();
                 }
             };
         };
@@ -212,9 +234,12 @@ KingofAttendances.international=new function() {
                   <td colspan="2"></td>
                 </tr>`
         $("#si").html(si);
+    
         for(var i=0;i<o.length;i++){
             this.bill(o,i);
             $("#tbManage tbody").append(list);
+            // alert(1);
+                    mini.parse();
             this.jState(o,i);
         };
     }

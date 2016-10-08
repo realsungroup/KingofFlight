@@ -1,41 +1,54 @@
 var KingofAttendances = KingofAttendances || {};
 KingofAttendances.domestic=new function() {
     this.setData=function(data,adbs,aappConfig){
+        var me=this;
+        var list;
         var o = data;
-        var si=`<tr height="40px" align="center">
-                    <td width="15%" class="title">员工号</td>
-                    <td width="15%">`+o[0].C3_526656511106+`</td>
-                    <td width="15%" class="title">姓名</td>
-                    <td width="15%">`+o[0].C3_526656510920+`</td>
-                    <td width="15%" class="title">身份证号</td><td width="25%">`+o[0].C3_526656510713+`</td>
-                </tr>`
-        $("#si").html(si);
-        for(var i=0;i<o.length;i++){
-            var list=`<tr height="30px">
-                          <td colspan="2" class="head" width="15%">出差单据号</td>
-                          <td colspan="4">`+o[i].C3_526656513019+`</td>
-                          <td class="title">单据状态</td>
-                          <td align="center">`+o[i].C3_528049541154+`</td>
-                          <td rowspan="2" width="5" align="center">
-                            <a class="mini-button" id="a_`+i+`" style="width:80px;height:30px;" iconCls="icon-upload" onclick="KingofAttendances.domestic.submitClick(`+o[i].REC_ID+`)">提交</a>
-                            <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-edit" onclick="KingofAttendances.domestic.editClick(`+o[i].REC_ID+`)">编辑</a>
-                            <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-remove" onclick="KingofAttendances.domestic.revokeClick(`+o[i].REC_ID+`)">撤销</a>
-                          </td>
-                      </tr>
-                      <tr align="center">
-                          <td width="10%" class="title">出发地</td>
-                          <td width="10%">`+o[i].C3_526656511963+`</td>
-                          <td width="10%" class="title">目的地</td>
-                          <td width="10%">`+o[i].C3_526656512229+`</td>
-                          <td width="10%" class="title">行程类别</td>
-                          <td width="10%">`+o[i].C3_526656512808+`</td>
-                          <td width="15%" class="title">出发日期</td>
-                          <td width="20%">`+o[i].C3_528048113321+`</td>
-                      </tr>`
-            $("#tbManage tbody").append(list);
-            if(o[i].C3_528049541154=="已提交"){
+        this.jState=function(o,i){//判断单据状态改变按钮
+            if(o[i].C3_528049541154=="未提交"){
+                $("#tds_"+i).addClass('wtj');
+            }else if(o[i].C3_528049541154=="已提交"){
                 $("#a_"+i).text("已提交").attr('onclick','');
+                $("#tds_"+i).addClass('ytj');
+            }else if(o[i].C3_528049541154=="待确认出票"){
+                $("#a_"+i).text("确认").attr('onclick','KingofAttendances.domestic.conClick('+o[i].REC_ID+')');
+                $("#tds_"+i).addClass('dqr');
+            }else if(o[i].C3_528049541154=="待行政确认出票"){
+                $("#a_"+i).text("已确认").attr('onclick','');
+                $("#tds_"+i).addClass('dsh');
+            }else if(o[i].C3_528049541154=="订单完成"){
+                $("#td_"+i).remove();
+                $("#tds_"+i).addClass('none');
             }
+        };
+        this.bill=function(o,i){//动态加载单据信息
+            list=`<tr height="30px">
+                    <td colspan="2" class="head" width="15%">出差单据号</td>
+                    <td colspan="2">`+o[i].C3_526656513019+`</td>
+                    <td class="title1">单据状态</td>
+                    <td align="center" id="tds_`+i+`">`+o[i].C3_528049541154+`</td>
+                    <td rowspan="3" width="5" align="center">
+                        <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.domestic.submitClick(`+o[i].REC_ID+`)">提交</a>
+                        <a class="mini-button m_btn" iconCls="icon-edit" onclick="KingofAttendances.domestic.editClick(`+o[i].REC_ID+`)">编辑</a>
+                        <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.domestic.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td class="title1">出发地</td>
+                    <td>`+o[i].C3_526656511963+`</td>
+                    <td class="title1">出发日期</td>
+                    <td>`+o[i].C3_528048113321+`</td>
+                    <td class="title1">航班号</td>
+                    <td>`+o[i].C3_526656513426+`</td>
+                  </tr>
+                  <tr align="center">
+                    <td class="title1">目的地</td>
+                    <td>`+o[i].C3_526656512229+`</td>
+                    <td class="title1">行程类别</td>
+                    <td>`+o[i].C3_526656512808+`</td>
+                    <td class="title1">航班时间</td>
+                    <td>`+o[i].C3_529016446872+`</td>
+                  </tr>`
         }
         this.addClick=function(){
             var win = mini.open({
@@ -121,5 +134,56 @@ KingofAttendances.domestic=new function() {
     			return;
     		}
         }
+        this.conClick=function(REC_ID){//确认单据
+            if(confirm('您是否要确认么？')){
+    		    mini.parse();
+                var form = new mini.Form("form1");
+                var o =  new mini.Form("form1").getData();
+                form.validate(); 
+                if (form.isValid() == false) return;
+                o._id=1;
+                o._state="modified";
+                o.REC_ID=REC_ID;
+                o.C3_526656513624="Y";
+                var json = mini.encode([o]);
+                adbs.dbSavedata(aappConfig.domesticfilght.guoneiResid,0,json,dataSaved,fnerror,fnhttperror);
+                function dataSaved(text){
+                    alert("申请成功");
+                }
+                function fnerror(text){
+                    alert("申请失败");
+                    alert(text);
+                }
+                function fnhttperror(jqXHR, textStatus, errorThrown){
+                    alert("error");
+                }
+                parent.location.reload();
+    		}else{
+    			return;
+    		}
+        };
+        this.navClick=function(state){//导航
+            $("#tbManage tbody").empty()
+            for(var i=0;i<o.length;i++){
+                if(o[i].C3_528049541154==state){
+                    me.bill(o,i);
+                    $("#tbManage tbody").append(list);
+                    me.jState(o,i);
+                }
+            };
+        };
+        var si=`<tr height="40px" align="center">
+                    <td width="15%" class="title">员工号</td>
+                    <td width="15%">`+o[0].C3_526656511106+`</td>
+                    <td width="15%" class="title">姓名</td>
+                    <td width="15%">`+o[0].C3_526656510920+`</td>
+                    <td width="15%" class="title">身份证号</td><td width="25%">`+o[0].C3_526656510713+`</td>
+                </tr>`
+        $("#si").html(si);
+        for(var i=0;i<o.length;i++){
+            this.bill(o,i);
+            $("#tbManage tbody").append(list);
+            this.jState(o,i);
+        };
     };
 }

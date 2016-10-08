@@ -21,5 +21,10 @@
     {        
         "guoneiResid":526664384125,
         "mainHtml":"./dist/component/domestic.html"
+    },
+     "domesticmanage":
+    {        
+        "guoneiResid":526664384125,
+        "mainHtml":"./dist/component/d_manage.html"
     }
 }

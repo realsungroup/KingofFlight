@@ -1,7 +1,17 @@
  <form id="form1">
-	<a class="mini-button" iconCls="icon-add" onclick="KingofAttendances.domestic.addClick">新增航班</a>
-	<br><br>
-	
+	<fieldset>
+    	<legend>流程按钮</legend>
+		<a class="mini-button" iconCls="icon-downgrade" onclick="KingofAttendances.domestic.navClick('未提交')">未提交</a>
+		<a class="mini-button" iconCls="icon-downgrade" onclick="KingofAttendances.domestic.navClick('已提交')">已提交</a>
+		<a class="mini-button" iconCls="icon-downgrade" onclick="KingofAttendances.domestic.navClick('待确认出票')">待申请人确认出票</a>
+		<a class="mini-button" iconCls="icon-downgrade" onclick="KingofAttendances.domestic.navClick('待行政确认出票')">待行政确认出票</a>
+		<a class="mini-button" iconCls="icon-downgrade" onclick="KingofAttendances.domestic.navClick('订单完成')">订单完成</a>
+    </fieldset>
+	<fieldset>
+    	<legend>功能按钮</legend>
+		<a class="mini-button" iconCls="icon-add" onclick="KingofAttendances.domestic.addClick">新增航班</a>
+		<a class="mini-button" iconCls="icon-reload" onclick="parent.location.reload()">刷新</a>
+	</fieldset>
 	<table  border="1px" width="100%" align="center" cellspacing="0px">
 		<thead>
 			<tr height="30px" class="head">
@@ -13,7 +23,7 @@
 		</tbody>
 	</table>
 	<br>	
-	<table  border="1px" width="100%" align="center" cellspacing="0px" id="tbManage">	
+	<table  border="1px" width="100%" align="center" cellspacing="0px" id="tbManage">
 		<tbody>
 			
 		</tbody>	

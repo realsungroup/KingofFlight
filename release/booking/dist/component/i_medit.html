@@ -8,7 +8,7 @@
                 </tr>
                 <tr>
                     <td>往程航班时间</td>
-                    <td><input class="mini-datepicker" required="true" name="C3_526655809049" style="width:200px;" onvaluechanged="onValueChanged" nullValue="null"
+                    <td><input class="mini-datepicker" required="true" name="C3_526655809049" style="width:200px;" nullValue="null"
         format="yyyy-MM-dd H:mm:ss" timeFormat="H:mm:ss" showTime="true" showOkButton="true" showClearButton="false"/></td>
                 </tr>
                 <tr>
@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td>返程航班时间</td>
-                    <td><input class="mini-datepicker" required="true" name="C3_528311922738" style="width:200px;" onvaluechanged="onValueChanged" nullValue="null"
+                    <td><input class="mini-datepicker" required="true" name="C3_528311922738" style="width:200px;" nullValue="null"
         format="yyyy-MM-dd H:mm:ss" timeFormat="H:mm:ss" showTime="true" showOkButton="true" showClearButton="false"></td>
                 </tr>
                 <tr>
@@ -38,8 +38,7 @@
                 function fnSuccess(data,subdata){
                     mini.parse();
                     var form = new mini.Form("#form2");
-                    form.setData(data[0]);                        
-                    mini.parse();
+                    form.setData(data[0]);
                     var fileupload=mini.get("fileupload1");//上传图片
                     fileupload.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
                     var imgfield=mini.get('imgurl');

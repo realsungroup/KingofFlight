@@ -56,10 +56,7 @@ table .content
 {
     text-align: center;
 }
-a.head2{
-    margin:20px 0px 30px;
-    z-index: 5; 
-}
+/***********************************************************/
 .lf{
     float:left;
 }
@@ -105,4 +102,24 @@ a.head2{
     left:-150%;
     width:400%;
     z-index:100;
+}
+.m_btn{
+    width:80px;
+    height:30px;
+    line-height:30px;
+}
+/*fieldset{
+    position:relative;
+	width:97%;
+}
+fieldset img{
+    position:absolute;
+	top:28px;
+}
+fieldset a{
+    margin-left:20px;
+    margin-right:4px;
+}*/
+fieldset a{
+    border-radius:5px;
 }

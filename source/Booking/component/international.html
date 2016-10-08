@@ -1,11 +1,21 @@
  <form id="form1">
-	<a class="mini-button head2" iconCls="icon-add" onclick="KingofAttendances.international.addClick">新增航班</a>
-	<a class="mini-button head2" iconCls="icon-no" onclick="KingofAttendances.international.navClick('未提交')">未提交</a>
-	<a class="mini-button head2" iconCls="icon-downgrade" onclick="KingofAttendances.international.navClick('已提交')">已提交</a>
-	<a class="mini-button head2" iconCls="icon-downgrade" onclick="KingofAttendances.international.navClick('待确认出票')">待申请人确认出票</a>
-	<a class="mini-button head2" iconCls="icon-downgrade" onclick="KingofAttendances.international.navClick('待行政确认出票')">待行政确认出票</a>
-	<a class="mini-button head2" iconCls="icon-downgrade" onclick="KingofAttendances.international.navClick('订单完成')">订单完成</a>
-	<a class="mini-button head2" iconCls="icon-reload" onclick="parent.location.reload()">刷新</a>
+	<fieldset>
+    	<legend>流程按钮</legend>
+		<a class="mini-button" onclick="KingofAttendances.international.navClick('未提交')">未提交</a>
+		<img src="../../scripts/miniui/themes/icons/arrow_right.png"/>
+		<a class="mini-button" onclick="KingofAttendances.international.navClick('已提交')">已提交</a>
+		<img src="../../scripts/miniui/themes/icons/arrow_right.png"/>
+		<a class="mini-button" onclick="KingofAttendances.international.navClick('待确认出票')">待申请人确认出票</a>
+		<img src="../../scripts/miniui/themes/icons/arrow_right.png"/>
+		<a class="mini-button" onclick="KingofAttendances.international.navClick('待行政确认出票')">待行政确认出票</a>
+		<img src="../../scripts/miniui/themes/icons/arrow_right.png"/>
+		<a class="mini-button" onclick="KingofAttendances.international.navClick('订单完成')">订单完成</a>
+	</fieldset>
+	<fieldset>
+    	<legend>功能按钮</legend>
+		<a class="mini-button" iconCls="icon-add" onclick="KingofAttendances.international.addClick">新增航班</a>
+		<a class="mini-button" iconCls="icon-reload" onclick="parent.location.reload()">刷新</a>
+	</fieldset>
 	<table  border="1px" width="100%" align="center" cellspacing="0px">
 		<thead>
 			<tr height="30px" class="head">
