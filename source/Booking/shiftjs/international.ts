@@ -25,7 +25,7 @@ KingofAttendances.international=new function() {
                 $("#a_"+i).text("已确认").attr('onclick','');
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_527946742678=="订单完成"){
-                $("#td_"+i).remove();
+                $("#tdb_"+i).remove();
                 $("#tds_"+i).addClass('none');
             }
         };
@@ -35,7 +35,7 @@ KingofAttendances.international=new function() {
                       <td colspan="4">`+o[i].C3_526655624603+`</td>
                       <td class="head1" align="center" width="10%">单据状态</td>
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
-                      <td rowspan="5" width="5%" align="center" id="td_`+i+`">
+                      <td rowspan="5" width="5%" align="center" id="tdb_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
                           <a class="mini-button m_btn" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
                           <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
@@ -46,11 +46,11 @@ KingofAttendances.international=new function() {
                       <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
                       <td width="10%" class="title" rowspan="2">出发地</td>
                       <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="3" width="15%" class="ImgBox oh">
-                          <img src="`+o[i].C3_527873192635+`" class="oImg"/>
+                      <td rowspan="3" width="15%">
+                          <img src="`+o[i].C3_527873192635+`" width="100px"/>
                       </td>
-                      <td rowspan="3" width="15%" class="ImgBox oh">
-                          <img src="`+o[i].C3_526655353950+`" class="oImg"/>
+                      <td rowspan="3" width="15%">
+                          <img src="`+o[i].C3_526655353950+`" width="100px"/>
                       </td>
                       <td  class="title1">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
@@ -82,7 +82,7 @@ KingofAttendances.international=new function() {
         }
         this.addClick=function(){//新增航班单据
           var win = mini.open({
-                url: '../dist/component/setdata.html',
+                url: 'http://wux-hr03:8009/dist/component/setdata.html',
                 showModal: false,
                 width: 550,
                 height: 550,
@@ -97,7 +97,7 @@ KingofAttendances.international=new function() {
         };
         this.enlClick=function(imgUrl){//放大图片
           var win = mini.open({
-                url: '../dist/component/imgenl.html',
+                url: 'http://wux-hr03:8009//dist/component/imgenl.html',
                 showModal: false,
                 width: 600,
                 height: 600,
@@ -113,7 +113,7 @@ KingofAttendances.international=new function() {
         this.editClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
                 
-                url: '../dist/component/editdata.html',
+                url: 'http://wux-hr03:8009//dist/component/editdata.html',
                 showModal: false,
                 width: 600,
                 height: 550,

@@ -37,7 +37,7 @@ KingofAttendances.i_manage = new function () {
         };
         this.i_meditClick = function (REC_ID) {
             var win = mini.open({
-                url: '../dist/component/i_medit.html',
+                url: 'http://wux-hr03:8009//dist/component/i_medit.html',
                 showModal: false,
                 width: 600,
                 height: 470,

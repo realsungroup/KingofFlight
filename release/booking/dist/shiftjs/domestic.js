@@ -21,16 +21,16 @@ KingofAttendances.domestic = new function () {
                 $("#tds_" + i).addClass('dsh');
             }
             else if (o[i].C3_528049541154 == "订单完成") {
-                $("#td_" + i).remove();
+                $("#tdb_" + i).remove();
                 $("#tds_" + i).addClass('none');
             }
         };
         this.bill = function (o, i) {
-            list = "<tr height=\"30px\">\n                    <td colspan=\"2\" class=\"head\" width=\"15%\">\u51FA\u5DEE\u5355\u636E\u53F7</td>\n                    <td colspan=\"2\">" + o[i].C3_526656513019 + "</td>\n                    <td class=\"title1\">\u5355\u636E\u72B6\u6001</td>\n                    <td align=\"center\" id=\"tds_" + i + "\">" + o[i].C3_528049541154 + "</td>\n                    <td rowspan=\"3\" width=\"5\" align=\"center\">\n                        <a class=\"mini-button m_btn\" id=\"a_" + i + "\" iconCls=\"icon-upload\" onclick=\"KingofAttendances.domestic.submitClick(" + o[i].REC_ID + ")\">\u63D0\u4EA4</a>\n                        <a class=\"mini-button m_btn\" iconCls=\"icon-edit\" onclick=\"KingofAttendances.domestic.editClick(" + o[i].REC_ID + ")\">\u7F16\u8F91</a>\n                        <a class=\"mini-button m_btn\" iconCls=\"icon-remove\" onclick=\"KingofAttendances.domestic.revokeClick(" + o[i].REC_ID + ")\">\u64A4\u9500</a>\n                    </td>\n                  </tr>\n                  <tr align=\"center\">\n                    <td class=\"title1\">\u51FA\u53D1\u5730</td>\n                    <td>" + o[i].C3_526656511963 + "</td>\n                    <td class=\"title1\">\u51FA\u53D1\u65E5\u671F</td>\n                    <td>" + o[i].C3_528048113321 + "</td>\n                    <td class=\"title1\">\u822A\u73ED\u53F7</td>\n                    <td>" + o[i].C3_526656513426 + "</td>\n                  </tr>\n                  <tr align=\"center\">\n                    <td class=\"title1\">\u76EE\u7684\u5730</td>\n                    <td>" + o[i].C3_526656512229 + "</td>\n                    <td class=\"title1\">\u884C\u7A0B\u7C7B\u522B</td>\n                    <td>" + o[i].C3_526656512808 + "</td>\n                    <td class=\"title1\">\u822A\u73ED\u65F6\u95F4</td>\n                    <td>" + o[i].C3_529016446872 + "</td>\n                  </tr>";
+            list = "<tr height=\"30px\">\n                    <td colspan=\"2\" class=\"head\" width=\"15%\">\u51FA\u5DEE\u5355\u636E\u53F7</td>\n                    <td colspan=\"2\">" + o[i].C3_526656513019 + "</td>\n                    <td class=\"title1\">\u5355\u636E\u72B6\u6001</td>\n                    <td align=\"center\" id=\"tds_" + i + "\">" + o[i].C3_528049541154 + "</td>\n                    <td rowspan=\"3\" width=\"5\" align=\"center\" id=\"tdb_" + i + "\">\n                        <a class=\"mini-button m_btn\" id=\"a_" + i + "\" iconCls=\"icon-upload\" onclick=\"KingofAttendances.domestic.submitClick(" + o[i].REC_ID + ")\">\u63D0\u4EA4</a>\n                        <a class=\"mini-button m_btn\" iconCls=\"icon-edit\" onclick=\"KingofAttendances.domestic.editClick(" + o[i].REC_ID + ")\">\u7F16\u8F91</a>\n                        <a class=\"mini-button m_btn\" iconCls=\"icon-remove\" onclick=\"KingofAttendances.domestic.revokeClick(" + o[i].REC_ID + ")\">\u64A4\u9500</a>\n                    </td>\n                  </tr>\n                  <tr align=\"center\">\n                    <td class=\"title1\">\u51FA\u53D1\u5730</td>\n                    <td>" + o[i].C3_526656511963 + "</td>\n                    <td class=\"title1\">\u51FA\u53D1\u65E5\u671F</td>\n                    <td>" + o[i].C3_528048113321 + "</td>\n                    <td class=\"title1\">\u822A\u73ED\u53F7</td>\n                    <td>" + o[i].C3_526656513426 + "</td>\n                  </tr>\n                  <tr align=\"center\">\n                    <td class=\"title1\">\u76EE\u7684\u5730</td>\n                    <td>" + o[i].C3_526656512229 + "</td>\n                    <td class=\"title1\">\u884C\u7A0B\u7C7B\u522B</td>\n                    <td>" + o[i].C3_526656512808 + "</td>\n                    <td class=\"title1\">\u822A\u73ED\u65F6\u95F4</td>\n                    <td>" + o[i].C3_529016446872 + "</td>\n                  </tr>";
         };
         this.addClick = function () {
             var win = mini.open({
-                url: '../dist/component/dsetdata.html',
+                url: 'http://wux-hr03:8009//dist/component/dsetdata.html',
                 showModal: false,
                 width: 400,
                 height: 450,
@@ -45,7 +45,7 @@ KingofAttendances.domestic = new function () {
         };
         this.editClick = function (REC_ID) {
             var win = mini.open({
-                url: '../dist/component/deditdata.html',
+                url: 'http://wux-hr03:8009//dist/component/deditdata.html',
                 showModal: false,
                 width: 600,
                 height: 550,
@@ -162,6 +162,7 @@ KingofAttendances.domestic = new function () {
         for (var i = 0; i < o.length; i++) {
             this.bill(o, i);
             $("#tbManage tbody").append(list);
+            mini.parse();
             this.jState(o, i);
         }
         ;

@@ -29,7 +29,7 @@ KingofAttendances.d_manage = new function () {
         };
         this.d_meditClick = function (REC_ID) {
             var win = mini.open({
-                url: '../dist/component/d_medit.html',
+                url: 'http://wux-hr03:8009//dist/component/d_medit.html',
                 showModal: false,
                 width: 600,
                 height: 470,

@@ -7,7 +7,7 @@ appfunctions.uploadFile=new function (){
     var uploadFile=this;
     /** swfFileUpload 在服务器根目录下放crossdomain.xml可以跨域上传文件*/
     this.swfFileUpload=function (aappConfig,fileupload) {
-        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+aappConfig.app.httppath);
+        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl+"?savepath=d:\\web\\rispweb\\upfiles&httppath="+aappConfig.app.httppath);
         fileupload.startUpload();
 
     }
@@ -22,7 +22,7 @@ appfunctions.uploadFile=new function (){
            $.ajaxFileUpload({
             url: aappConfig.app.uploadFileUrl,                 //用于文件上传的服务器端请求地址
             fileElementId: inputFile,               //文件上传域的ID
-            data: { savepath: "e:\\web\\rispweb\\upfiles" },            //附加的额外参数
+            data: { savepath: "D:\\web\\rispweb\\upfiles" },            //附加的额外参数
             dataType: 'json',               //返回值类型 一般设置为json
             
             success: function (data, status)    //服务器成功响应处理函数

@@ -80,7 +80,7 @@
                     form.setData(data[0]);                        
                     mini.parse();
                     var fileupload=mini.get("fileupload1");//上传图片
-                    fileupload.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
+                    fileupload.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=d:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
                     var imgfield=mini.get('imgurl');
                     var imgurl=imgfield.getValue();
                     if (imgurl)
@@ -89,7 +89,7 @@
                         img[0].src=imgurl;
                     }   
                     var fileupload2 = mini.get("fileupload2");
-                    fileupload2.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
+                    fileupload2.setUploadUrl(appConfig.app.uploadFileUrl+"?savepath=d:\\web\\rispweb\\upfiles&httppath="+appConfig.app.httppath);
                     var imgfield2=mini.get('imgurl2'); 
                     var imgurl2= imgfield2.getValue();
                     if (imgurl2)

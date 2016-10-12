@@ -3,7 +3,7 @@ var appConfig;
 appfunctions.uploadFile = new function () {
     var uploadFile = this;
     this.swfFileUpload = function (aappConfig, fileupload) {
-        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl + "?savepath=e:\\web\\rispweb\\upfiles&httppath=" + aappConfig.app.httppath);
+        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl + "?savepath=d:\\web\\rispweb\\upfiles&httppath=" + aappConfig.app.httppath);
         fileupload.startUpload();
     };
     this.ajaxFileUpload = function (aappConfig, inputFile) {
@@ -14,7 +14,7 @@ appfunctions.uploadFile = new function () {
             $.ajaxFileUpload({
                 url: aappConfig.app.uploadFileUrl,
                 fileElementId: inputFile,
-                data: { savepath: "e:\\web\\rispweb\\upfiles" },
+                data: { savepath: "D:\\web\\rispweb\\upfiles" },
                 dataType: 'json',
                 success: function (data, status) {
                     if (data) {
