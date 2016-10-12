@@ -105,9 +105,6 @@ KingofAttendances.international=new function() {
                     var iframe = this.getIFrameEl(); 
                     iframe.contentWindow.Setdbs(imgUrl);
                 },
-                ondestroy: function (action) {
-                     parent.location.reload();     
-                }
             });
         };
         this.editClick=function(REC_ID){//编辑航班单据
