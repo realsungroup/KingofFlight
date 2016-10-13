@@ -63,7 +63,6 @@ function submain3() {
         alert(data);
     }
     function fnhttperror(jqXHR, textStatus, errorThrown) {
-        console.log(jqXHR);
     }
 }
 ;

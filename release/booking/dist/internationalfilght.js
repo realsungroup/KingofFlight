@@ -57,10 +57,11 @@ function submain() {
     mini.parse();
     dbs.dbGetdata(resid, "", cmswhere, dataGot, fnerror, fnhttperror);
     function dataGot(data, subdata) {
-        shiftPanel.appendManage(datagrids, data, subdata, mini, dbs);
+        setTimeout(function () {
+            shiftPanel.appendManage(datagrids, data, subdata, mini, dbs);
+        }, 500);
     }
     function fnerror(data) {
-        alert(data);
     }
     function fnhttperror(jqXHR, textStatus, errorThrown) {
         console.log(jqXHR);

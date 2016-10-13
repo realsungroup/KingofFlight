@@ -3,18 +3,17 @@ var appConfig;
 appfunctions.uploadFile = new function () {
     var uploadFile = this;
     this.swfFileUpload = function (aappConfig, fileupload) {
-        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl + "?savepath=e:\\web\\rispweb\\upfiles&httppath=" + aappConfig.app.httppath);
+        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl + "?savepath=d:\\web\\rispweb\\upfiles&httppath=" + aappConfig.app.httppath);
         fileupload.startUpload();
     };
     this.ajaxFileUpload = function (aappConfig, inputFile) {
         mini.parse();
         scriptLoaded();
         function scriptLoaded() {
-            alert('scriptLoaded');
             $.ajaxFileUpload({
                 url: aappConfig.app.uploadFileUrl,
                 fileElementId: inputFile,
-                data: { savepath: "e:\\web\\rispweb\\upfiles" },
+                data: { savepath: "d:\\web\\rispweb\\upfiles" },
                 dataType: 'json',
                 success: function (data, status) {
                     if (data) {
@@ -25,7 +24,6 @@ appfunctions.uploadFile = new function () {
                     }
                 },
                 error: function (data, status, e) {
-                    alert(e);
                 },
                 complete: function () {
                     var jq = $("#file1 > input:file");
@@ -112,13 +110,8 @@ var miniPanel = (function () {
     function miniPanel(element) {
         this.element = element;
         this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = new Date().toLocaleTimeString();
     }
     miniPanel.prototype.start = function () {
-        var _this = this;
-        var jsonString = '{"messge": "ok","error":"-1"}';
-        this.timerToken = setInterval(function () { return _this.span.innerHTML = new Date().toLocaleTimeString(); }, 500);
     };
     miniPanel.prototype.stop = function () {
         clearTimeout(this.timerToken);

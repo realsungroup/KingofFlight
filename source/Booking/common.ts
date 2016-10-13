@@ -7,7 +7,7 @@ appfunctions.uploadFile=new function (){
     var uploadFile=this;
     /** swfFileUpload 在服务器根目录下放crossdomain.xml可以跨域上传文件*/
     this.swfFileUpload=function (aappConfig,fileupload) {
-        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl+"?savepath=e:\\web\\rispweb\\upfiles&httppath="+aappConfig.app.httppath);
+        fileupload.setUploadUrl(aappConfig.app.uploadFileUrl+"?savepath=d:\\web\\rispweb\\upfiles&httppath="+aappConfig.app.httppath);
         fileupload.startUpload();
 
     }
@@ -17,12 +17,12 @@ appfunctions.uploadFile=new function (){
        // $.getScript('dist/ajaxfileupload.js',scriptLoaded)
         scriptLoaded();
        function scriptLoaded(){
-           alert('scriptLoaded');
+           //alert('scriptLoaded');
            //document.domain = "localhost";
            $.ajaxFileUpload({
             url: aappConfig.app.uploadFileUrl,                 //用于文件上传的服务器端请求地址
             fileElementId: inputFile,               //文件上传域的ID
-            data: { savepath: "e:\\web\\rispweb\\upfiles" },            //附加的额外参数
+            data: { savepath: "d:\\web\\rispweb\\upfiles" },            //附加的额外参数
             dataType: 'json',               //返回值类型 一般设置为json
             
             success: function (data, status)    //服务器成功响应处理函数
@@ -34,7 +34,7 @@ appfunctions.uploadFile=new function (){
             },
             error: function (data, status, e)   //服务器响应失败处理函数
             {
-                alert(e);
+                //alert(e);
             },
             complete: function () {
                 var jq = $("#file1 > input:file");
@@ -135,13 +135,13 @@ class miniPanel {
     constructor(element: HTMLElement) {
         this.element = element;
         this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = new Date().toLocaleTimeString();
+        // this.element.appendChild(this.span);
+        // this.span.innerText = new Date().toLocaleTimeString();
     }
 
     start() {
-         var jsonString :string  = '{"messge": "ok","error":"-1"}';
-         this.timerToken = setInterval(() => this.span.innerHTML = new Date().toLocaleTimeString(), 500);
+        //  var jsonString :string  = '{"messge": "ok","error":"-1"}';
+        //  this.timerToken = setInterval(() => this.span.innerHTML = new Date().toLocaleTimeString(), 500);
     }
 
     stop() {
@@ -155,10 +155,12 @@ class miniPanel {
         this.mini_control.title=title;
         parentelement.appendChild(this.mini_control);
         mini.parse();
-        var aPanel = mini.get(panelid);
-        aPanel.set({"width":"auto","height":"800","iconCls":iconCls,"expanded":expanded,"onbuttonclick":"onbuttonclick"});
+          var aPanel = mini.get(panelid);
+          aPanel.set({ "width": "auto", "height": "800", "iconCls": iconCls, "expanded": expanded, "onbuttonclick": "onbuttonclick" });
+       
         aPanel.load(url, function () {
             var iFrame = aPanel.getIFrameEl();
+          
              fnload(iFrame);
         },null);
            

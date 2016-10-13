@@ -9,17 +9,24 @@ KingofAttendances.domestic=new function() {
                 $("#tds_"+i).addClass('wtj');
             }else if(o[i].C3_528049541154=="已提交"){
                 $("#a_"+i).text("已提交").attr('onclick','');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('ytj');
             }else if(o[i].C3_528049541154=="待确认出票"){
                 $("#a_"+i).text("确认").attr('onclick','KingofAttendances.domestic.conClick('+o[i].REC_ID+')');
                 $("#tds_"+i).addClass('dqr');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
             }else if(o[i].C3_528049541154=="待行政确认出票"){
                 $("#a_"+i).text("已确认").attr('onclick','');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_528049541154=="订单完成"){
                 $("#td_"+i).remove();
                 $("#tds_"+i).addClass('none');
             }
+            mini.parse();
         };
         this.bill=function(o,i){//动态加载单据信息
             list=`<tr height="30px">
@@ -27,10 +34,10 @@ KingofAttendances.domestic=new function() {
                     <td colspan="2">`+o[i].C3_526656513019+`</td>
                     <td class="title1">单据状态</td>
                     <td align="center" id="tds_`+i+`">`+o[i].C3_528049541154+`</td>
-                    <td rowspan="3" width="5" align="center">
+                    <td rowspan="3" width="5" align="center" id="td_`+i+`">
                         <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.domestic.submitClick(`+o[i].REC_ID+`)">提交</a>
-                        <a class="mini-button m_btn" iconCls="icon-edit" onclick="KingofAttendances.domestic.editClick(`+o[i].REC_ID+`)">编辑</a>
-                        <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.domestic.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                        <a class="mini-button m_btn" id="b_`+i+`"iconCls="icon-edit" onclick="KingofAttendances.domestic.editClick(`+o[i].REC_ID+`)">编辑</a>
+                        <a class="mini-button m_btn" id="c_`+i+`"iconCls="icon-remove" onclick="KingofAttendances.domestic.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                     </td>
                   </tr>
                   <tr align="center">
@@ -52,7 +59,7 @@ KingofAttendances.domestic=new function() {
         }
         this.addClick=function(){
             var win = mini.open({
-                url: '../dist/component/dsetdata.html',
+                url: 'http://wux-hr03:8009/dist/component/dsetdata.html',
                 showModal: false,
                 width: 400,
                 height: 450,
@@ -67,10 +74,10 @@ KingofAttendances.domestic=new function() {
         };
         this.editClick=function(REC_ID){
             var win = mini.open({
-                url: '../dist/component/deditdata.html',
+                url: 'http://wux-hr03:8009/dist/component/deditdata.html',
                 showModal: false,
-                width: 600,
-                height: 550,
+                width: 400,
+                height: 450,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl(); 
                     iframe.contentWindow.Setdbs(adbs,aappConfig,REC_ID);
@@ -171,6 +178,7 @@ KingofAttendances.domestic=new function() {
                     me.jState(o,i);
                 }
             };
+            mini.parse();
         };
         var si=`<tr height="40px" align="center">
                     <td width="15%" class="title">员工号</td>
@@ -184,6 +192,7 @@ KingofAttendances.domestic=new function() {
             this.bill(o,i);
             $("#tbManage tbody").append(list);
             this.jState(o,i);
+            mini.parse();
         };
     };
 }

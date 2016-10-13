@@ -19,9 +19,13 @@ KingofAttendances.i_manage=new function() {
                 $("#tds_"+i).addClass('ytj');
             }else if(o[i].C3_527946742678=="待确认出票"){
                 $("#a_"+i).text("确认").attr('onclick','');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dqr');
             }else if(o[i].C3_527946742678=="待行政确认出票"){
                 $("#a_"+i).text("确认出票").attr('onclick','KingofAttendances.i_manage.conClick('+o[i].REC_ID+')');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_527946742678=="订单完成"){
                 $("#td_"+i).remove();
@@ -36,8 +40,8 @@ KingofAttendances.i_manage=new function() {
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
                       <td rowspan="6" width="5%" align="center" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" onclick="KingofAttendances.i_manage.i_meditClick(`+o[i].REC_ID+`)">航班信息</a>
-                          <a class="mini-button m_btn" iconCls="icon-upgrade" onclick="KingofAttendances.i_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
-                          <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.i_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                          <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-upgrade" onclick="KingofAttendances.i_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
+                          <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.i_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                       </td>
                   </tr>
                   <tr height="40px" align="center">
@@ -55,11 +59,11 @@ KingofAttendances.i_manage=new function() {
                       <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
                       <td width="10%" class="title" rowspan="2">出发地</td>
                       <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="3" class="ImgBox oh">
-                          <img src="`+o[i].C3_527873192635+`" class="oImg" onmouseover="KingofAttendances.i_manage.big(i1_`+i+`,`+i+`)" onmouseout="KingofAttendances.i_manage.small(i1_`+i+`,`+i+`)" id="i1_`+i+`"/>
+                      <td rowspan="3">
+                          <img src="`+o[i].C3_527873192635+`" width="100px"/>
                       </td>
-                      <td rowspan="3" class="ImgBox oh">
-                          <img src="`+o[i].C3_526655353950+`" class="oImg" onmouseover="KingofAttendances.i_manage.big(i2_`+i+`,`+i+`)" onmouseout="KingofAttendances.i_manage.small(i2_`+i+`,`+i+`)" id="i2_`+i+`"/>
+                      <td rowspan="3">
+                          <img src="`+o[i].C3_526655353950+`" width="100px"/>
                       </td>
                       <td align="center">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
@@ -86,7 +90,7 @@ KingofAttendances.i_manage=new function() {
         this.i_meditClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
                 
-                url: '../dist/component/i_medit.html',
+                url: 'http://wux-hr03:8009/dist/component/i_medit.html',
                 showModal: false,
                 width: 600,
                 height: 470,
@@ -109,7 +113,6 @@ KingofAttendances.i_manage=new function() {
                 o._id=1;
                 o._state="modified";
                 o.REC_ID=REC_ID;
-                console.log(REC_ID);
                 o.C3_526655932836="Y";
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.internationalmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
@@ -118,7 +121,6 @@ KingofAttendances.i_manage=new function() {
                 }
                 function fnerror(text){
                     alert("申请失败");
-                    console.log(text);
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown){
                     alert("error");
@@ -165,7 +167,6 @@ KingofAttendances.i_manage=new function() {
                 o._id=1;
                 o._state="modified";
                 o.REC_ID=REC_ID;
-                console.log(REC_ID);
                 o.C3_526655608924="";
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.internationalmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
@@ -192,6 +193,7 @@ KingofAttendances.i_manage=new function() {
                     me.jState(o,i);
                 }
             };
+            mini.parse();
         };
         for(var i=0;i<o.length;i++){
             if(o[i].C3_527946742678=="已提交"){

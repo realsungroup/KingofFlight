@@ -1,10 +1,10 @@
 <html>
     <body>
         <form id="form3">
-            <table>
+            <table width="380px">
                 <tr>
                     <td>出发地: </td>
-                    <td><input class="mini-textbox" required="true" name="C3_526656511963"></td>
+                    <td><input class="mini-textbox" required="true" name="C3_526656511963" width="300px"></td>
                 </tr>
                 <tr>
                     <td>目的地:</td>
@@ -48,7 +48,6 @@
                     o._id=1;
                     o._state="added";
                     var json = mini.encode([o]);
-                    console.log(json);
                     dbs.dbSavedata(appConfig.domesticfilght.guoneiResid,0,json,dataSaved,fnerror,fnhttperror);
                     function dataSaved(text){
                         alert("申请成功");

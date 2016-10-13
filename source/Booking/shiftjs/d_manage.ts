@@ -11,14 +11,19 @@ KingofAttendances.d_manage=new function() {
                 $("#tds_"+i).addClass('ytj');
             }else if(o[i].C3_528049541154=="待确认出票"){
                 $("#a_"+i).text("确认").attr('onclick','');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dqr');
             }else if(o[i].C3_528049541154=="待行政确认出票"){
                 $("#a_"+i).text("确认出票").attr('onclick','KingofAttendances.d_manage.conClick('+o[i].REC_ID+')');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_528049541154=="订单完成"){
                 $("#td_"+i).remove();
                 $("#tds_"+i).addClass('none');
             }
+            mini.parse();
         };
         this.bill=function(o,i){//动态加载单据信息
             list=`<tr height="30px">
@@ -28,8 +33,8 @@ KingofAttendances.d_manage=new function() {
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_528049541154+`</td>
                       <td rowspan="4" width="5%" align="center" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" onclick="KingofAttendances.d_manage.d_meditClick(`+o[i].REC_ID+`)">航班信息</a>
-                          <a class="mini-button m_btn" iconCls="icon-upgrade" onclick="KingofAttendances.d_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
-                          <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.d_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                          <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-upgrade" onclick="KingofAttendances.d_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
+                          <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.d_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                       </td>
                   </tr>
                   <tr height="40px" align="center">
@@ -57,7 +62,7 @@ KingofAttendances.d_manage=new function() {
         }
         this.d_meditClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
-                url: '../dist/component/d_medit.html',
+                url: 'http://wux-hr03:8009/dist/component/d_medit.html',
                 showModal: false,
                 width: 600,
                 height: 470,
@@ -80,7 +85,6 @@ KingofAttendances.d_manage=new function() {
                 o._id=1;
                 o._state="modified";
                 o.REC_ID=REC_ID;
-                console.log(REC_ID);
                 o.C3_526656514479="Y";
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.domesticmanage.guoneiResid,0,json,dataSaved,fnerror,fnhttperror);
@@ -89,7 +93,6 @@ KingofAttendances.d_manage=new function() {
                 }
                 function fnerror(text){
                     alert("申请失败");
-                    console.log(text);
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown){
                     alert("error");
@@ -136,7 +139,6 @@ KingofAttendances.d_manage=new function() {
                 o._id=1;
                 o._state="modified";
                 o.REC_ID=REC_ID;
-                console.log(REC_ID);
                 o.C3_526655608924="";
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.domesticmanage.guojiResid,0,json,dataSaved,fnerror,fnhttperror);

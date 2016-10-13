@@ -1,6 +1,6 @@
 var KingofAttendances = KingofAttendances || {};
 KingofAttendances.international=new function() {
-    this.setData=function(data,adbs,aappConfig){
+    this.setData=function(data,adbs,aappConfig,callback){
         var me=this;
         var list;
         var o = data;
@@ -17,12 +17,18 @@ KingofAttendances.international=new function() {
                 $("#tds_"+i).addClass('wtj');
             }else if(o[i].C3_527946742678=="已提交"){
                 $("#a_"+i).text("已提交").attr('onclick','');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('ytj');
             }else if(o[i].C3_527946742678=="待确认出票"){
                 $("#a_"+i).text("确认").attr('onclick','KingofAttendances.international.conClick('+o[i].REC_ID+')');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dqr');
             }else if(o[i].C3_527946742678=="待行政确认出票"){
                 $("#a_"+i).text("已确认").attr('onclick','');
+                $("#b_"+i).remove();
+                $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_527946742678=="订单完成"){
                 $("#td_"+i).remove();
@@ -37,8 +43,8 @@ KingofAttendances.international=new function() {
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
                       <td rowspan="5" width="5%" align="center" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
-                          <a class="mini-button m_btn" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
-                          <a class="mini-button m_btn" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                          <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
+                          <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                       </td>
                   </tr>
                   <tr class="tc">
@@ -46,11 +52,11 @@ KingofAttendances.international=new function() {
                       <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
                       <td width="10%" class="title" rowspan="2">出发地</td>
                       <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="3" width="15%" class="ImgBox oh">
-                          <img src="`+o[i].C3_527873192635+`" class="oImg"/>
+                      <td rowspan="3" width="15%">
+                          <img src="`+o[i].C3_527873192635+`" width="100px"/>
                       </td>
-                      <td rowspan="3" width="15%" class="ImgBox oh">
-                          <img src="`+o[i].C3_526655353950+`" class="oImg"/>
+                      <td rowspan="3" width="15%">
+                          <img src="`+o[i].C3_526655353950+`" width="100px"/>
                       </td>
                       <td  class="title1">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
@@ -82,7 +88,7 @@ KingofAttendances.international=new function() {
         }
         this.addClick=function(){//新增航班单据
           var win = mini.open({
-                url: '../dist/component/setdata.html',
+                url: 'http://wux-hr03:8009/dist/component/setdata.html',
                 showModal: false,
                 width: 550,
                 height: 550,
@@ -97,23 +103,20 @@ KingofAttendances.international=new function() {
         };
         this.enlClick=function(imgUrl){//放大图片
           var win = mini.open({
-                url: '../dist/component/imgenl.html',
+                url: 'http://wux-hr03:8009/dist/component/imgenl.html',
                 showModal: false,
                 width: 600,
                 height: 600,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl(); 
                     iframe.contentWindow.Setdbs(imgUrl);
-                },
-                ondestroy: function (action) {
-                     parent.location.reload();     
                 }
             });
         };
         this.editClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
                 
-                url: '../dist/component/editdata.html',
+                url: 'http://wux-hr03:8009/dist/component/editdata.html',
                 showModal: false,
                 width: 600,
                 height: 550,
@@ -233,13 +236,11 @@ KingofAttendances.international=new function() {
                   <td>`+o[0].C3_527948550902+`</td>
                   <td colspan="2"></td>
                 </tr>`
-        $("#si").html(si);
-    
+                $("#si").html(si);
+             
         for(var i=0;i<o.length;i++){
             this.bill(o,i);
-            $("#tbManage tbody").append(list);
-            // alert(1);
-                    mini.parse();
+                $("#tbManage tbody").append(list);
             this.jState(o,i);
         };
     }

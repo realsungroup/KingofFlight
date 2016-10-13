@@ -29,7 +29,10 @@ class internationalfilght extends miniPanel {
 
         super.appendPanel(parentelement,panelid,mini,className,title,appConfig.internationalfilght.mainHtml,
            function(iFrame){
+             
+               
                 iFrame.contentWindow.KingofAttendances.international.setData(data,dbs,appConfig);
+                 
             },true,"");
     }
 }
@@ -65,13 +68,17 @@ function submain() {
     dbs.dbGetdata(resid,"",cmswhere,dataGot,fnerror,fnhttperror);
     function dataGot(data,subdata)
     {
+        // alert(1);
        // console.log(data);
+       setTimeout(function() {
+           
+      
         shiftPanel.appendManage(datagrids,data,subdata,mini,dbs);
-               
+        },500);        
     }
     function fnerror(data){   
        // alert(1);
-        alert(data);
+        //alert(data);
 
     }
     function fnhttperror(jqXHR, textStatus, errorThrown){

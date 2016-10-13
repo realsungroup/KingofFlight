@@ -81,45 +81,11 @@ table .content
 .none{
   background-color:#76FF5A;
 }
-.oh{
-    overflow: hidden;
-}
-.ImgBox{
-	position:relative;
-	width:100px;
-	height:100px;
-}
-.oImg{
-	position:absolute;
-	top:-45%;
-	left:20%;
-    width:60%;
-	z-index:1;
-}
-.oImg1{
-    position:absolute;
-    top:-50%;
-    left:-150%;
-    width:400%;
-    z-index:100;
-}
 .m_btn{
     width:80px;
     height:30px;
     line-height:30px;
 }
-/*fieldset{
-    position:relative;
-	width:97%;
-}
-fieldset img{
-    position:absolute;
-	top:28px;
-}
-fieldset a{
-    margin-left:20px;
-    margin-right:4px;
-}*/
 fieldset a{
     border-radius:5px;
 }

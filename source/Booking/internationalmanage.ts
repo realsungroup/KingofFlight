@@ -35,6 +35,7 @@ class internationalmanage extends miniPanel {
 }
 
 function main3(){
+    // alert(21);
     $.getJSON("./dist/app.config.json",function(data,textStatus,hr){
          appConfig=data;
          appConfig.appfunction=appfunctions;
@@ -64,17 +65,17 @@ function submain3() {
     function dataGot(data,subdata)
     {
        // console.log(data);
-        shiftPanel.appendManage(datagrids,data,subdata,mini,dbs);
+       shiftPanel.appendManage(datagrids,data,subdata,mini,dbs);
                
     }
     function fnerror(data){   
-       // alert(1);
+       //
         alert(data);
 
     }
     function fnhttperror(jqXHR, textStatus, errorThrown){
        //alert(2);
-       console.log(jqXHR);
+      // console.log(jqXHR);
       //  alert(jqXHR.responseText);
     }
 
