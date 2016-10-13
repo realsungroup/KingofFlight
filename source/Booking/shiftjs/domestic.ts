@@ -23,7 +23,7 @@ KingofAttendances.domestic=new function() {
                 $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_528049541154=="订单完成"){
-                $("#td_"+i).remove();
+                $("#tdb_"+i).remove();
                 $("#tds_"+i).addClass('none');
             }
             mini.parse();
@@ -34,7 +34,11 @@ KingofAttendances.domestic=new function() {
                     <td colspan="2">`+o[i].C3_526656513019+`</td>
                     <td class="title1">单据状态</td>
                     <td align="center" id="tds_`+i+`">`+o[i].C3_528049541154+`</td>
+<<<<<<< HEAD
                     <td rowspan="3" width="5" align="center" id="td_`+i+`">
+=======
+                    <td rowspan="3" width="5" align="center" id="tdb_`+i+`">
+>>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
                         <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.domestic.submitClick(`+o[i].REC_ID+`)">提交</a>
                         <a class="mini-button m_btn" id="b_`+i+`"iconCls="icon-edit" onclick="KingofAttendances.domestic.editClick(`+o[i].REC_ID+`)">编辑</a>
                         <a class="mini-button m_btn" id="c_`+i+`"iconCls="icon-remove" onclick="KingofAttendances.domestic.revokeClick(`+o[i].REC_ID+`)">撤销</a>
@@ -59,7 +63,11 @@ KingofAttendances.domestic=new function() {
         }
         this.addClick=function(){
             var win = mini.open({
+<<<<<<< HEAD
                 url: 'http://wux-hr03:8009/dist/component/dsetdata.html',
+=======
+                url: 'http://wux-hr03:8009//dist/component/dsetdata.html',
+>>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
                 showModal: false,
                 width: 400,
                 height: 450,
@@ -74,7 +82,11 @@ KingofAttendances.domestic=new function() {
         };
         this.editClick=function(REC_ID){
             var win = mini.open({
+<<<<<<< HEAD
                 url: 'http://wux-hr03:8009/dist/component/deditdata.html',
+=======
+                url: 'http://wux-hr03:8009//dist/component/deditdata.html',
+>>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
                 showModal: false,
                 width: 400,
                 height: 450,
@@ -191,6 +203,7 @@ KingofAttendances.domestic=new function() {
         for(var i=0;i<o.length;i++){
             this.bill(o,i);
             $("#tbManage tbody").append(list);
+            mini.parse();
             this.jState(o,i);
             mini.parse();
         };

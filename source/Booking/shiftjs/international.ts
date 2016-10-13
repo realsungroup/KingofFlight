@@ -31,7 +31,7 @@ KingofAttendances.international=new function() {
                 $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_527946742678=="订单完成"){
-                $("#td_"+i).remove();
+                $("#tdb_"+i).remove();
                 $("#tds_"+i).addClass('none');
             }
         };
@@ -41,7 +41,7 @@ KingofAttendances.international=new function() {
                       <td colspan="4">`+o[i].C3_526655624603+`</td>
                       <td class="head1" align="center" width="10%">单据状态</td>
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
-                      <td rowspan="5" width="5%" align="center" id="td_`+i+`">
+                      <td rowspan="5" width="5%" align="center" id="tdb_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
                           <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
                           <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
@@ -103,20 +103,32 @@ KingofAttendances.international=new function() {
         };
         this.enlClick=function(imgUrl){//放大图片
           var win = mini.open({
+<<<<<<< HEAD
                 url: 'http://wux-hr03:8009/dist/component/imgenl.html',
+=======
+                url: 'http://wux-hr03:8009//dist/component/imgenl.html',
+>>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
                 showModal: false,
                 width: 600,
                 height: 600,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl(); 
                     iframe.contentWindow.Setdbs(imgUrl);
+<<<<<<< HEAD
                 }
+=======
+                },
+>>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
             });
         };
         this.editClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
                 
+<<<<<<< HEAD
                 url: 'http://wux-hr03:8009/dist/component/editdata.html',
+=======
+                url: 'http://wux-hr03:8009//dist/component/editdata.html',
+>>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
                 showModal: false,
                 width: 600,
                 height: 550,

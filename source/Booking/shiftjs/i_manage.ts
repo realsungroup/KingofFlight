@@ -90,7 +90,11 @@ KingofAttendances.i_manage=new function() {
         this.i_meditClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
                 
+<<<<<<< HEAD
                 url: 'http://wux-hr03:8009/dist/component/i_medit.html',
+=======
+                url: 'http://wux-hr03:8009//dist/component/i_medit.html',
+>>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
                 showModal: false,
                 width: 600,
                 height: 470,
