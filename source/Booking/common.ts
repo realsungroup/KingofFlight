@@ -83,9 +83,8 @@ appfunctions.uploadFile=new function (){
                     adata = data.data;
                     if (data.subdata!=null){subdata=data.subdata.data;}
                     
-                     if (fnSuccess!=null)
-                     {fnSuccess(adata,subdata);}
-
+                    if (fnSuccess!=null)
+                    {fnSuccess(adata,subdata);}
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

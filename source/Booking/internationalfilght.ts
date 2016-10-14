@@ -122,7 +122,7 @@ KingofAttendances.international=new function() {
         this.bill=function(o,i){//动态加载单据信息
             list=`<tr height="30px">
                       <td class="head" width="10%" colspan="2">出差单据号</td>
-                      <td colspan="4">`+o[i].C3_526655624603+`</td>
+                      <td colspan="3">`+o[i].C3_526655624603+`</td>
                       <td class="head1" align="center" width="10%">单据状态</td>
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
                       <td rowspan="5" width="5%" align="center" id="tdb_`+i+`">
@@ -136,11 +136,9 @@ KingofAttendances.international=new function() {
                       <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
                       <td width="10%" class="title" rowspan="2">出发地</td>
                       <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="3" width="15%">
-                          <img src="`+o[i].C3_527873192635+`" width="100px"/>
-                      </td>
-                      <td rowspan="3" width="15%">
-                          <img src="`+o[i].C3_526655353950+`" width="100px"/>
+                      <td rowspan="2" width="15%">
+                          签证扫描件
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_526655353950+`')"/>
                       </td>
                       <td  class="title1">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
@@ -154,24 +152,19 @@ KingofAttendances.international=new function() {
                       <td rowspan="2">`+o[i].C3_527948869929+`</td>
                       <td class="title" rowspan="2">返回地</td>
                       <td rowspan="2">`+o[i].C3_526655271756+`</td>
+                      <td rowspan="2">
+                          护照扫描件
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_527873192635+`')"/>
+                      </td>
                       <td class="title1">返程航班号</td>
                       <td>`+o[i].C3_528311923010+`</td>
                   </tr>
                   <tr class="tc">
-                      <td>
-                          护照扫描件
-                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_527873192635+`')"/>
-                      </td>
-                      <td>
-                          签证扫描件
-                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_526655353950+`')"/>
-                      </td>
                       <td class="title1">航班时间</td>
                       <td>`+o[i].C3_528400600428+`</td>
                   </tr>`;
         }
         this.addClick=function(){//新增航班单据
-            console.log(2);
             var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/setdata.html',
                 showModal: false,
@@ -328,5 +321,7 @@ KingofAttendances.international=new function() {
                 $("#tbManage tbody").append(list);
             this.jState(o,i);
         };
+        
+        mini.parse();
     }
 }
