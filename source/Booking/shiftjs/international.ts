@@ -1,17 +1,9 @@
 var KingofAttendances = KingofAttendances || {};
 KingofAttendances.international=new function() {
-    this.setData=function(data,adbs,aappConfig,callback){
+    this.setData=function(data,adbs,aappConfig){
         var me=this;
         var list;
-        var o = data;
-        this.big=function(id,i){
-            $(id).removeClass("oImg").addClass('oImg1');
-            $(id).parent().removeClass("oh");
-	    }
-        this.small=function(id,i){
-		    $(id).removeClass("oImg1").addClass('oImg');
-            $(id).parent().addClass("oh");
-	    }        
+        var o = data;     
         this.jState=function(o,i){//判断单据状态改变按钮
             if(o[i].C3_527946742678=="未提交"){
                 $("#tds_"+i).addClass('wtj');

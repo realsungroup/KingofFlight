@@ -107,28 +107,9 @@ var dbHelper = (function () {
     return dbHelper;
 }());
 var miniPanel = (function () {
-    function miniPanel(element) {
-        this.element = element;
-        this.span = document.createElement('span');
+    function miniPanel() {
     }
-    miniPanel.prototype.start = function () {
-    };
     miniPanel.prototype.stop = function () {
-        clearTimeout(this.timerToken);
-    };
-    miniPanel.prototype.appendPanel = function (parentelement, panelid, mini, classname, title, url, fnload, expanded, iconCls) {
-        this.mini_control = document.createElement('div');
-        this.mini_control.id = panelid;
-        this.mini_control.className = classname;
-        this.mini_control.title = title;
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-        var aPanel = mini.get(panelid);
-        aPanel.set({ "width": "auto", "height": "800", "iconCls": iconCls, "expanded": expanded, "onbuttonclick": "onbuttonclick" });
-        aPanel.load(url, function () {
-            var iFrame = aPanel.getIFrameEl();
-            fnload(iFrame);
-        }, null);
     };
     return miniPanel;
 }());
@@ -138,13 +119,4 @@ function getQueryString(name) {
     if (r != null)
         return unescape(r[2]);
     return null;
-}
-function onbuttonclick(e) {
-    if (e.name = "collapse") {
-        setTimeout(function () {
-            if (e.sender.expanded == true) {
-                e.sender.set({ "height": "400px" });
-            }
-        }, 500);
-    }
 }

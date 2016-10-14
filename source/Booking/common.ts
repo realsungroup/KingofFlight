@@ -73,7 +73,6 @@ appfunctions.uploadFile=new function (){
             success: function (text) {
                 if (text !== "") {    
                     var data = mini.decode(text);
-                     //debugger;
                     if (data.error == -1) {
                      if (fnError!=null)
                      {fnError(data);}
@@ -129,57 +128,48 @@ appfunctions.uploadFile=new function (){
    }
 }
 class miniPanel {
-    element: HTMLElement;
-    span: HTMLElement;
-    timerToken: number;
-    mini_grid: HTMLElement;
+    //element: HTMLElement;
+    //span: HTMLElement;
+    //timerToken: number;
+    //mini_grid: HTMLElement;
     mini_control:HTMLElement;
-    constructor(element: HTMLElement) {
-        this.element = element;
-        this.span = document.createElement('span');
+    //constructor(element: HTMLElement) {
+        //this.element = element;
+        //this.span = document.createElement('span');
         // this.element.appendChild(this.span);
         // this.span.innerText = new Date().toLocaleTimeString();
-    }
+    //}
 
-    start() {
+    //start() {
         //  var jsonString :string  = '{"messge": "ok","error":"-1"}';
         //  this.timerToken = setInterval(() => this.span.innerHTML = new Date().toLocaleTimeString(), 500);
-    }
+    //}
 
     stop() {
-        clearTimeout(this.timerToken);
+        //clearTimeout(this.timerToken);
     }
     
-    appendPanel(parentelement: HTMLElement,panelid :string ,mini:any,classname:string,title:string,url:string,fnload:any,expanded:Boolean,iconCls:string){ 
-        this.mini_control=document.createElement('div');
-        this.mini_control.id = panelid;
-        this.mini_control.className=classname;
-        this.mini_control.title=title;
-        parentelement.appendChild(this.mini_control);
-        mini.parse();
-          var aPanel = mini.get(panelid);
-          aPanel.set({ "width": "auto", "height": "800", "iconCls": iconCls, "expanded": expanded, "onbuttonclick": "onbuttonclick" });
+    // appendPanel(parentelement: HTMLElement,panelid :string ,mini:any,classname:string,title:string,url:string,fnload:any,expanded:Boolean,iconCls:string){ 
+    //     this.mini_control=document.createElement('div');
+    //     this.mini_control.id = panelid;
+    //     this.mini_control.className=classname;
+    //     this.mini_control.title=title;
+    //     parentelement.appendChild(this.mini_control);
+    //     mini.parse();
+    //       var aPanel = mini.get(panelid);
+    //       aPanel.set({ "width": "auto", "height": "800", "iconCls": iconCls, "expanded": expanded, "onbuttonclick": "onbuttonclick" });
        
-        aPanel.load(url, function () {
-            var iFrame = aPanel.getIFrameEl();
+    //     aPanel.load(url, function () {
+    //         var iFrame = aPanel.getIFrameEl();
           
-             fnload(iFrame);
-        },null);
+    //          fnload(iFrame);
+    //     },null);
            
-    }
+    // }
 }
  
 function getQueryString(name) { 
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
         var r = window.location.search.substr(1).match(reg); 
         if (r != null) return unescape(r[2]); return null; 
-} 
-function  onbuttonclick(e){               
-        if (e.name="collapse"){
-            setTimeout(function() {
-                if (e.sender.expanded == true) { 
-                    e.sender.set({ "height": "400px" }); 
-                }
-            }, 500);
-        }
 }

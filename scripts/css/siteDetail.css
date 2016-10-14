@@ -1,3 +1,7 @@
+body{
+    width:85%;
+    margin: 0px auto;
+}
 table{
     border: 1px solid #99bbc1;
     border-spacing: 0px;
