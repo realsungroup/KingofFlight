@@ -20,7 +20,7 @@ appfunctions.uploadFile=new function (){
            //alert('scriptLoaded');
            //document.domain = "localhost";
            $.ajaxFileUpload({
-            url: aappConfig.app.uploadFileUrl,                 //用于文件上传的服务器端请求地址
+            url: aappConfig.app.uploadFileUrl,      //用于文件上传的服务器端请求地址
             fileElementId: inputFile,               //文件上传域的ID
 
             data: { savepath: "d:\\web\\rispweb\\upfiles" },            //附加的额外参数
