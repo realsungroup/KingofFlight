@@ -22,11 +22,9 @@ appfunctions.uploadFile=new function (){
            $.ajaxFileUpload({
             url: aappConfig.app.uploadFileUrl,                 //用于文件上传的服务器端请求地址
             fileElementId: inputFile,               //文件上传域的ID
-<<<<<<< HEAD
+
             data: { savepath: "d:\\web\\rispweb\\upfiles" },            //附加的额外参数
-=======
-            data: { savepath: "D:\\web\\rispweb\\upfiles" },            //附加的额外参数
->>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
+
             dataType: 'json',               //返回值类型 一般设置为json
             
             success: function (data, status)    //服务器成功响应处理函数
