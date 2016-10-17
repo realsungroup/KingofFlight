@@ -63,7 +63,7 @@ KingofAttendances.d_manage = new function () {
         this.d_meditClick = function (REC_ID) {
             var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/d_medit.html',
-                showModal: false,
+                showModal: true,
                 width: 600,
                 height: 470,
                 onload: function () {
@@ -71,7 +71,7 @@ KingofAttendances.d_manage = new function () {
                     iframe.contentWindow.Setdbs(adbs, aappConfig, REC_ID);
                 },
                 ondestroy: function (action) {
-                    parent.location.reload();
+                    window.location.reload();
                 }
             });
         };
@@ -90,15 +90,15 @@ KingofAttendances.d_manage = new function () {
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.domesticmanage.guoneiResid, 0, json, dataSaved, fnerror, fnhttperror);
                 function dataSaved(text) {
-                    alert("申请成功");
+                    alert("操作成功");
                 }
                 function fnerror(text) {
-                    alert("申请失败");
+                    alert("操作失败");
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown) {
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
             }
             else {
                 return;
@@ -119,15 +119,15 @@ KingofAttendances.d_manage = new function () {
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.domesticmanage.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
                 function dataSaved(text) {
-                    alert("申请成功");
+                    alert("操作成功");
                 }
                 function fnerror(text) {
-                    alert("申请失败");
+                    alert("操作失败");
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown) {
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
             }
             else {
                 return;
@@ -148,15 +148,15 @@ KingofAttendances.d_manage = new function () {
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.domesticmanage.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
                 function dataSaved(text) {
-                    alert("申请成功");
+                    alert("操作成功");
                 }
                 function fnerror(text) {
-                    alert("申请失败");
+                    alert("操作失败");
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown) {
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
             }
             else {
                 return;

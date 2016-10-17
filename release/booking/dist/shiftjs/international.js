@@ -52,6 +52,7 @@ KingofAttendances.international = new function () {
         this.enlClick = function (imgUrl) {
             var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/imgenl.html',
+                url: 'http://wux-hr03:8009//dist/component/imgenl.html',
                 showModal: false,
                 width: 600,
                 height: 600,
@@ -61,128 +62,130 @@ KingofAttendances.international = new function () {
                 }
             });
         };
-        this.editClick = function (REC_ID) {
-            var win = mini.open({
-                url: 'http://wux-hr03:8009/dist/component/editdata.html',
-                showModal: false,
-                width: 600,
-                height: 550,
-                onload: function () {
-                    var iframe = this.getIFrameEl();
-                    iframe.contentWindow.Setdbs(adbs, aappConfig, REC_ID);
-                },
-                ondestroy: function (action) {
-                    parent.location.reload();
-                }
-            });
-        };
-        this.revokeClick = function (REC_ID) {
-            if (confirm('您确定要撤销么？')) {
-                mini.parse();
-                var form = new mini.Form("form1");
-                var o = new mini.Form("form1").getData();
-                form.validate();
-                if (form.isValid() == false)
-                    return;
-                o._id = 1;
-                o._state = "modified";
-                o.REC_ID = REC_ID;
-                o.C3_527965048090 = "Y";
-                var json = mini.encode([o]);
-                adbs.dbSavedata(aappConfig.internationalfilght.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
-                function dataSaved(text) {
-                    alert("申请成功");
-                }
-                function fnerror(text) {
-                    alert("申请失败");
-                }
-                function fnhttperror(jqXHR, textStatus, errorThrown) {
-                    alert("error");
-                }
+        ;
+    };
+    this.editClick = function (REC_ID) {
+        var win = mini.open({
+            url: 'http://wux-hr03:8009/dist/component/editdata.html',
+            url: 'http://wux-hr03:8009//dist/component/editdata.html',
+            showModal: false,
+            width: 600,
+            height: 550,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                iframe.contentWindow.Setdbs(adbs, aappConfig, REC_ID);
+            },
+            ondestroy: function (action) {
                 parent.location.reload();
             }
-            else {
+        });
+    };
+    this.revokeClick = function (REC_ID) {
+        if (confirm('您确定要撤销么？')) {
+            mini.parse();
+            var form = new mini.Form("form1");
+            var o = new mini.Form("form1").getData();
+            form.validate();
+            if (form.isValid() == false)
                 return;
+            o._id = 1;
+            o._state = "modified";
+            o.REC_ID = REC_ID;
+            o.C3_527965048090 = "Y";
+            var json = mini.encode([o]);
+            adbs.dbSavedata(aappConfig.internationalfilght.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
+            function dataSaved(text) {
+                alert("申请成功");
             }
-        };
-        this.submitClick = function (REC_ID) {
-            if (confirm('您确定要提交么？')) {
-                mini.parse();
-                var form = new mini.Form("form1");
-                var o = new mini.Form("form1").getData();
-                form.validate();
-                if (form.isValid() == false)
-                    return;
-                o._id = 1;
-                o._state = "modified";
-                o.REC_ID = REC_ID;
-                o.C3_526655608924 = "Y";
-                var json = mini.encode([o]);
-                adbs.dbSavedata(aappConfig.internationalfilght.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
-                function dataSaved(text) {
-                    alert("申请成功");
-                }
-                function fnerror(text) {
-                    alert("申请失败");
-                }
-                function fnhttperror(jqXHR, textStatus, errorThrown) {
-                    alert("error");
-                }
-                parent.location.reload();
+            function fnerror(text) {
+                alert("申请失败");
             }
-            else {
+            function fnhttperror(jqXHR, textStatus, errorThrown) {
+                alert("error");
+            }
+            parent.location.reload();
+        }
+        else {
+            return;
+        }
+    };
+    this.submitClick = function (REC_ID) {
+        if (confirm('您确定要提交么？')) {
+            mini.parse();
+            var form = new mini.Form("form1");
+            var o = new mini.Form("form1").getData();
+            form.validate();
+            if (form.isValid() == false)
                 return;
+            o._id = 1;
+            o._state = "modified";
+            o.REC_ID = REC_ID;
+            o.C3_526655608924 = "Y";
+            var json = mini.encode([o]);
+            adbs.dbSavedata(aappConfig.internationalfilght.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
+            function dataSaved(text) {
+                alert("申请成功");
             }
-        };
-        this.conClick = function (REC_ID) {
-            if (confirm('您是否要确认么？')) {
-                mini.parse();
-                var form = new mini.Form("form1");
-                var o = new mini.Form("form1").getData();
-                form.validate();
-                if (form.isValid() == false)
-                    return;
-                o._id = 1;
-                o._state = "modified";
-                o.REC_ID = REC_ID;
-                o.C3_526655868769 = "Y";
-                var json = mini.encode([o]);
-                adbs.dbSavedata(aappConfig.internationalfilght.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
-                function dataSaved(text) {
-                    alert("申请成功");
-                }
-                function fnerror(text) {
-                    alert("申请失败");
-                    alert(text);
-                }
-                function fnhttperror(jqXHR, textStatus, errorThrown) {
-                    alert("error");
-                }
-                parent.location.reload();
+            function fnerror(text) {
+                alert("申请失败");
             }
-            else {
+            function fnhttperror(jqXHR, textStatus, errorThrown) {
+                alert("error");
+            }
+            parent.location.reload();
+        }
+        else {
+            return;
+        }
+    };
+    this.conClick = function (REC_ID) {
+        if (confirm('您是否要确认么？')) {
+            mini.parse();
+            var form = new mini.Form("form1");
+            var o = new mini.Form("form1").getData();
+            form.validate();
+            if (form.isValid() == false)
                 return;
+            o._id = 1;
+            o._state = "modified";
+            o.REC_ID = REC_ID;
+            o.C3_526655868769 = "Y";
+            var json = mini.encode([o]);
+            adbs.dbSavedata(aappConfig.internationalfilght.guojiResid, 0, json, dataSaved, fnerror, fnhttperror);
+            function dataSaved(text) {
+                alert("申请成功");
             }
-        };
-        this.navClick = function (state) {
-            $("#tbManage tbody").empty();
-            for (var i = 0; i < o.length; i++) {
-                if (o[i].C3_527946742678 == state) {
-                    me.bill(o, i);
-                    $("#tbManage tbody").append(list);
-                    me.jState(o, i);
-                    mini.parse();
-                }
+            function fnerror(text) {
+                alert("申请失败");
+                alert(text);
             }
-            ;
-        };
-        var si = "<tr height=\"40px\" align=\"center\">\n                  <td width=\"15%\" class=\"title1\">\u5458\u5DE5\u53F7</td>\n                  <td width=\"15%\">" + o[0].C3_526655169418 + "</td>\n                  <td width=\"15%\" class=\"title1\">\u59D3\u540D</td>\n                  <td width=\"15%\">" + o[0].C3_526655177113 + "</td>\n                  <td width=\"15%\" class=\"title1\">\u8EAB\u4EFD\u8BC1\u53F7</td><td width=\"25%\">" + o[0].C3_526655197108 + "</td>\n                </tr>\n                <tr height=\"40px\" align=\"center\">\n                  <td class=\"title1\">\u62A4\u7167\u53F7</td>\n                  <td>" + o[0].C3_526655213359 + "</td>\n                  <td class=\"title1\">\u62A4\u7167\u6709\u6548\u671F</td>\n                  <td>" + o[0].C3_527948550902 + "</td>\n                  <td colspan=\"2\"></td>\n                </tr>";
-        $("#si").html(si);
+            function fnhttperror(jqXHR, textStatus, errorThrown) {
+                alert("error");
+            }
+            parent.location.reload();
+        }
+        else {
+            return;
+        }
+    };
+    this.navClick = function (state) {
+        $("#tbManage tbody").empty();
         for (var i = 0; i < o.length; i++) {
-            this.bill(o, i);
-            $("#tbManage tbody").append(list);
-            this.jState(o, i);
+            if (o[i].C3_527946742678 == state) {
+                me.bill(o, i);
+                $("#tbManage tbody").append(list);
+                me.jState(o, i);
+                mini.parse();
+            }
         }
         ;
     };
+    var si = "<tr height=\"40px\" align=\"center\">\n                  <td width=\"15%\" class=\"title1\">\u5458\u5DE5\u53F7</td>\n                  <td width=\"15%\">" + o[0].C3_526655169418 + "</td>\n                  <td width=\"15%\" class=\"title1\">\u59D3\u540D</td>\n                  <td width=\"15%\">" + o[0].C3_526655177113 + "</td>\n                  <td width=\"15%\" class=\"title1\">\u8EAB\u4EFD\u8BC1\u53F7</td><td width=\"25%\">" + o[0].C3_526655197108 + "</td>\n                </tr>\n                <tr height=\"40px\" align=\"center\">\n                  <td class=\"title1\">\u62A4\u7167\u53F7</td>\n                  <td>" + o[0].C3_526655213359 + "</td>\n                  <td class=\"title1\">\u62A4\u7167\u6709\u6548\u671F</td>\n                  <td>" + o[0].C3_527948550902 + "</td>\n                  <td colspan=\"2\"></td>\n                </tr>";
+    $("#si").html(si);
+    for (var i = 0; i < o.length; i++) {
+        this.bill(o, i);
+        $("#tbManage tbody").append(list);
+        this.jState(o, i);
+    }
+    ;
 };

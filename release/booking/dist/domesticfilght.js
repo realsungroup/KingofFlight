@@ -72,7 +72,7 @@ KingofAttendances.domestic = new function () {
         this.addClick = function () {
             var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/dsetdata.html',
-                showModal: false,
+                showModal: true,
                 width: 400,
                 height: 450,
                 onload: function () {
@@ -80,14 +80,14 @@ KingofAttendances.domestic = new function () {
                     iframe.contentWindow.Setdbs(adbs, aappConfig);
                 },
                 ondestroy: function (action) {
-                    parent.location.reload();
+                    window.location.reload();
                 }
             });
         };
         this.editClick = function (REC_ID) {
             var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/deditdata.html',
-                showModal: false,
+                showModal: true,
                 width: 400,
                 height: 450,
                 onload: function () {
@@ -95,7 +95,7 @@ KingofAttendances.domestic = new function () {
                     iframe.contentWindow.Setdbs(adbs, aappConfig, REC_ID);
                 },
                 ondestroy: function (action) {
-                    parent.location.reload();
+                    window.location.reload();
                 }
             });
         };
@@ -122,7 +122,7 @@ KingofAttendances.domestic = new function () {
                 function fnhttperror(jqXHR, textStatus, errorThrown) {
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
             }
             else {
                 return;
@@ -151,7 +151,7 @@ KingofAttendances.domestic = new function () {
                 function fnhttperror(jqXHR, textStatus, errorThrown) {
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
             }
             else {
                 return;
@@ -181,7 +181,7 @@ KingofAttendances.domestic = new function () {
                 function fnhttperror(jqXHR, textStatus, errorThrown) {
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
             }
             else {
                 return;

@@ -1,4 +1,4 @@
-var KingofAttendances = KingofAttendances || {};
+﻿var KingofAttendances = KingofAttendances || {};
 KingofAttendances.international=new function() {
     this.setData=function(data,adbs,aappConfig){
         var me=this;
@@ -95,32 +95,26 @@ KingofAttendances.international=new function() {
         };
         this.enlClick=function(imgUrl){//放大图片
           var win = mini.open({
-<<<<<<< HEAD
+
                 url: 'http://wux-hr03:8009/dist/component/imgenl.html',
-=======
+
                 url: 'http://wux-hr03:8009//dist/component/imgenl.html',
->>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
                 showModal: false,
                 width: 600,
                 height: 600,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl(); 
                     iframe.contentWindow.Setdbs(imgUrl);
-<<<<<<< HEAD
                 }
-=======
                 },
->>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
             });
         };
         this.editClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
-                
-<<<<<<< HEAD
                 url: 'http://wux-hr03:8009/dist/component/editdata.html',
-=======
+
                 url: 'http://wux-hr03:8009//dist/component/editdata.html',
->>>>>>> deb407b291eb4103263b404ff02ca6d6aaf1a5a3
+
                 showModal: false,
                 width: 600,
                 height: 550,

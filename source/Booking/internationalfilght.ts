@@ -167,7 +167,7 @@ KingofAttendances.international=new function() {
         this.addClick=function(){//新增航班单据
             var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/setdata.html',
-                showModal: false,
+                showModal: true,
                 width: 550,
                 height: 550,
                 onload: function () {       //弹出页面加载完成
@@ -175,7 +175,7 @@ KingofAttendances.international=new function() {
                     iframe.contentWindow.Setdbs(adbs,aappConfig);
                 },
                 ondestroy: function (action) {
-                   parent.location.reload();
+                   window.location.reload();
                 }
             });
         };
@@ -183,7 +183,7 @@ KingofAttendances.international=new function() {
           var win = mini.open({
 
                 url: 'http://wux-hr03:8009/dist/component/imgenl.html',
-                showModal: false,
+                showModal: true,
                 width: 600,
                 height: 600,
                 onload: function () {       //弹出页面加载完成
@@ -195,7 +195,7 @@ KingofAttendances.international=new function() {
         this.editClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/editdata.html',
-                showModal: false,
+                showModal: true,
                 width: 600,
                 height: 550,
                 onload: function () {       //弹出页面加载完成
@@ -203,7 +203,7 @@ KingofAttendances.international=new function() {
                     iframe.contentWindow.Setdbs(adbs,aappConfig,REC_ID);
                 },
                 ondestroy: function (action) {
-                     parent.location.reload();     
+                     window.location.reload();     
                 }
             });
         };             
@@ -221,15 +221,15 @@ KingofAttendances.international=new function() {
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.internationalfilght.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                 function dataSaved(text){
-                    alert("申请成功");
+                    alert("撤销成功");
                 }
                 function fnerror(text){
-                    alert("申请失败");
+                    alert("撤销失败");
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown){
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
     		}else{
     			return;
     		}
@@ -275,16 +275,16 @@ KingofAttendances.international=new function() {
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.internationalfilght.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                 function dataSaved(text){
-                    alert("申请成功");
+                    alert("确认成功");
                 }
                 function fnerror(text){
-                    alert("申请失败");
+                    alert("确认失败");
                     alert(text);
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown){
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
     		}else{
     			return;
     		}
