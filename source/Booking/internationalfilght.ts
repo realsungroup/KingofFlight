@@ -115,7 +115,7 @@ KingofAttendances.international=new function() {
                 $("#c_"+i).remove();
                 $("#tds_"+i).addClass('dsh');
             }else if(o[i].C3_527946742678=="订单完成"){
-                $("#tdb_"+i).remove();
+                $("#td_"+i).remove();
                 $("#tds_"+i).addClass('none');
             }
         };
@@ -125,7 +125,7 @@ KingofAttendances.international=new function() {
                       <td colspan="3">`+o[i].C3_526655624603+`</td>
                       <td class="head1" align="center" width="10%">单据状态</td>
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
-                      <td rowspan="5" width="5%" align="center" id="tdb_`+i+`">
+                      <td rowspan="5" width="5%" align="center" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
                           <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
                           <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
@@ -248,15 +248,15 @@ KingofAttendances.international=new function() {
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.internationalfilght.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                 function dataSaved(text){
-                    alert("申请成功");
+                    alert("提交成功");
                 }
                 function fnerror(text){
-                    alert("申请失败");
+                    alert("提交失败");
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown){
                     alert("error");
                 }
-                parent.location.reload();
+                window.location.reload();
     		}else{
     			return;
     		}
@@ -311,17 +311,17 @@ KingofAttendances.international=new function() {
                   <td class="title1">护照号</td>
                   <td>`+o[0].C3_526655213359+`</td>
                   <td class="title1">护照有效期</td>
-                  <td>`+o[0].C3_527948550902+`</td>
-                  <td colspan="2"></td>
+                  <td colspan="3">`+o[0].C3_527948550902+`</td>
                 </tr>`
                 $("#si").html(si);
              
         for(var i=0;i<o.length;i++){
-            this.bill(o,i);
+            if(o[i].C3_527946742678=="未提交"){
+                this.bill(o,i);
                 $("#tbManage tbody").append(list);
-            this.jState(o,i);
+                this.jState(o,i);
+            }
         };
-        
         mini.parse();
     }
 }

@@ -178,10 +178,10 @@ KingofAttendances.domestic=new function() {
                 var json = mini.encode([o]);
                 adbs.dbSavedata(aappConfig.domesticfilght.guoneiResid,0,json,dataSaved,fnerror,fnhttperror);
                 function dataSaved(text){
-                    alert("设置成功");
+                    alert("提交成功");
                 }
                 function fnerror(text){
-                    alert("设置失败");
+                    alert("提交失败");
                 }
                 function fnhttperror(jqXHR, textStatus, errorThrown){
                     alert("error");
