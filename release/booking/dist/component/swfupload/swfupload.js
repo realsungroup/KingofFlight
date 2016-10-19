@@ -994,7 +994,13 @@ SWFUpload.Console.writeLine = function (message) {
 	}
 };
  
- 		function onFileSelect(e) {}
+ 		function onFileSelect(e) {
+			// alert('fileselect');
+			// var bt=mini.get("fileupload1");
+			// bt.setValue("files");
+			// bt.set({"visible":"true"});
+
+		 }
        	function onUploadSuccess(e) {
 
                // alert("上传成功：" + e.serverData);
@@ -1007,8 +1013,9 @@ SWFUpload.Console.writeLine = function (message) {
                     	  mini.parse();
 					 	 var imgfield=mini.get('imgurl');
 					 	  imgfield.setValue(data.httpfilename);
+						   //alert("showimg");
 					 	  img[0].src=data.httpfilename;
-					
+					       //  mini.parse();
 						 
 					 } catch (error) {
 						 alert(error);
@@ -1020,7 +1027,7 @@ SWFUpload.Console.writeLine = function (message) {
 				 {
 					 alert("上传失败：" + data.message);
 				 }
-                this.setText("");
+               this.setText("");
             }
 		function onUploadError(e) {
 	            alert(e.message);
