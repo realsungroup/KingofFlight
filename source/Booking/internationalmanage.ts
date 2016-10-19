@@ -138,7 +138,7 @@ KingofAttendances.i_manage=new function() {
                       <td rowspan="2" width="15%">`+o[i].C3_527948208338+`</td>
                       <td rowspan="2">
                           护照扫描件
-                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.i_manage.enlClick('`+o[i].C3_527873192635+`')"/>
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.i_manage.enlClick1('`+o[i].C3_527873192635+`')"/>
                       </td>
                       <td  class="title1">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
@@ -154,7 +154,7 @@ KingofAttendances.i_manage=new function() {
                       <td rowspan="2">`+o[i].C3_527948869929+`</td>
                       <td rowspan="2" width="10%">
                           签证扫描件
-                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.i_manage.enlClick('`+o[i].C3_526655353950+`')"/>
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.i_manage.enlClick1('`+o[i].C3_526655353950+`')"/>
                       </td>
                       <td class="title1">返程航班号</td>
                       <td>`+o[i].C3_528311923010+`</td>
@@ -179,7 +179,7 @@ KingofAttendances.i_manage=new function() {
                 }
             });
         };
-        this.enlClick=function(imgUrl){//放大图片
+        this.enlClick1=function(imgUrl){//放大图片
           var win = mini.open({
 
                 url: 'http://wux-hr03:8009/dist/component/imgenl.html',
