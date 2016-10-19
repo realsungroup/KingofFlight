@@ -3,25 +3,26 @@
         <form id="form3">
             <table width="380px">
                 <tr>
+                    <td>行程类别</td>
+                    <td>
+                        <select id="sel" class="mini-combobox" name="C3_526656512808" onvaluechanged="onDeptChanged">
+		                    <option value="去程">去程</option>
+                            <option value="返程">返程</option>
+                            <option value="往返">往返</option>
+	                    </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>出发地: </td>
                     <td><input class="mini-textbox" required="true" name="C3_526656511963" width="300px"></td>
                 </tr>
-                <tr>
+                <tr id="trd">
                     <td>目的地:</td>
                     <td><input class="mini-textbox" required="true" name="C3_526656512229"></td>
                 </tr>
-                <tr>
+                <tr id="trg">
                     <td>出发日期: </td>
                     <td><input class="mini-datepicker" required="true" name="C3_526656511485"></td>
-                </tr>
-                <tr>
-                    <td>行程类别</td>
-                    <td>
-                        <select class="mini-combobox" name="C3_526656512808">
-		                    <option value="往程">往程</option>
-                            <option value="返程">返程</option>
-	                    </select>
-                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -35,10 +36,29 @@
         <script>
             
             function Setdbs(dbs,appConfig,REC_ID){
-                //debugger;
+                mini.parse();
                 var resid=appConfig.domesticfilght.guoneiResid;
                 //debugger;
                 var cmswhere="";
+                
+                var deptCombo = mini.get("sel");
+                onDeptChanged=function(){
+                    var vd=deptCombo.getValue();
+                    if(vd=="去程"){
+                        $("#trg").remove();
+                        $("#trb").remove();
+                        $("#trd").after('<tr id="trg"><td>出发日期: </td><td><input class="mini-datepicker" required="true" name="C3_526656511485"></td></tr>');
+                    }else if(vd=="返程"){
+                        $("#trg").remove();
+                        $("#trb").remove();
+                        $("#trd").after('<tr id="trb"><td>返回日期: </td><td><input class="mini-datepicker" required="true" name="C3_530114343874"></td></tr>');
+                    }else if(vd=="往返"){
+                        $("#trg").remove();
+                        $("#trb").remove();
+                        $("#trd").after('<tr id="trg"><td>出发日期: </td><td><input class="mini-datepicker" required="true" name="C3_526656511485"></td></tr><tr id="trb"><td>返回日期: </td><td><input class="mini-datepicker" required="true" name="C3_530114343874"></td></tr>');
+                    }
+                    mini.parse();
+                }
                 saveClick=function(){
                     mini.parse();
                     var form = new mini.Form("form3");
@@ -68,5 +88,6 @@
         <link href="../../scripts/css/siteDetail.css" rel="stylesheet" type="text/css">
         <script src="../shiftJs/domestic.js" type="text/javascript"></script>
         <script src="../component/swfupload/swfupload.js" type="text/javascript"></script>
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     </body>
 </html>

@@ -15,7 +15,7 @@
                     <td colspan="2"><input class="mini-datepicker" required="true" name="C3_526655237449"></td>
                 </tr>
                 <tr>
-                    <td>返回日前:</td>
+                    <td>返回日期:</td>
                     <td colspan="2"><input class="mini-datepicker" required="true" name="C3_526655248019"></td>
                 </tr>
                 <tr>
@@ -29,8 +29,19 @@
                 <tr height="60px">
                     <td>护照扫描件: </td>
                     <td width="150px">
-                        <input required="true" cursor="pointer" id='fileupload1' name='' onuploaderror='onUploadError' onfileselect='onFileSelect' onuploadsuccess='onUploadSuccess'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata' "+   
-                      " limitType='*.jpg;*.jpeg;*.png' style='width:50%;'/>
+                        <input required="true"
+                               cursor="pointer"
+                               id='fileupload1'
+                               buttonText="插入附件"
+                               onuploaderror='onUploadError'
+                               onfileselect='onFileSelect'
+                               onuploadsuccess='onUploadSuccess'
+                               uploadUrl='upload.aspx'
+                               flashUrl='swfupload/swfupload.swf'
+                               class='mini-fileupload'
+                               uploadOnSelect=true
+                               name='Fdata'
+                               limitType='*.jpg;*.jpeg;*.png;*.pdf'/>
                       <input id="imgurl" name='C3_527873192635' class="mini-Hidden"  allowInput="false"/>
                     </td>
                     <td>  
@@ -40,8 +51,19 @@
                 <tr height="60px">
                     <td>签证扫描件:</td>
                     <td>
-                        <input required="true" id='fileupload2' name='' onuploaderror='onUploadError2' onfileselect='onFileSelect2' onuploadsuccess='onUploadSuccess2'  uploadUrl='upload.aspx' flashUrl='swfupload/swfupload.swf' class='mini-fileupload' uploadOnSelect=true name='Fdata2' "+   
-                      " limitType='*.jpg;*.jpeg;*.png' style='width:50%;' />
+                        <input required="true"
+                               cursor="pointer"
+                               id='fileupload2'
+                               buttonText="插入附件"
+                               onuploaderror='onUploadError2'
+                               onfileselect='onFileSelect2'
+                               onuploadsuccess='onUploadSuccess2'
+                               uploadUrl='upload.aspx'
+                               flashUrl='swfupload/swfupload.swf'
+                               class='mini-fileupload'
+                               uploadOnSelect=true
+                               name='Fdata2'  
+                               limitType='*.jpg;*.jpeg;*.png;*.pdf'/>
                         <input  id="imgurl2" name='C3_526655353950' class="mini-Hidden"  allowInput="false"/>
                     </td>
                     <td>

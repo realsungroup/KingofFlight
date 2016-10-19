@@ -72,38 +72,47 @@ KingofAttendances.d_manage=new function() {
             mini.parse();
         };
         this.bill=function(o,i){//动态加载单据信息
-            list=`<tr height="30px">
+            list=`<tr height="30px" class="tc">
                       <td class="head" colspan="2">出差单据号</td>
                       <td colspan="2">`+o[i].C3_526656513019+`</td>
-                      <td class="head1" align="center" width="10%">单据状态</td>
-                      <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_528049541154+`</td>
-                      <td rowspan="4" width="5%" align="center" id="td_`+i+`">
+                      <td class="head1" width="15%">单据状态</td>
+                      <td id="tds_`+i+`" width="25%">`+o[i].C3_528049541154+`</td>
+                      <td rowspan="6" width="10%" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" onclick="KingofAttendances.d_manage.d_meditClick(`+o[i].REC_ID+`)">航班信息</a>
                           <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-upgrade" onclick="KingofAttendances.d_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
                           <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.d_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                       </td>
                   </tr>
-                  <tr height="40px" align="center">
-                      <td class="title1">姓名</td>
-                      <td>`+o[i].C3_526656510920+`</td>
-                      <td class="title1">身份证号</td>
-                      <td colspan="3">`+o[i].C3_526656510713+`</td>
+                  <tr height="30px" class="tc">
+                      <td width="10%" class="title1">姓名</td>
+                      <td width="10%">`+o[i].C3_526656510920+`</td>
+                      <td width="10%" class="title1">身份证号</td>
+                      <td width="15%" colspan="2">`+o[i].C3_526656510713+`</td>
+                      <td>`+o[i].C3_526656512808+`</td>
                   </tr>
                   <tr class="tc">
-                      <td class="title1">出发地</td>
-                      <td>`+o[i].C3_526656511963+`</td>
-                      <td class="title1">出发日期</td>
-                      <td>`+o[i].C3_528048113321+`</td>
-                      <td align="center">航班号</td>
+                      <td class="title1" rowspan="2">出发地</td>
+                      <td rowspan="2">`+o[i].C3_526656511963+`</td>
+                      <td rowspan="2" class="title1">出发日期</td>
+                      <td rowspan="2">`+o[i].C3_528048113321+`</td>
+                      <td>去程航班号</td>
                       <td>`+o[i].C3_526656513426+`</td>
                   </tr>
                   <tr class="tc">
-                      <td class="title1">目的地</td>
-                      <td>`+o[i].C3_526656512229+`</td>
-                      <td class="title1">行程类别</td>
-                      <td>`+o[i].C3_526656512808+`</td>
                       <td>航班时间</td>
                       <td>`+o[i].C3_529016446872+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td rowspan="2" class="title1">目的地</td>
+                      <td rowspan="2">`+o[i].C3_526656512229+`</td>
+                      <td rowspan="2" class="title1">返回日期</td>
+                      <td rowspan="2">`+o[i].C3_530114959734+`</td>
+                      <td>返程航班号</td>
+                      <td>`+o[i].C3_530118289053+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td>航班时间</td>
+                      <td>`+o[i].C3_530118810885+`</td>
                   </tr>`;
         }
         this.d_meditClick=function(REC_ID){//编辑航班单据
@@ -111,7 +120,7 @@ KingofAttendances.d_manage=new function() {
                 url: 'http://wux-hr03:8009/dist/component/d_medit.html',
                 showModal: true,
                 width: 600,
-                height: 470,
+                height: 500,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl(); 
                     iframe.contentWindow.Setdbs(adbs,aappConfig,REC_ID);

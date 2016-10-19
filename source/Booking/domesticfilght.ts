@@ -107,31 +107,40 @@ KingofAttendances.domestic=new function() {
         };
         this.bill=function(o,i){//动态加载单据信息
             list=`<tr height="30px">
-                    <td colspan="2" class="head" width="15%">出差单据号</td>
+                    <td colspan="2" class="head">出差单据号</td>
                     <td colspan="2">`+o[i].C3_526656513019+`</td>
-                    <td class="title1">单据状态</td>
-                    <td align="center" id="tds_`+i+`">`+o[i].C3_528049541154+`</td>
-                    <td rowspan="3" width="5" align="center" id="td_`+i+`">
+                    <td width="10%" class="tc">`+o[i].C3_526656512808+`</td>
+                    <td class="title1" width="10%">单据状态</td>
+                    <td class="tc" id="tds_`+i+`" width="25%">`+o[i].C3_528049541154+`</td>
+                    <td rowspan="5" width="10%" class="tc" id="td_`+i+`">
                         <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.domestic.submitClick(`+o[i].REC_ID+`)">提交</a>
                         <a class="mini-button m_btn" id="b_`+i+`"iconCls="icon-edit" onclick="KingofAttendances.domestic.editClick(`+o[i].REC_ID+`)">编辑</a>
                         <a class="mini-button m_btn" id="c_`+i+`"iconCls="icon-remove" onclick="KingofAttendances.domestic.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                     </td>
                   </tr>
-                  <tr align="center">
-                    <td class="title1">出发地</td>
-                    <td>`+o[i].C3_526656511963+`</td>
-                    <td class="title1">出发日期</td>
-                    <td>`+o[i].C3_528048113321+`</td>
-                    <td class="title1">航班号</td>
+                  <tr class="tc">
+                    <td width="10%" rowspan="2" class="title1">出发地</td>
+                    <td width="10%" rowspan="2">`+o[i].C3_526656511963+`</td>
+                    <td width="10%" rowspan="2" class="title1">出发日期</td>
+                    <td width="25%" rowspan="2" colspan="2">`+o[i].C3_528048113321+`</td>
+                    <td class="title1">去程航班号</td>
                     <td>`+o[i].C3_526656513426+`</td>
                   </tr>
-                  <tr align="center">
-                    <td class="title1">目的地</td>
-                    <td>`+o[i].C3_526656512229+`</td>
-                    <td class="title1">行程类别</td>
-                    <td>`+o[i].C3_526656512808+`</td>
+                  <tr class="tc">
                     <td class="title1">航班时间</td>
                     <td>`+o[i].C3_529016446872+`</td>
+                  </tr>
+                  <tr class="tc">
+                    <td rowspan="2" class="title1">目的地</td>
+                    <td rowspan="2">`+o[i].C3_526656512229+`</td>
+                    <td rowspan="2" class="title1">返回日期</td>
+                    <td rowspan="2" colspan="2">`+o[i].C3_530114959734+`</td>
+                    <td class="title1">返程航班号</td>
+                    <td>`+o[i].C3_530118289053+`</td>
+                  </tr>
+                  <tr class="tc">
+                    <td class="title1">航班时间</td>
+                    <td>`+o[i].C3_530118810885+`</td>
                   </tr>`
         }
         this.addClick=function(){
@@ -139,7 +148,7 @@ KingofAttendances.domestic=new function() {
                 url: 'http://wux-hr03:8009/dist/component/dsetdata.html',
                 showModal: true,
                 width: 400,
-                height: 450,
+                height: 500,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl();
                     iframe.contentWindow.Setdbs(adbs,aappConfig);
@@ -154,7 +163,7 @@ KingofAttendances.domestic=new function() {
                 url: 'http://wux-hr03:8009/dist/component/deditdata.html',
                 showModal: true,
                 width: 400,
-                height: 450,
+                height: 500,
                 onload: function () {       //弹出页面加载完成
                     var iframe = this.getIFrameEl(); 
                     iframe.contentWindow.Setdbs(adbs,aappConfig,REC_ID);
@@ -266,11 +275,13 @@ KingofAttendances.domestic=new function() {
                 </tr>`
         $("#si").html(si);
         for(var i=0;i<o.length;i++){
+            if(o[i].C3_528049541154=="未提交"){
             this.bill(o,i);
             $("#tbManage tbody").append(list);
             mini.parse();
             this.jState(o,i);
             mini.parse();
+            }
         };
     };
 }

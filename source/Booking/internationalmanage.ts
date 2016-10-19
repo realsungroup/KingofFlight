@@ -109,24 +109,36 @@ KingofAttendances.i_manage=new function() {
         };
         this.bill=function(o,i){//动态加载单据信息
             list=`<tr height="30px">
-                      <td class="head" width="10%" colspan="2">出差单据号</td>
+                      <td class="head" colspan="2">出差单据号</td>
                       <td colspan="3">`+o[i].C3_526655624603+`</td>
                       <td class="head1" align="center" width="10%">单据状态</td>
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
-                       <td rowspan="5" width="5%" align="center" id="td_`+i+`">
+                      <td rowspan="7" width="10%" align="center" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" onclick="KingofAttendances.i_manage.i_meditClick(`+o[i].REC_ID+`)">航班信息</a>
                           <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-upgrade" onclick="KingofAttendances.i_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
                           <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.i_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
                       </td>
                   </tr>
                   <tr class="tc">
-                      <td width="10%" class="title" rowspan="2">出发日期</td>
-                      <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
-                      <td width="10%" class="title" rowspan="2">出发地</td>
-                      <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="2" width="15%">
-                          签证扫描件
-                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_526655353950+`')"/>
+                      <td rowspan="2" width="10%" class="title1">姓名</td>
+                      <td rowspan="2" width="10%">`+o[i].C3_526655177113+`</td>
+                      <td rowspan="2" width="10%" class="title1">身份证号</td>
+                      <td rowspan="2" colspan="2">`+o[i].C3_526655197108+`</td>
+                      <td class="title1" width="10%">护照号</td>
+                      <td width="25%">`+o[i].C3_526655213359+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td class="title1">护照有效期</td>
+                      <td>`+o[i].C3_527948550902+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td class="title" rowspan="2">出发地</td>
+                      <td rowspan="2" width="10%">`+o[i].C3_526655262089+`</td>
+                      <td class="title" rowspan="2">出发日期</td>
+                      <td rowspan="2" width="15%">`+o[i].C3_527948208338+`</td>
+                      <td rowspan="2">
+                          护照扫描件
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.i_manage.enlClick('`+o[i].C3_527873192635+`')"/>
                       </td>
                       <td  class="title1">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
@@ -136,13 +148,13 @@ KingofAttendances.i_manage=new function() {
                       <td>`+o[i].C3_528400651698+`</td>
                   </tr>
                   <tr class="tc">
+                      <td class="title" rowspan="2">目的地</td>
+                      <td rowspan="2">`+o[i].C3_526655271756+`</td>
                       <td class="title" rowspan="2">返回日期</td>
                       <td rowspan="2">`+o[i].C3_527948869929+`</td>
-                      <td class="title" rowspan="2">返回地</td>
-                      <td rowspan="2">`+o[i].C3_526655271756+`</td>
-                      <td rowspan="2">
-                          护照扫描件
-                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.international.enlClick('`+o[i].C3_527873192635+`')"/>
+                      <td rowspan="2" width="10%">
+                          签证扫描件
+                          <img src="../../scripts/miniui/themes/icons/search.gif" width="15px" style="cursor:pointer" onclick="KingofAttendances.i_manage.enlClick('`+o[i].C3_526655353950+`')"/>
                       </td>
                       <td class="title1">返程航班号</td>
                       <td>`+o[i].C3_528311923010+`</td>
@@ -164,6 +176,19 @@ KingofAttendances.i_manage=new function() {
                 },
                 ondestroy: function (action) {
                      window.location.reload();
+                }
+            });
+        };
+        this.enlClick=function(imgUrl){//放大图片
+          var win = mini.open({
+
+                url: 'http://wux-hr03:8009/dist/component/imgenl.html',
+                showModal: true,
+                width: 600,
+                height: 600,
+                onload: function () {       //弹出页面加载完成
+                    var iframe = this.getIFrameEl(); 
+                    iframe.contentWindow.Setdbs(imgUrl);
                 }
             });
         };
