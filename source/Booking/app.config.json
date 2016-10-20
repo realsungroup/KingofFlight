@@ -14,7 +14,7 @@
     },
      "internationalmanage":
     {        
-        "guojiResid":526664335204,
+        "guojiResid":528297992116,
         "mainHtml":"./dist/component/i_manage.html"
     },
      "domesticfilght":
@@ -24,7 +24,7 @@
     },
      "domesticmanage":
     {        
-        "guoneiResid":526664384125,
+        "guoneiResid":530277198193,
         "mainHtml":"./dist/component/d_manage.html"
     }
 }
