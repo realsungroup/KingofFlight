@@ -83,6 +83,15 @@ KingofAttendances.international = new function () {
                 }
             });
         };
+        this.noteClick = function () {
+            var win = mini.open({
+                url: aappConfig.app.note,
+                showModal: true,
+                width: 800,
+                height: 550,
+                title: "订票须知"
+            });
+        };
         this.enlClick = function (imgUrl) {
             var win = mini.open({
                 url: 'http://wux-hr03:8009/dist/component/imgenl.html',

@@ -6,7 +6,8 @@
         "httppath":"http://wux-hr03/rispweb/upfiles",
         "saveMethod":"SaveData_Ajax",
         "dic1Resid":526765618499,
-        "debug":true
+        "debug":true,
+        "note":"http://wux-hr03:8009/note.html"
     },
     "internationalfilght":{
         "guojiResid":526664335204,

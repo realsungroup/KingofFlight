@@ -76,15 +76,18 @@
                     function dataSaved(text){
                         alert("申请成功");
                         //console.log(text);
+                         window.CloseOwnerWindow();
                     }
                     function fnerror(text){
-                        alert("申请失败");
+                        alert("申请失败:"+text.message);
                         //console.log(text);
+                         window.CloseOwnerWindow();
                     }
                     function fnhttperror(jqXHR, textStatus, errorThrown){
                         alert("error");
+                         window.CloseOwnerWindow();
                     }
-                    window.CloseOwnerWindow();
+                  
                 }
             }
         </script>

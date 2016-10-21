@@ -179,6 +179,15 @@ KingofAttendances.international=new function() {
                 }
             });
         };
+        this.noteClick=function(){//新增航班单据
+            var win = mini.open({
+                url: aappConfig.app.note,
+                showModal: true,
+                width: 800,
+                height: 550,
+                title:"订票须知"
+            });
+        };
         this.enlClick=function(imgUrl){//放大图片
           var win = mini.open({
 
