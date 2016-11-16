@@ -112,7 +112,7 @@ KingofAttendances.domestic=new function() {
                     <td width="10%" class="tc">`+o[i].C3_526656512808+`</td>
                     <td class="title1" width="10%">单据状态</td>
                     <td class="tc" id="tds_`+i+`" width="25%">`+o[i].C3_528049541154+`</td>
-                    <td rowspan="5" width="10%" class="tc" id="td_`+i+`">
+                    <td rowspan="6" width="10%" class="tc" id="td_`+i+`">
                         <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.domestic.submitClick(`+o[i].REC_ID+`)">提交</a>
                         <a class="mini-button m_btn" id="b_`+i+`"iconCls="icon-edit" onclick="KingofAttendances.domestic.editClick(`+o[i].REC_ID+`)">编辑</a>
                         <a class="mini-button m_btn" id="c_`+i+`"iconCls="icon-remove" onclick="KingofAttendances.domestic.revokeClick(`+o[i].REC_ID+`)">撤销</a>
@@ -141,6 +141,10 @@ KingofAttendances.domestic=new function() {
                   <tr class="tc">
                     <td class="title1">航班时间</td>
                     <td>`+o[i].C3_530118810885+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td class="title1" colspan="2">价格说明</td>
+                      <td colspan="5">`+o[i].C3_531586511730+`</td>
                   </tr>`
         }
         this.addClick=function(){

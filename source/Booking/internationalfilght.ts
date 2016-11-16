@@ -125,7 +125,7 @@ KingofAttendances.international=new function() {
                       <td colspan="3">`+o[i].C3_526655624603+`</td>
                       <td class="head1" align="center">单据状态</td>
                       <td align="center" width="15%" id="tds_`+i+`">`+o[i].C3_527946742678+`</td>
-                      <td rowspan="5" width="10%" align="center" id="td_`+i+`">
+                      <td rowspan="6" width="10%" align="center" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
                           <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
                           <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
@@ -162,6 +162,10 @@ KingofAttendances.international=new function() {
                   <tr class="tc">
                       <td class="title1">航班时间</td>
                       <td>`+o[i].C3_528400600428+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td class="title1" colspan="2">价格说明</td>
+                      <td colspan="5">`+o[i].C3_531584375787+`</td>
                   </tr>`;
         }
         this.addClick=function(){//新增航班单据

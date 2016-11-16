@@ -77,7 +77,7 @@ KingofAttendances.d_manage=new function() {
                       <td colspan="2">`+o[i].C3_526656513019+`</td>
                       <td class="head1" width="15%">单据状态</td>
                       <td id="tds_`+i+`" width="25%">`+o[i].C3_528049541154+`</td>
-                      <td rowspan="6" width="10%" id="td_`+i+`">
+                      <td rowspan="7" width="10%" id="td_`+i+`">
                           <a class="mini-button m_btn" id="a_`+i+`" onclick="KingofAttendances.d_manage.d_meditClick(`+o[i].REC_ID+`)">航班信息</a>
                           <a class="mini-button m_btn" id="b_`+i+`" iconCls="icon-upgrade" onclick="KingofAttendances.d_manage.rebutClick(`+o[i].REC_ID+`)">驳回</a>
                           <a class="mini-button m_btn" id="c_`+i+`" iconCls="icon-remove" onclick="KingofAttendances.d_manage.revokeClick(`+o[i].REC_ID+`)">撤销</a>
@@ -113,6 +113,10 @@ KingofAttendances.d_manage=new function() {
                   <tr class="tc">
                       <td>航班时间</td>
                       <td>`+o[i].C3_530118810885+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td class="title1" colspan="2">价格说明</td>
+                      <td colspan="5">`+o[i].C3_531586511730+`</td>
                   </tr>`;
         }
         this.d_meditClick=function(REC_ID){//编辑航班单据
